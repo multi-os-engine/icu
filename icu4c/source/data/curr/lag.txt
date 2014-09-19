@@ -96,7 +96,7 @@ lag{
             "Faráanga ya Gíine",
         }
         INR{
-            "Rs.",
+            "₹",
             "Rupía ya Índia",
         }
         JPY{
@@ -232,5 +232,5 @@ lag{
             "Dóola ya Simbáabwe",
         }
     }
-    Version{"2.0.92.75"}
+    Version{"2.1.6.69"}
 }

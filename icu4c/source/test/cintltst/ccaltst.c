@@ -1712,11 +1712,11 @@ static const TestDaysOfWeek daysOfWeek_en_US[] = {
     { UCAL_SATURDAY, UCAL_WEEKEND,       0        },
     { UCAL_SUNDAY,   UCAL_WEEKEND,       0        },
 };
-static const TestDaysOfWeek daysOfWeek_ar_OM[] = { /* Thursday:Friday */
+static const TestDaysOfWeek daysOfWeek_ar_OM[] = { /* Friday:Saturday */
     { UCAL_WEDNESDAY,UCAL_WEEKDAY,       0        },
-    { UCAL_SATURDAY, UCAL_WEEKDAY,       0        },
-    { UCAL_THURSDAY, UCAL_WEEKEND,       0        },
+    { UCAL_THURSDAY, UCAL_WEEKDAY,       0        },
     { UCAL_FRIDAY,   UCAL_WEEKEND,       0        },
+    { UCAL_SATURDAY, UCAL_WEEKEND,       0        },
 };
 static const TestDaysOfWeek daysOfWeek_hi_IN[] = { /* Sunday only */
     { UCAL_MONDAY,   UCAL_WEEKDAY,       0        },
@@ -2299,7 +2299,7 @@ static const UChar zoneIceland[]   = { 0x41,0x74,0x6C,0x61,0x6E,0x74,0x69,0x63,0
 static const TZTransitionItem tzTransitionItems[] = {
     { "USPacific mid 2012", zoneUSPacific, 2012, UCAL_JULY, 1, TRUE , TRUE  },
     { "USPacific mid  100", zoneUSPacific,  100, UCAL_JULY, 1, FALSE, TRUE  }, /* no transitions before 100 CE... */
-    // { "Cairo     mid 2012", zoneCairo,     2012, UCAL_JULY, 1, TRUE , FALSE }, /* DST cancelled since 2011 */  // android-changed: disable for tzdata 2014c change to Egypt.
+    { "Cairo     mid 2012", zoneCairo,     2012, UCAL_JULY, 1, TRUE , TRUE  }, /* DST cancelled since 2011 (Changed since 2014c) */
     { "Iceland   mid 2012", zoneIceland,   2012, UCAL_JULY, 1, TRUE , FALSE }, /* always on DST */
     { NULL,                 NULL,             0,         0, 0, FALSE, FALSE } /* terminator */
 };

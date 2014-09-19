@@ -86,7 +86,7 @@ id{
         CF{"Republik Afrika Tengah"}
         CG{"Kongo - Brazzaville"}
         CH{"Swiss"}
-        CI{"Cote d'Ivoire"}
+        CI{"Cote d’Ivoire"}
         CK{"Kepulauan Cook"}
         CL{"Cile"}
         CM{"Kamerun"}
@@ -141,7 +141,7 @@ id{
         GU{"Guam"}
         GW{"Guinea-Bissau"}
         GY{"Guyana"}
-        HK{"Hong Kong"}
+        HK{"Hong Kong SAR China"}
         HM{"Pulau Heard dan Kepulauan McDonald"}
         HN{"Honduras"}
         HR{"Kroasia"}
@@ -195,7 +195,7 @@ id{
         ML{"Mali"}
         MM{"Myanmar (Burma)"}
         MN{"Mongolia"}
-        MO{"Makau"}
+        MO{"Makau SAR China"}
         MP{"Kepulauan Mariana Utara"}
         MQ{"Martinik"}
         MR{"Mauritania"}
@@ -230,7 +230,7 @@ id{
         PM{"Saint Pierre dan Miquelon"}
         PN{"Kepulauan Pitcairn"}
         PR{"Puerto Riko"}
-        PS{"Palestina"}
+        PS{"Wilayah Palestina"}
         PT{"Portugal"}
         PW{"Palau"}
         PY{"Paraguay"}
@@ -302,9 +302,20 @@ id{
         ZW{"Zimbabwe"}
         ZZ{"Wilayah Tidak Dikenal"}
     }
+    Countries%variant{
+        CD{"Kongo (RDK)"}
+        CG{"Kongo (Republik)"}
+        CI{"Ivory Coast"}
+        FK{"Kepulauan Malvinas (Falkland)"}
+        MK{"Makedonia (BRY)"}
+        TL{"Timor Timur"}
+    }
     CountriesShort{
         GB{"GB"}
+        HK{"Hong Kong"}
+        MO{"Makau"}
+        PS{"Palestina"}
         US{"A.S."}
     }
-    Version{"2.0.98.52"}
+    Version{"2.1.8.9"}
 }

@@ -1,7 +1,7 @@
 /*
 ******************************************************************************
 *
-*   Copyright (C) 1999-2013, International Business Machines
+*   Copyright (C) 1999-2014, International Business Machines
 *   Corporation and others.  All Rights Reserved.
 *
 ******************************************************************************
@@ -17,10 +17,11 @@
 #include "unicode/utypes.h"  /* U_PLATFORM etc. */
 
 #ifdef __GNUC__
-/* if gcc
+#ifdef GOOGLE_VENDOR_SRC_BRANCH
 #define ATTRIBUTE_WEAK __attribute__ ((weak))
-might have to #include some other header
-*/
+#else
+#include "base/port.h"
+#endif
 #endif
 
 #include "unicode/putil.h"
@@ -71,8 +72,6 @@ might have to #include some other header
 #   include <stdio.h>
 #endif
 
-#define LENGTHOF(array) (int32_t)(sizeof(array)/sizeof((array)[0]))
-
 U_NAMESPACE_USE
 
 /*
@@ -122,7 +121,7 @@ udata_cleanup(void)
     }
     gCommonDataCacheInitOnce.reset();
 
-    for (i = 0; i < LENGTHOF(gCommonICUDataArray) && gCommonICUDataArray[i] != NULL; ++i) {
+    for (i = 0; i < UPRV_LENGTHOF(gCommonICUDataArray) && gCommonICUDataArray[i] != NULL; ++i) {
         udata_close(gCommonICUDataArray[i]);
         gCommonICUDataArray[i] = NULL;
     }
@@ -141,7 +140,7 @@ findCommonICUDataByName(const char *inBasename)
     if (pData == NULL)
         return FALSE;
 
-    for (i = 0; i < LENGTHOF(gCommonICUDataArray); ++i) {
+    for (i = 0; i < UPRV_LENGTHOF(gCommonICUDataArray); ++i) {
         if ((gCommonICUDataArray[i] != NULL) && (gCommonICUDataArray[i]->pHeader == pData->pHeader)) {
             /* The data pointer is already in the array. */
             found = TRUE;
@@ -175,10 +174,9 @@ setCommonICUData(UDataMemory *pData,     /*  The new common data.  Belongs to ca
     /*    their locals.                                                              */
     UDatamemory_assign(newCommonData, pData);
     umtx_lock(NULL);
-    for (i = 0; i < LENGTHOF(gCommonICUDataArray); ++i) {
+    for (i = 0; i < UPRV_LENGTHOF(gCommonICUDataArray); ++i) {
         if (gCommonICUDataArray[i] == NULL) {
             gCommonICUDataArray[i] = newCommonData;
-            ucln_common_registerCleanup(UCLN_COMMON_UDATA, udata_cleanup);
             didUpdate = TRUE;
             break;
         } else if (gCommonICUDataArray[i]->pHeader == pData->pHeader) {
@@ -188,10 +186,12 @@ setCommonICUData(UDataMemory *pData,     /*  The new common data.  Belongs to ca
     }
     umtx_unlock(NULL);
 
-    if (i == LENGTHOF(gCommonICUDataArray) && warn) {
+    if (i == UPRV_LENGTHOF(gCommonICUDataArray) && warn) {
         *pErr = U_USING_DEFAULT_WARNING;
     }
-    if (!didUpdate) {
+    if (didUpdate) {
+        ucln_common_registerCleanup(UCLN_COMMON_UDATA, udata_cleanup);
+    } else {
         uprv_free(newCommonData);
     }
     return didUpdate;
@@ -624,14 +624,20 @@ U_NAMESPACE_END
 extern "C" const DataHeader U_DATA_API U_ICUDATA_ENTRY_POINT;
 
 /*
- * This would be a good place for weak-linkage declarations of
- * partial-data-library access functions where each returns a pointer
- * to its data package, if it is linked in.
+ * Begin google3-specific code:
+ * Add known slices of the ICU data if they are linked in.
  */
-/*
-extern const void *uprv_getICUData_collation(void) ATTRIBUTE_WEAK;
-extern const void *uprv_getICUData_conversion(void) ATTRIBUTE_WEAK;
- */
+#if U_PLATFORM_IS_LINUX_BASED
+extern "C" const void *uprv_getICUData_collation(void) ATTRIBUTE_WEAK;
+extern "C" const void *uprv_getICUData_conversion(void) ATTRIBUTE_WEAK;
+extern "C" const void *uprv_getICUData_core(void) ATTRIBUTE_WEAK;
+extern "C" const void *uprv_getICUData_locale(void) ATTRIBUTE_WEAK;
+extern "C" const void *uprv_getICUData_tz(void) ATTRIBUTE_WEAK;
+extern "C" const void *uprv_getICUData_unicode(void) ATTRIBUTE_WEAK;
+extern "C" const void *uprv_getICUData_uts46(void) ATTRIBUTE_WEAK;
+extern "C" const void *uprv_getICUData_other(void) ATTRIBUTE_WEAK;
+#endif
+/* End google3-specific code. */
 
 /*----------------------------------------------------------------------*
  *                                                                      *
@@ -661,7 +667,7 @@ openCommonData(const char *path,          /*  Path from OpenChoice?          */
     /* ??????? TODO revisit this */ 
     if (commonDataIndex >= 0) {
         /* "mini-cache" for common ICU data */
-        if(commonDataIndex >= LENGTHOF(gCommonICUDataArray)) {
+        if(commonDataIndex >= UPRV_LENGTHOF(gCommonICUDataArray)) {
             return NULL;
         }
         if(gCommonICUDataArray[commonDataIndex] == NULL) {
@@ -675,9 +681,36 @@ openCommonData(const char *path,          /*  Path from OpenChoice?          */
 
             /* Add the linked-in data to the list. */
             /*
-             * This is where we would check and call weakly linked partial-data-library
-             * access functions.
+             * Begin google3-specific code:
+             * Add known slices of the ICU data if they are linked in.
              */
+#if U_PLATFORM_IS_LINUX_BASED
+            if (uprv_getICUData_collation) {
+                setCommonICUDataPointer(uprv_getICUData_collation(), FALSE, pErrorCode);
+            }
+            if (uprv_getICUData_conversion) {
+                setCommonICUDataPointer(uprv_getICUData_conversion(), FALSE, pErrorCode);
+            }
+            if (uprv_getICUData_core) {
+                setCommonICUDataPointer(uprv_getICUData_core(), FALSE, pErrorCode);
+            }
+            if (uprv_getICUData_locale) {
+                setCommonICUDataPointer(uprv_getICUData_locale(), FALSE, pErrorCode);
+            }
+            if (uprv_getICUData_tz) {
+                setCommonICUDataPointer(uprv_getICUData_tz(), FALSE, pErrorCode);
+            }
+            if (uprv_getICUData_unicode) {
+                setCommonICUDataPointer(uprv_getICUData_unicode(), FALSE, pErrorCode);
+            }
+            if (uprv_getICUData_uts46) {
+                setCommonICUDataPointer(uprv_getICUData_uts46(), FALSE, pErrorCode);
+            }
+            if (uprv_getICUData_other) {
+                setCommonICUDataPointer(uprv_getICUData_other(), FALSE, pErrorCode);
+            }
+#endif
+            /* End google3-specific code. */
             setCommonICUDataPointer(&U_ICUDATA_ENTRY_POINT, FALSE, pErrorCode);
         }
         return gCommonICUDataArray[commonDataIndex];
@@ -1058,6 +1091,17 @@ static UDataMemory *doLoadFromCommonData(UBool isICUData, const char * /*pkgName
 }
 
 /*
+ * Identify the Time Zone resources that are subject to special override data loading.
+ */
+static UBool isTimeZoneFile(const char *name, const char *type) {
+    return ((uprv_strcmp(type, "res") == 0) &&
+            (uprv_strcmp(name, "zoneinfo64") == 0 ||
+             uprv_strcmp(name, "timezoneTypes") == 0 ||
+             uprv_strcmp(name, "windowsZones") == 0 ||
+             uprv_strcmp(name, "metaZones") == 0));
+}
+
+/*
  *  A note on the ownership of Mapped Memory
  *
  *  For common format files, ownership resides with the UDataMemory object
@@ -1224,6 +1268,21 @@ doOpenChoice(const char *path, const char *type, const char *name,
 
     /* End of dealing with a null basename */
     dataPath = u_getDataDirectory();
+
+    /****    Time zone individual files override  */
+    if (isTimeZoneFile(name, type) && isICUData) {
+        const char *tzFilesDir = u_getTimeZoneFilesDirectory(pErrorCode);
+        if (tzFilesDir[0] != 0) {
+#ifdef UDATA_DEBUG
+            fprintf(stderr, "Trying Time Zone Files directory = %s\n", tzFilesDir);
+#endif
+            retVal = doLoadFromIndividualFiles(/* pkgName.data() */ "", tzFilesDir, tocEntryPathSuffix,
+                            /* path */ "", type, name, isAcceptable, context, &subErrorCode, pErrorCode);
+            if((retVal != NULL) || U_FAILURE(*pErrorCode)) {
+                return retVal;
+            }
+        }
+    }
 
     /****    COMMON PACKAGE  - only if packages are first. */
     if(gDataFileAccess == UDATA_PACKAGES_FIRST) {

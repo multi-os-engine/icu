@@ -427,8 +427,9 @@ class TimeZoneFormat;
  *     <tr>
  *         <td style="text-align: center">S</td>
  *         <td style="text-align: center">1..n</td>
- *         <td>3456</td>
- *         <td>Fractional Second - truncates (like other time fields) to the count of letters.
+ *         <td>3450</td>
+ *         <td>Fractional Second - truncates (like other time fields) to the count of letters when formatting.
+ *         Appends zeros if more than 3 letters specified. Truncates at three significant digits when parsing.
  *         (example shows display using pattern SSSS for seconds value 12.34567)</td>
  *     </tr>
  *     <tr>
@@ -1121,6 +1122,41 @@ public:
      * @draft ICU 53
      */
     virtual void setContext(UDisplayContext value, UErrorCode& status);
+    
+#ifndef U_HIDE_DRAFT_API
+    /**
+     * Overrides base class method and
+     * This method clears per field NumberFormat instances 
+     * previously set by {@see adoptNumberFormat(const UnicodeString&, NumberFormat*, UErrorCode)} 
+     * @param adoptNF the NumbeferFormat used
+     * @draft ICU 54
+     */
+    void adoptNumberFormat(NumberFormat *formatToAdopt);
+
+    /**
+     * Allow the user to set the NumberFormat for several fields
+     * It can be a single field like: "y"(year) or "M"(month)
+     * It can be several field combined together: "yM"(year and month)
+     * Note: 
+     * 1 symbol field is enough for multiple symbol field (so "y" will override "yy", "yyy")
+     * If the field is not numeric, then override has no effect (like "MMM" will use abbreviation, not numerical field)
+     * Per field NumberFormat can also be cleared in {@see DateFormat::setNumberFormat(const NumberFormat& newNumberFormat)}
+     *
+     * @param fields  the fields to override(like y)
+     * @param adoptNF the NumbeferFormat used
+     * @param status  Receives a status code, which will be U_ZERO_ERROR
+     *                if the operation succeeds.
+     * @draft ICU 54
+     */
+    void adoptNumberFormat(const UnicodeString& fields, NumberFormat *formatToAdopt, UErrorCode &status);
+
+    /**
+     * Get the numbering system to be used for a particular field.
+     * @param field The UDateFormatField to get
+     * @draft ICU 54
+     */
+    const NumberFormat * getNumberFormatForField(UChar field) const;
+#endif  /* U_HIDE_DRAFT_API */
 
 #ifndef U_HIDE_INTERNAL_API
     /**
@@ -1334,12 +1370,13 @@ private:
      *                   will be set to the offset of the character after the match
      * @param whitespaceLenient <code>TRUE</code> if whitespace parse is lenient, <code>FALSE</code> otherwise.
      * @param partialMatchLenient <code>TRUE</code> if partial match parse is lenient, <code>FALSE</code> otherwise.
+     * @param oldLeniency <code>TRUE</code> if old leniency control is lenient, <code>FALSE</code> otherwise.
      *
      * @return <code>TRUE</code> if the literal text could be matched, <code>FALSE</code> otherwise.
      */
     static UBool matchLiterals(const UnicodeString &pattern, int32_t &patternOffset,
                                const UnicodeString &text, int32_t &textOffset, 
-                               UBool whitespaceLenient, UBool partialMatchLenient);
+                               UBool whitespaceLenient, UBool partialMatchLenient, UBool oldLeniency);
     
     /**
      * Private member function that converts the parsed date strings into

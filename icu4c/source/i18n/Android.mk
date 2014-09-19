@@ -22,7 +22,7 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 src_files := \
-	ucln_in.c  decContext.c \
+	decContext.c \
 	ulocdata.c  utmscale.c decNumber.c
 
 src_files += \
@@ -69,9 +69,10 @@ src_files += \
 	rbt_set.cpp     regexcmp.cpp regexst.cpp  \
 	regeximp.cpp 	region.cpp \
 	rematch.cpp     remtrans.cpp repattrn.cpp \
-	rulebasedcollator.cpp \
+	rulebasedcollator.cpp scientificformathelper.cpp \
 	scriptset.cpp \
 	search.cpp      simpletz.cpp smpdtfmt.cpp \
+	sharedbreakiterator.cpp \
 	sortkey.cpp     strmatch.cpp strrepl.cpp  \
 	stsearch.cpp    timezone.cpp \
 	titletrn.cpp    tolowtrn.cpp toupptrn.cpp \
@@ -102,6 +103,7 @@ src_files += \
         alphaindex.cpp  bocsu.cpp    decfmtst.cpp \
         smpdtfst.cpp    smpdtfst.h   tzfmt.cpp \
         tzgnames.cpp    tznames.cpp  tznames_impl.cpp \
+	ucln_in.cpp \
         udateintervalformat.cpp  upluralrules.cpp
 
 

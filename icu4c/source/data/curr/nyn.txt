@@ -96,7 +96,7 @@ nyn{
             "Faranga ya Guinea",
         }
         INR{
-            "Rs.",
+            "₹",
             "Rupiya ya India",
         }
         JPY{
@@ -236,5 +236,5 @@ nyn{
             "Doora ya Zimbabwe",
         }
     }
-    Version{"2.0.92.87"}
+    Version{"2.1.7.39"}
 }

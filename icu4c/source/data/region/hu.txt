@@ -68,7 +68,7 @@ hu{
         BH{"Bahrein"}
         BI{"Burundi"}
         BJ{"Benin"}
-        BL{"Saint Barthélemy"}
+        BL{"Saint-Barthélemy"}
         BM{"Bermuda"}
         BN{"Brunei"}
         BO{"Bolívia"}
@@ -141,7 +141,7 @@ hu{
         GU{"Guam"}
         GW{"Guinea-Bissau"}
         GY{"Guyana"}
-        HK{"Hongkong"}
+        HK{"Hongkong SAR Kína"}
         HM{"Heard-sziget és McDonald-szigetek"}
         HN{"Honduras"}
         HR{"Horvátország"}
@@ -195,7 +195,7 @@ hu{
         ML{"Mali"}
         MM{"Mianmar (Burma)"}
         MN{"Mongólia"}
-        MO{"Makaó"}
+        MO{"Makaó SAR Kína"}
         MP{"Északi Mariana-szigetek"}
         MQ{"Martinique"}
         MR{"Mauritánia"}
@@ -230,7 +230,7 @@ hu{
         PM{"Saint Pierre és Miquelon"}
         PN{"Pitcairn-szigetek"}
         PR{"Puerto Rico"}
-        PS{"Palesztina"}
+        PS{"Palesztin Terület"}
         PT{"Portugália"}
         PW{"Palau"}
         PY{"Paraguay"}
@@ -302,9 +302,18 @@ hu{
         ZW{"Zimbabwe"}
         ZZ{"Ismeretlen körzet"}
     }
+    Countries%variant{
+        CD{"Kongó (KDK)"}
+        CG{"Kongó (Köztársaság)"}
+        FK{"Falkland-szigetek (Malvin-szigetek)"}
+        MK{"Macedónia (MVJK)"}
+    }
     CountriesShort{
         GB{"UK"}
+        HK{"Hongkong"}
+        MO{"Makaó"}
+        PS{"Palesztina"}
         US{"USA"}
     }
-    Version{"2.0.98.52"}
+    Version{"2.1.8.9"}
 }

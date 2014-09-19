@@ -86,7 +86,7 @@ et{
         CF{"Kesk-Aafrika Vabariik"}
         CG{"Kongo-Brazzaville"}
         CH{"Šveits"}
-        CI{"Côte d'Ivoire"}
+        CI{"Côte d’Ivoire"}
         CK{"Cooki saared"}
         CL{"Tšiili"}
         CM{"Kamerun"}
@@ -141,8 +141,8 @@ et{
         GU{"Guam"}
         GW{"Guinea-Bissau"}
         GY{"Guyana"}
-        HK{"Hongkong"}
-        HM{"Heard ja McDonald saared"}
+        HK{"Hongkong - Hiina erihalduspiirkond"}
+        HM{"Heardi ja McDonaldi saared"}
         HN{"Honduras"}
         HR{"Horvaatia"}
         HT{"Haiti"}
@@ -193,9 +193,9 @@ et{
         MH{"Marshalli saared"}
         MK{"Makedoonia"}
         ML{"Mali"}
-        MM{"Myanmar"}
+        MM{"Myanmar (Birma)"}
         MN{"Mongoolia"}
-        MO{"Macau"}
+        MO{"Macau - Hiina erihalduspiirkond"}
         MP{"Põhja-Mariaanid"}
         MQ{"Martinique"}
         MR{"Mauritaania"}
@@ -230,7 +230,7 @@ et{
         PM{"Saint Pierre ja Miquelon"}
         PN{"Pitcairni saared"}
         PR{"Puerto Rico"}
-        PS{"Palestiina"}
+        PS{"Palestiina alad"}
         PT{"Portugal"}
         PW{"Belau"}
         PY{"Paraguay"}
@@ -302,9 +302,18 @@ et{
         ZW{"Zimbabwe"}
         ZZ{"Tundmatu piirkond"}
     }
+    Countries%variant{
+        CD{"Kongo-Kinshasa"}
+        CG{"Kongo (Vabariik)"}
+        CI{"Elevandiluurannik"}
+        FK{"Falklandi saared (Malviini saared)"}
+    }
     CountriesShort{
         GB{"Suurbritannia"}
+        HK{"Hongkong"}
+        MO{"Macau"}
+        PS{"Palestiina"}
         US{"USA"}
     }
-    Version{"2.0.98.52"}
+    Version{"2.1.8.9"}
 }

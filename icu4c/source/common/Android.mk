@@ -22,7 +22,6 @@ LOCAL_PATH:= $(call my-dir)
 src_files := \
 	cmemory.c          cstring.c          \
 	cwchar.c           locmap.c           \
-	lrucache.cpp \
 	punycode.cpp       putil.cpp          \
 	sharedobject.cpp \
 	simplepatternformatter.cpp \
@@ -39,7 +38,7 @@ src_files := \
 	ucnv_ext.cpp       ucnvhz.c           \
 	ucnv_io.cpp        ucnvisci.c         \
 	ucnvlat1.c         ucnv_lmb.c         \
-	ucnvmbcs.c         ucnvscsu.c         \
+	ucnvmbcs.cpp       ucnvscsu.c         \
 	ucnv_set.c         ucnv_u16.c         \
 	ucnv_u32.c         ucnv_u7.c          \
 	ucnv_u8.c                             \
@@ -54,12 +53,12 @@ src_files := \
 	usc_impl.c         uscript.c          \
 	uscript_props.cpp  \
 	ushape.cpp         ustrcase.cpp       \
-	ustr_cnv.c         ustrfmt.c          \
+	ustr_cnv.cpp       ustrfmt.c          \
 	ustring.cpp        ustrtrns.cpp       \
 	ustr_wcs.cpp       utf_impl.c         \
 	utrace.c           utrie.cpp          \
 	utypes.c           wintz.c            \
-	utrie2_builder.cpp icuplug.c          \
+	utrie2_builder.cpp icuplug.cpp        \
 	propsvec.c         ulist.c            \
 	uloc_tag.c         ucnv_ct.c
 

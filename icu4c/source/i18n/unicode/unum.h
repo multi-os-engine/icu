@@ -18,6 +18,7 @@
 
 #include "unicode/localpointer.h"
 #include "unicode/uloc.h"
+#include "unicode/ucurr.h"
 #include "unicode/umisc.h"
 #include "unicode/parseerr.h"
 #include "unicode/uformattable.h"
@@ -203,13 +204,21 @@ typedef enum UNumberFormatStyle {
      * negative currency amount instead of "-$3.00" ({@link #UNUM_CURRENCY}).
      * @draft ICU 53
      */
-    UNUM_CURRENCY_ACCOUNTING = UNUM_CURRENCY_PLURAL+1,
+    UNUM_CURRENCY_ACCOUNTING,
+    /**
+     * Currency format with a currency symbol given CASH usage, e.g., 
+     * "NT$3" instead of "NT$3.23".
+     * @draft ICU 54
+     */
+    UNUM_CASH_CURRENCY,
 #endif /* U_HIDE_DRAFT_API */
+
     /**
      * One more than the highest number format style constant.
      * @stable ICU 4.8
      */
-    UNUM_FORMAT_STYLE_COUNT = UNUM_CURRENCY_PLURAL+2,
+    UNUM_FORMAT_STYLE_COUNT,
+
     /**
      * Default format
      * @stable ICU 2.0
@@ -901,6 +910,16 @@ typedef enum UNumberFormatAttribute {
   UNUM_NUMERIC_ATTRIBUTE_COUNT = UNUM_LENIENT_PARSE + 3,
 #endif  /* U_HIDE_INTERNAL_API */
 
+#ifndef U_HIDE_DRAFT_API
+  /** 
+   * if this attribute is set to 0, it is set to UNUM_CURRENCY_STANDARD purpose,
+   * otherwise it is UNUM_CURRENCY_CASH purpose
+   * Default: 0 (UNUM_CURRENCY_STANDARD purpose)
+   * @draft ICU 54
+   */
+  UNUM_CURRENCY_USAGE = UNUM_LENIENT_PARSE + 4,
+#endif  /* U_HIDE_DRAFT_API */
+
   /* The following cannot be #ifndef U_HIDE_INTERNAL_API, needed in .h file variable declararions */
   /** One below the first bitfield-boolean item.
    * All items after this one are stored in boolean form.
@@ -920,6 +939,16 @@ typedef enum UNumberFormatAttribute {
    * @stable ICU 50
    */
   UNUM_PARSE_NO_EXPONENT,
+
+  /** 
+   * if this attribute is set to 1, specifies that, if the pattern contains a 
+   * decimal mark the input is required to have one. If this attribute is set to 0,
+   * specifies that input does not have to contain a decimal mark.
+   * Has no effect on formatting.
+   * Default: 0 (unset)
+   * @draft ICU 54
+   */
+  UNUM_PARSE_DECIMAL_MARK_REQUIRED,
 
   /* The following cannot be #ifndef U_HIDE_INTERNAL_API, needed in .h file variable declararions */
   /** Limit of boolean attributes.
@@ -1190,8 +1219,14 @@ typedef enum UNumberFormatSymbol {
    * @stable ICU 4.6
    */
   UNUM_NINE_DIGIT_SYMBOL = 26,
+
+  /** Multiplication sign
+   * @draft ICU 54
+   */
+  UNUM_EXPONENT_MULTIPLICATION_SYMBOL = 27,
+
   /** count symbol constants */
-  UNUM_FORMAT_SYMBOL_COUNT = 27
+  UNUM_FORMAT_SYMBOL_COUNT = 28
 } UNumberFormatSymbol;
 
 /**

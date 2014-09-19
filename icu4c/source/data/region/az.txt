@@ -141,7 +141,7 @@ az{
         GU{"Quam"}
         GW{"Qvineya-Bisau"}
         GY{"Qviyana"}
-        HK{"Honq Konq"}
+        HK{"Honq Konq Xüsusi İnzibati Ərazi Çin"}
         HM{"Herd və Mak Donald Adaları"}
         HN{"Honduras"}
         HR{"Xorvatiya"}
@@ -195,7 +195,7 @@ az{
         ML{"Mali"}
         MM{"Myanma"}
         MN{"Monqoliya"}
-        MO{"Makao"}
+        MO{"Makao Xüsusi İnzibati Ərazi Çin"}
         MP{"Şimali Mariana Adaları"}
         MQ{"Martinik"}
         MR{"Mavritaniya"}
@@ -230,7 +230,7 @@ az{
         PM{"San Pier və Mikelon"}
         PN{"Pitkern Adaları"}
         PR{"Puerto Riko"}
-        PS{"Fələstin"}
+        PS{"Fələstin Əraziləri"}
         PT{"Portuqal"}
         PW{"Palau"}
         PY{"Paraqvay"}
@@ -302,9 +302,19 @@ az{
         ZW{"Zimbabve"}
         ZZ{"Naməlum Region"}
     }
+    Countries%variant{
+        CD{"Konqo (KDR)"}
+        CG{"Konqo (Respublika)"}
+        FK{"Folklend Adaları (Malvin Adaları)"}
+        MK{"Makedoniya (FYROM)"}
+        TL{"Doğu Timor"}
+    }
     CountriesShort{
         GB{"B.K."}
+        HK{"Honq Konq"}
+        MO{"Makao"}
+        PS{"Fələstin"}
         US{"A.B.Ş."}
     }
-    Version{"2.0.98.52"}
+    Version{"2.1.8.9"}
 }

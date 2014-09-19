@@ -131,8 +131,11 @@ protected:
      * Throw an exception, log an error, terminate the program, or similar.
      * @stable ICU 4.2
      */
-
+#ifdef GOOGLE_VENDOR_SRC_BRANCH
     virtual void handleFailure() const {}
+#else
+    virtual void handleFailure() const;
+#endif
 };
 
 U_NAMESPACE_END

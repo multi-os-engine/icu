@@ -87,7 +87,8 @@
  * @internal
  */
 #ifndef U_DISABLE_RENAMING
-#define U_DISABLE_RENAMING 0
+/* Google Patch: default to DISABLE_RENAMING=1 */
+#define U_DISABLE_RENAMING 1
 #endif
 
 /**
@@ -140,7 +141,8 @@
  * @internal
  */
 #ifndef U_ENABLE_DYLOAD
-#define U_ENABLE_DYLOAD 1
+/* Google Patch: disable dynamic load; not available in production. */
+#define U_ENABLE_DYLOAD 0
 #endif
 
 /**
@@ -244,6 +246,10 @@
  */
 #ifndef UCONFIG_NO_FILE_IO
 #   define UCONFIG_NO_FILE_IO 0
+#endif
+
+#if UCONFIG_NO_FILE_IO && defined(U_TIMEZONE_FILES_DIR) 
+#   error Contradictory file io switches in uconfig.h.
 #endif
 
 /**
@@ -417,7 +423,10 @@
  * @internal
  */
 #ifndef UCONFIG_NO_FILTERED_BREAK_ITERATION
-#   define UCONFIG_NO_FILTERED_BREAK_ITERATION 1
+#   define UCONFIG_NO_FILTERED_BREAK_ITERATION 0
+
+
+
 #endif
 
 #endif

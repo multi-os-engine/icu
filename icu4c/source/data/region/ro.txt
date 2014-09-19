@@ -82,9 +82,9 @@ ro{
         BZ{"Belize"}
         CA{"Canada"}
         CC{"Insulele Cocos (Keeling)"}
-        CD{"Republica Democrată Congo"}
+        CD{"Congo - Kinshasa"}
         CF{"Republica Centrafricană"}
-        CG{"Congo"}
+        CG{"Congo - Brazzaville"}
         CH{"Elveția"}
         CI{"Côte d’Ivoire"}
         CK{"Insulele Cook"}
@@ -141,7 +141,7 @@ ro{
         GU{"Guam"}
         GW{"Guineea-Bissau"}
         GY{"Guyana"}
-        HK{"Hong Kong"}
+        HK{"R.A.S. Hong Kong a Chinei"}
         HM{"Insula Heard și Insulele McDonald"}
         HN{"Honduras"}
         HR{"Croația"}
@@ -195,7 +195,7 @@ ro{
         ML{"Mali"}
         MM{"Myanmar (Birmania)"}
         MN{"Mongolia"}
-        MO{"Macao"}
+        MO{"R.A.S. Macao a Chinei"}
         MP{"Insulele Mariane de Nord"}
         MQ{"Martinica"}
         MR{"Mauritania"}
@@ -230,7 +230,7 @@ ro{
         PM{"Saint-Pierre și Miquelon"}
         PN{"Insulele Pitcairn"}
         PR{"Puerto Rico"}
-        PS{"Palestina"}
+        PS{"Teritoriile Palestiniene"}
         PT{"Portugalia"}
         PW{"Palau"}
         PY{"Paraguay"}
@@ -281,7 +281,7 @@ ro{
         TZ{"Tanzania"}
         UA{"Ucraina"}
         UG{"Uganda"}
-        UM{"Insulele Minore Îndepărtate ale Statelor Unite ale Americii"}
+        UM{"Insulele Îndepărtate ale S.U.A."}
         US{"Statele Unite ale Americii"}
         UY{"Uruguay"}
         UZ{"Uzbekistan"}
@@ -302,9 +302,19 @@ ro{
         ZW{"Zimbabwe"}
         ZZ{"Regiune necunoscută"}
     }
+    Countries%variant{
+        CD{"Congo (Republica Democrată Congo)"}
+        CG{"Congo (Republica)"}
+        CI{"Coasta de Fildeș"}
+        FK{"Insulele Falkland (Insulele Malvine)"}
+        MK{"Macedonia (FRIM)"}
+    }
     CountriesShort{
         GB{"Regatul Unit"}
+        HK{"Hong Kong"}
+        MO{"Macao"}
+        PS{"Palestina"}
         US{"S.U.A."}
     }
-    Version{"2.0.98.52"}
+    Version{"2.1.8.9"}
 }

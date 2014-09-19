@@ -96,7 +96,7 @@ ak{
             "Gini Frank",
         }
         INR{
-            "Rs.",
+            "₹",
             "India Rupi",
         }
         JPY{
@@ -232,5 +232,5 @@ ak{
             "Zimbabwe Dɔla",
         }
     }
-    Version{"2.0.92.87"}
+    Version{"2.1.7.39"}
 }

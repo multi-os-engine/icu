@@ -76,7 +76,7 @@ eu{
         BR{"Brasil"}
         BS{"Bahamak"}
         BT{"Bhutan"}
-        BV{"Bouvet Uhartea"}
+        BV{"Bouvet uhartea"}
         BW{"Botswana"}
         BY{"Bielorrusia"}
         BZ{"Belize"}
@@ -141,7 +141,7 @@ eu{
         GU{"Guam"}
         GW{"Ginea-Bissau"}
         GY{"Guyana"}
-        HK{"Hong Kong"}
+        HK{"Hong Kong AEB Txina"}
         HM{"Heard eta McDonald uharteak"}
         HN{"Honduras"}
         HR{"Kroazia"}
@@ -195,7 +195,7 @@ eu{
         ML{"Mali"}
         MM{"Myanmar"}
         MN{"Mongolia"}
-        MO{"Macau"}
+        MO{"Macau AEB Txina"}
         MP{"Iparraldeko Mariana uharteak"}
         MQ{"Martinika"}
         MR{"Mauritania"}
@@ -230,7 +230,7 @@ eu{
         PM{"Saint-Pierre eta Mikelune"}
         PN{"Pitcairn uharteak"}
         PR{"Puerto Rico"}
-        PS{"Palestina"}
+        PS{"Palestinako Lurraldeak"}
         PT{"Portugal"}
         PW{"Palau"}
         PY{"Paraguai"}
@@ -302,8 +302,19 @@ eu{
         ZW{"Zimbabwe"}
         ZZ{"Eskualde ezezaguna"}
     }
+    Countries%variant{
+        CD{"Kongo (KED)"}
+        CG{"Kongo (errepublika)"}
+        FK{"Falkland uharteak (Malvina uharteak)"}
+        MK{"Mazedonia (Mazedoniako Yugoslaviar Errepublika ohia)"}
+        TL{"Timor ekialdea"}
+    }
     CountriesShort{
+        GB{"EB"}
+        HK{"Hong Kong"}
+        MO{"Macau"}
+        PS{"Palestina"}
         US{"AEB"}
     }
-    Version{"2.0.97.91"}
+    Version{"2.1.8.9"}
 }

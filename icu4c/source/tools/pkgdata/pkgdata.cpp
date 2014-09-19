@@ -865,6 +865,9 @@ static int32_t initializePkgDataFlags(UPKGOptions *o) {
  * Depending on the configuration, the library name may either end with version number or shared object suffix.
  */
 static void createFileNames(UPKGOptions *o, const char mode, const char *version_major, const char *version, const char *libName, UBool reverseExt, UBool noVersion) {
+    const char* FILE_EXTENSION_SEP = uprv_strlen(pkgDataFlags[SO_EXT]) == 0 ? "" : ".";
+    const char* FILE_SUFFIX = pkgDataFlags[LIB_EXT_ORDER][0] == '.' ? "." : "";
+
 #if U_PLATFORM == U_PF_MINGW
         /* MinGW does not need the library prefix when building in dll mode. */
         if (IN_DLL_MODE(mode)) {
@@ -887,25 +890,29 @@ static void createFileNames(UPKGOptions *o, const char mode, const char *version
 #if U_PLATFORM == U_PF_MINGW
         sprintf(libFileNames[LIB_FILE_MINGW], "%s%s.lib", pkgDataFlags[LIBPREFIX], libName);
 #elif U_PLATFORM == U_PF_CYGWIN
-        sprintf(libFileNames[LIB_FILE_CYGWIN], "cyg%s.%s",
+        sprintf(libFileNames[LIB_FILE_CYGWIN], "cyg%s%s%s",
                 libName,
+                FILE_EXTENSION_SEP,
                 pkgDataFlags[SO_EXT]);
-        sprintf(libFileNames[LIB_FILE_CYGWIN_VERSION], "cyg%s%s.%s",
+        sprintf(libFileNames[LIB_FILE_CYGWIN_VERSION], "cyg%s%s%s%s",
                 libName,
                 version_major,
+                FILE_EXTENSION_SEP,
                 pkgDataFlags[SO_EXT]);
 
         uprv_strcat(pkgDataFlags[SO_EXT], ".");
         uprv_strcat(pkgDataFlags[SO_EXT], pkgDataFlags[A_EXT]);
 #elif U_PLATFORM == U_PF_OS400 || defined(_AIX)
-        sprintf(libFileNames[LIB_FILE_VERSION_TMP], "%s.%s",
+        sprintf(libFileNames[LIB_FILE_VERSION_TMP], "%s%s%s",
                 libFileNames[LIB_FILE],
+                FILE_EXTENSION_SEP,
                 pkgDataFlags[SOBJ_EXT]);
 #elif U_PLATFORM == U_PF_OS390
-        sprintf(libFileNames[LIB_FILE_VERSION_TMP], "%s%s%s.%s",
+        sprintf(libFileNames[LIB_FILE_VERSION_TMP], "%s%s%s%s%s",
                     libFileNames[LIB_FILE],
                     pkgDataFlags[LIB_EXT_ORDER][0] == '.' ? "." : "",
                     reverseExt ? version : pkgDataFlags[SOBJ_EXT],
+                    FILE_EXTENSION_SEP,
                     reverseExt ? pkgDataFlags[SOBJ_EXT] : version);
 
         sprintf(libFileNames[LIB_FILE_OS390BATCH_VERSION], "%s%s.x",
@@ -918,37 +925,40 @@ static void createFileNames(UPKGOptions *o, const char mode, const char *version
         if (noVersion && !reverseExt) {
             sprintf(libFileNames[LIB_FILE_VERSION_TMP], "%s%s%s",
                     libFileNames[LIB_FILE],
-                    pkgDataFlags[LIB_EXT_ORDER][0] == '.' ? "." : "",
+                    FILE_SUFFIX,
                     pkgDataFlags[SOBJ_EXT]);
         } else {
-            sprintf(libFileNames[LIB_FILE_VERSION_TMP], "%s%s%s.%s",
+            sprintf(libFileNames[LIB_FILE_VERSION_TMP], "%s%s%s%s%s",
                     libFileNames[LIB_FILE],
-                    pkgDataFlags[LIB_EXT_ORDER][0] == '.' ? "." : "",
+                    FILE_SUFFIX,
                     reverseExt ? version : pkgDataFlags[SOBJ_EXT],
+                    FILE_EXTENSION_SEP,
                     reverseExt ? pkgDataFlags[SOBJ_EXT] : version);
         }
 #endif
         if (noVersion && !reverseExt) {
             sprintf(libFileNames[LIB_FILE_VERSION_MAJOR], "%s%s%s",
                     libFileNames[LIB_FILE],
-                    pkgDataFlags[LIB_EXT_ORDER][0] == '.' ? "." : "",
+                    FILE_SUFFIX,
                     pkgDataFlags[SO_EXT]);
 
             sprintf(libFileNames[LIB_FILE_VERSION], "%s%s%s",
                     libFileNames[LIB_FILE],
-                    pkgDataFlags[LIB_EXT_ORDER][0] == '.' ? "." : "",
+                    FILE_SUFFIX,
                     pkgDataFlags[SO_EXT]);
         } else {
-            sprintf(libFileNames[LIB_FILE_VERSION_MAJOR], "%s%s%s.%s",
+            sprintf(libFileNames[LIB_FILE_VERSION_MAJOR], "%s%s%s%s%s",
                     libFileNames[LIB_FILE],
-                    pkgDataFlags[LIB_EXT_ORDER][0] == '.' ? "." : "",
+                    FILE_SUFFIX,
                     reverseExt ? version_major : pkgDataFlags[SO_EXT],
+                    FILE_EXTENSION_SEP,
                     reverseExt ? pkgDataFlags[SO_EXT] : version_major);
 
-            sprintf(libFileNames[LIB_FILE_VERSION], "%s%s%s.%s",
+            sprintf(libFileNames[LIB_FILE_VERSION], "%s%s%s%s%s",
                     libFileNames[LIB_FILE],
-                    pkgDataFlags[LIB_EXT_ORDER][0] == '.' ? "." : "",
+                    FILE_SUFFIX,
                     reverseExt ? version : pkgDataFlags[SO_EXT],
+                    FILE_EXTENSION_SEP,
                     reverseExt ? pkgDataFlags[SO_EXT] : version);
         }
 
@@ -976,6 +986,7 @@ static int32_t pkg_createSymLinks(const char *targetDir, UBool specialHandling) 
     char cmd[LARGE_BUFFER_MAX_SIZE];
     char name1[SMALL_BUFFER_MAX_SIZE]; /* symlink file name */
     char name2[SMALL_BUFFER_MAX_SIZE]; /* file name to symlink */
+    const char* FILE_EXTENSION_SEP = uprv_strlen(pkgDataFlags[SO_EXT]) == 0 ? "" : ".";
 
 #if !defined(USING_CYGWIN) && U_PLATFORM != U_PF_MINGW
     /* No symbolic link to make. */
@@ -1035,7 +1046,7 @@ static int32_t pkg_createSymLinks(const char *targetDir, UBool specialHandling) 
         }
 
         /* Needs to be set here because special handling skips it */
-        sprintf(name1, "%s.%s", libFileNames[LIB_FILE], pkgDataFlags[SO_EXT]);
+        sprintf(name1, "%s%s%s", libFileNames[LIB_FILE], FILE_EXTENSION_SEP, pkgDataFlags[SO_EXT]);
         sprintf(name2, "%s", libFileNames[LIB_FILE_VERSION]);
 #else
         goto normal_symlink_mode;
@@ -1044,7 +1055,7 @@ static int32_t pkg_createSymLinks(const char *targetDir, UBool specialHandling) 
 #if U_PLATFORM != U_PF_CYGWIN
 normal_symlink_mode:
 #endif
-        sprintf(name1, "%s.%s", libFileNames[LIB_FILE], pkgDataFlags[SO_EXT]);
+        sprintf(name1, "%s%s%s", libFileNames[LIB_FILE], FILE_EXTENSION_SEP, pkgDataFlags[SO_EXT]);
         sprintf(name2, "%s", libFileNames[LIB_FILE_VERSION]);
     }
 
@@ -1292,6 +1303,9 @@ static int32_t pkg_generateLibraryFile(const char *targetDir, const char mode, c
     char *cmd = NULL;
     UBool freeCmd = FALSE;
     int32_t length = 0;
+
+    (void)specialHandling;  // Suppress unused variable compiler warnings on platforms where all usage
+                            // of this parameter is #ifdefed out.
 
     /* This is necessary because if packaging is done without assembly code, objectFile might be extremely large
      * containing many object files and so the calling function should supply a command buffer that is large

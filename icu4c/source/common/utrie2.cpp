@@ -139,7 +139,22 @@ utrie2_openFromSerialized(UTrie2ValueBits valueBits,
         return 0;
     }
 
-    if( length<=0 || (U_POINTER_MASK_LSB(data, 3)!=0) ||
+
+    /* Google Patch.
+     *   blaze test finance/frontend/modules:all
+     *   finance/batch/autocomplete/autocomplete_builder is run via a genrule
+     *   as part of the build process, which creates an ICU NFD transliterator,
+     *   which ultimately ends up here.  In release mode only, the data for
+     *   the norm2 NFD normalizer is not properly aligned.  Doesn't happen
+     *   in the normal build targets, only in the genrule environment.
+     *   Misaligned data appears to be correct otherwise.
+     *
+     *   5/22/2012 Alex Verstak reports in a mail to icu-team that removing this
+     *   patch is causing a problem in production. The problem described above
+     *   in building finance/frontend, is gone.
+     *   TODO (aheninger): figure out why and either fix it or file a bug.
+     */
+    if( length<=0 || /* (U_POINTER_MASK_LSB(data, 3)!=0) || */
         valueBits<0 || UTRIE2_COUNT_VALUE_BITS<=valueBits
     ) {
         *pErrorCode=U_ILLEGAL_ARGUMENT_ERROR;

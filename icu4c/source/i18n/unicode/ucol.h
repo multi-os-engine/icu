@@ -452,8 +452,7 @@ ucol_openRules( const UChar        *rules,
  * @see ucol_setVariableTop
  * @see ucol_getShortDefinitionString
  * @see ucol_normalizeShortDefinitionString
- * @stable ICU 3.0
- *
+ * @deprecated ICU 54 Use ucol_open() with language tag collation keywords instead.
  */
 U_STABLE UCollator* U_EXPORT2
 ucol_openFromShortString( const char *definition,
@@ -930,7 +929,7 @@ ucol_getRules(    const    UCollator    *coll,
  *  @return length of the resulting string
  *  @see ucol_openFromShortString
  *  @see ucol_normalizeShortDefinitionString
- *  @stable ICU 3.0
+ *  @deprecated ICU 54
  */
 U_STABLE int32_t U_EXPORT2
 ucol_getShortDefinitionString(const UCollator *coll,
@@ -956,7 +955,7 @@ ucol_getShortDefinitionString(const UCollator *coll,
  *  @see ucol_openFromShortString
  *  @see ucol_getShortDefinitionString
  * 
- *  @stable ICU 3.0
+ *  @deprecated ICU 54
  */
 
 U_STABLE int32_t U_EXPORT2
@@ -970,6 +969,9 @@ ucol_normalizeShortDefinitionString(const char *source,
 /**
  * Get a sort key for a string from a UCollator.
  * Sort keys may be compared using <TT>strcmp</TT>.
+ *
+ * Note that sort keys are often less efficient than simply doing comparison.  
+ * For more details, see the ICU User Guide.
  *
  * Like ICU functions that write to an output buffer, the buffer contents
  * is undefined if the buffer capacity (resultLength parameter) is too small.
@@ -1112,6 +1114,17 @@ ucol_getUCAVersion(const UCollator* coll, UVersionInfo info);
  *
  * This is useful, for example, for combining sort keys from first and last names
  * to sort such pairs.
+ * See http://www.unicode.org/reports/tr10/#Merging_Sort_Keys
+ *
+ * The recommended way to achieve "merged" sorting is by
+ * concatenating strings with U+FFFE between them.
+ * The concatenation has the same sort order as the merged sort keys,
+ * but merge(getSortKey(str1), getSortKey(str2)) may differ from getSortKey(str1 + '\uFFFE' + str2).
+ * Using strings with U+FFFE may yield shorter sort keys.
+ *
+ * For details about Sort Key Features see
+ * http://userguide.icu-project.org/collation/api#TOC-Sort-Key-Features
+ *
  * It is possible to merge multiple sort keys by consecutively merging
  * another one with the intermediate result.
  *
@@ -1430,14 +1443,14 @@ ucol_cloneBinary(const UCollator *coll,
  *  ucol_cloneBinary. Binary image used in instantiation of the 
  *  collator remains owned by the user and should stay around for 
  *  the lifetime of the collator. The API also takes a base collator
- *  which usually should be the root collator.
+ *  which must be the root collator.
  *  @param bin binary image owned by the user and required through the
  *             lifetime of the collator
  *  @param length size of the image. If negative, the API will try to
  *                figure out the length of the image
- *  @param base fallback collator, usually the root collator. Base is required to be
- *              present through the lifetime of the collator. Currently 
- *              it cannot be NULL.
+ *  @param base Base collator, for lookup of untailored characters.
+ *              Must be the root collator, must not be NULL.
+ *              The base is required to be present through the lifetime of the collator.
  *  @param status for catching errors
  *  @return newly created collator
  *  @see ucol_cloneBinary

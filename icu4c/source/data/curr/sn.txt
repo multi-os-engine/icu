@@ -96,7 +96,7 @@ sn{
             "Furenki re Gine",
         }
         INR{
-            "Rs.",
+            "₹",
             "Rupe re India",
         }
         JPY{
@@ -236,5 +236,5 @@ sn{
             "Dora re Zimbabwe",
         }
     }
-    Version{"2.0.92.87"}
+    Version{"2.1.6.69"}
 }

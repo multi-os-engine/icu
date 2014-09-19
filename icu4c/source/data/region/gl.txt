@@ -141,7 +141,7 @@ gl{
         GU{"Guam"}
         GW{"Guinea-Bissau"}
         GY{"Güiana"}
-        HK{"Hong Kong"}
+        HK{"Hong Kong RAE de China"}
         HM{"Illa Heard e Illas McDonald"}
         HN{"Honduras"}
         HR{"Croacia"}
@@ -195,7 +195,7 @@ gl{
         ML{"Mali"}
         MM{"Myanmar (Birmania)"}
         MN{"Mongolia"}
-        MO{"Macau"}
+        MO{"Macau RAE de China"}
         MP{"Illas Marianas do norte"}
         MQ{"Martinica"}
         MR{"Mauritania"}
@@ -230,7 +230,7 @@ gl{
         PM{"San Pedro e Miguelón"}
         PN{"Illas Pitcairn"}
         PR{"Porto Rico"}
-        PS{"Palestina"}
+        PS{"Territorios palestinos"}
         PT{"Portugal"}
         PW{"Palau"}
         PY{"Paraguai"}
@@ -302,5 +302,18 @@ gl{
         ZW{"Cimbabue"}
         ZZ{"Rexión descoñecida"}
     }
-    Version{"2.0.98.76"}
+    Countries%variant{
+        CD{"Congo (RDC)"}
+        CG{"Congo (RC)"}
+        CI{"Costa do Marfil"}
+        FK{"Illas Malvinas (Falkland)"}
+        MK{"Macedonia (ARIM)"}
+    }
+    CountriesShort{
+        GB{"RU"}
+        HK{"Hong Kong"}
+        MO{"Macau"}
+        PS{"Palestina"}
+    }
+    Version{"2.1.8.9"}
 }

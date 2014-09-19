@@ -101,6 +101,16 @@ static const UnicodeString dbg_null("<NULL>","");
 #define debug(x)
 #endif
 
+/*
+ * Google specific patch.
+ * wrapper for PatternProps:isWhiteSpace.
+ * patch of currency parsing for space and non-breaking space equivalence
+ * in ICU4.0 Google deployment
+ */
+static UBool
+isPatternPropsWhiteSpace(UChar32 c) {
+  return (PatternProps::isWhiteSpace(c) || c == (UChar32)0x00A0);
+}
 
 /* == Fastpath calculation. ==
  */
@@ -419,6 +429,7 @@ DecimalFormat::init() {
     fAffixesForCurrency = NULL;
     fPluralAffixesForCurrency = NULL;
     fCurrencyPluralInfo = NULL;
+    fCurrencyUsage = UCURR_USAGE_STANDARD;
 #if UCONFIG_HAVE_PARSEALLINPUT
     fParseAllInput = UNUM_MAYBE;
 #endif
@@ -812,6 +823,7 @@ DecimalFormat::operator=(const DecimalFormat& rhs)
         fMaxSignificantDigits = rhs.fMaxSignificantDigits;
         fUseSignificantDigits = rhs.fUseSignificantDigits;
         fFormatPattern = rhs.fFormatPattern;
+        fCurrencyUsage = rhs.fCurrencyUsage;
         fStyle = rhs.fStyle;
         _clone_ptr(&fCurrencyPluralInfo, rhs.fCurrencyPluralInfo);
         deleteHashForAffixPattern();
@@ -1086,7 +1098,9 @@ DecimalFormat::operator==(const Format& that) const
         ((fCurrencyPluralInfo == other->fCurrencyPluralInfo &&
           fCurrencyPluralInfo == NULL) ||
          (fCurrencyPluralInfo != NULL && other->fCurrencyPluralInfo != NULL &&
-         *fCurrencyPluralInfo == *(other->fCurrencyPluralInfo)))
+         *fCurrencyPluralInfo == *(other->fCurrencyPluralInfo))) &&
+
+        fCurrencyUsage == other->fCurrencyUsage
 
         // depending on other settings we may also need to compare
         // fCurrencyChoice (mostly deprecated?),
@@ -1319,14 +1333,7 @@ void DecimalFormat::handleChanged() {
     debug("parse fastpath: YES");
   }
   
-  if (fGroupingSize!=0 && isGroupingUsed()) {
-    debug("No format fastpath: fGroupingSize!=0 and grouping is used");
-#ifdef FMT_DEBUG
-    printf("groupingsize=%d\n", fGroupingSize);
-#endif
-  } else if(fGroupingSize2!=0 && isGroupingUsed()) {
-    debug("No format fastpath: fGroupingSize2!=0");
-  } else if(fUseExponentialNotation) {
+  if(fUseExponentialNotation) {
     debug("No format fastpath: fUseExponentialNotation");
   } else if(fFormatWidth!=0) {
     debug("No format fastpath: fFormatWidth!=0");
@@ -1346,6 +1353,17 @@ void DecimalFormat::handleChanged() {
     debug("No format fastpath: fCurrencySignCount != fgCurrencySignCountZero");
   } else if(fRoundingIncrement!=0) {
     debug("No format fastpath: fRoundingIncrement!=0");
+  } else if (fGroupingSize!=0 && isGroupingUsed()) {
+    debug("Maybe format fastpath: fGroupingSize!=0 and grouping is used");
+#ifdef FMT_DEBUG
+    printf("groupingsize=%d\n", fGroupingSize);
+#endif
+    
+    if (getMinimumIntegerDigits() <= fGroupingSize) {
+      data.fFastFormatStatus = kFastpathMAYBE;
+    }
+  } else if(fGroupingSize2!=0 && isGroupingUsed()) {
+    debug("No format fastpath: fGroupingSize2!=0");
   } else {
     data.fFastFormatStatus = kFastpathYES;
     debug("format:kFastpathYES!");
@@ -1409,7 +1427,9 @@ DecimalFormat::_format(int64_t number,
   printf("fastpath? [%d]\n", number);
 #endif
     
-  if( data.fFastFormatStatus==kFastpathYES) {
+  if( data.fFastFormatStatus==kFastpathYES || 
+      data.fFastFormatStatus==kFastpathMAYBE) {
+    int32_t noGroupingThreshold = 0;
 
 #define kZero 0x0030
     const int32_t MAX_IDX = MAX_DIGITS+2;
@@ -1417,6 +1437,9 @@ DecimalFormat::_format(int64_t number,
     int32_t destIdx = MAX_IDX;
     outputStr[--destIdx] = 0;  // term
 
+    if (data.fFastFormatStatus==kFastpathMAYBE) {
+      noGroupingThreshold = destIdx - fGroupingSize;
+    }
     int64_t  n = number;
     if (number < 1) {
       // Negative numbers are slightly larger than positive
@@ -1426,10 +1449,12 @@ DecimalFormat::_format(int64_t number,
     }
     // get any remaining digits
     while (n > 0) {
+      if (destIdx == noGroupingThreshold) {
+        goto slowPath;
+      }
       outputStr[--destIdx] = (n % 10) + kZero;
       n /= 10;
     }
-    
 
         // Slide the number to the start of the output str
     U_ASSERT(destIdx >= 0);
@@ -1471,6 +1496,7 @@ DecimalFormat::_format(int64_t number,
     return appendTo;
   } // end fastpath
 #endif
+  slowPath:
 
   // Else the slow way - via DigitList
     DigitList digits;
@@ -2927,6 +2953,18 @@ UBool DecimalFormat::subparse(const UnicodeString& text,
             }
         }
 
+        // if we didn't see a decimal and it is required, check to see if the pattern had one
+        if(!sawDecimal && isDecimalPatternMatchRequired()) 
+        {
+            if(fFormatPattern.indexOf(DecimalFormatSymbols::kDecimalSeparatorSymbol) != 0) 
+            {
+                parsePosition.setIndex(oldStart);
+                parsePosition.setErrorIndex(position);
+                debug("decimal point match required fail!");
+                return FALSE;
+            }
+        }
+
         if (backup != -1)
         {
             position = backup;
@@ -3040,6 +3078,20 @@ printf("PP -> %d, SLOW = [%s]!    pp=%d, os=%d, err=%s\n", position, parsedNum.d
         parsePosition.setErrorIndex(position);
         return FALSE;
     }
+
+    // check if we missed a required decimal point
+    if(fastParseOk && isDecimalPatternMatchRequired()) 
+    {
+        if(fFormatPattern.indexOf(DecimalFormatSymbols::kDecimalSeparatorSymbol) != 0) 
+        {
+            parsePosition.setIndex(oldStart);
+            parsePosition.setErrorIndex(position);
+            debug("decimal point match required fail!");
+            return FALSE;
+        }
+    }
+
+
     return TRUE;
 }
 
@@ -3195,7 +3247,13 @@ int32_t DecimalFormat::compareSimpleAffix(const UnicodeString& affix,
         for (int32_t i = 0; i < affixLength; ) {
             UChar32 c = trimmedAffix.char32At(i);
             int32_t len = U16_LENGTH(c);
-            if (PatternProps::isWhiteSpace(c)) {
+            /* 
+             * Google specific patch.
+             * "if" block has a patch of currency parsing 
+             * for space and non-breaking space equivalence 
+             * in ICU4.0 Google deployment.
+             */
+            if (isPatternPropsWhiteSpace(c)) {
                 // We may have a pattern like: \u200F \u0020
                 //        and input text like: \u200F \u0020
                 // Note that U+200F and U+0020 are Pattern_White_Space but only
@@ -3205,7 +3263,10 @@ int32_t DecimalFormat::compareSimpleAffix(const UnicodeString& affix,
                 UBool literalMatch = FALSE;
                 while (pos < inputLength) {
                     UChar32 ic = input.char32At(pos);
-                    if (ic == c) {
+                    if (ic == c ||
+                          // treat space and non-break space equal.  Google Patch.
+                          (ic == (UChar)0x0020 && c == (UChar)0x00A0) ||
+                          (ic == (UChar)0x00A0 && c == (UChar)0x0020)) {
                         literalMatch = TRUE;
                         i += len;
                         pos += len;
@@ -3214,7 +3275,7 @@ int32_t DecimalFormat::compareSimpleAffix(const UnicodeString& affix,
                         }
                         c = trimmedAffix.char32At(i);
                         len = U16_LENGTH(c);
-                        if (!PatternProps::isWhiteSpace(c)) {
+                        if (!isPatternPropsWhiteSpace(c)) {
                             break;
                         }
                     } else if (IS_BIDI_MARK(ic)) {
@@ -3308,10 +3369,17 @@ int32_t DecimalFormat::compareSimpleAffix(const UnicodeString& affix,
 /**
  * Skip over a run of zero or more Pattern_White_Space characters at
  * pos in text.
+ * Google Patch: Also include non-breaking space, U+00a0.
  */
 int32_t DecimalFormat::skipPatternWhiteSpace(const UnicodeString& text, int32_t pos) {
-    const UChar* s = text.getBuffer();
-    return (int32_t)(PatternProps::skipWhiteSpace(s + pos, text.length() - pos) - s);
+    while (pos < text.length()) {
+        UChar32 c = text.char32At(pos);
+        if (!(PatternProps::isWhiteSpace(c) || c == 0x00a0)) {
+            break;
+        }
+        pos += U16_LENGTH(c);
+    }
+    return pos;
 }
 
 /**
@@ -3467,7 +3535,11 @@ int32_t DecimalFormat::compareComplexAffix(const UnicodeString& affixPat,
         }
 
         pos = match(text, pos, c);
-        if (PatternProps::isWhiteSpace(c)) {
+        /* Google specific patch.
+         * patch of currency parsing for space and non-breaking space
+         * equivalence in ICU4.0 Google deployment
+         */
+        if (isPatternPropsWhiteSpace(c)) {
             i = skipPatternWhiteSpace(affixPat, i);
         }
     }
@@ -3480,7 +3552,11 @@ int32_t DecimalFormat::compareComplexAffix(const UnicodeString& affixPat,
  * ch is a Pattern_White_Space then match a run of white space in text.
  */
 int32_t DecimalFormat::match(const UnicodeString& text, int32_t pos, UChar32 ch) {
-    if (PatternProps::isWhiteSpace(ch)) {
+    /* Google specific patch.
+     * patch of currency parsing for space and non-breaking space 
+     * equivalence in ICU4.0 Google deployment
+     */
+    if (isPatternPropsWhiteSpace(ch)) {
         // Advance over run of white space in input text
         // Must see at least one white space char in input
         int32_t s = pos;
@@ -3503,7 +3579,11 @@ int32_t DecimalFormat::match(const UnicodeString& text, int32_t pos, const Unico
     for (int32_t i=0; i<str.length() && pos >= 0; ) {
         UChar32 ch = str.char32At(i);
         i += U16_LENGTH(ch);
-        if (PatternProps::isWhiteSpace(ch)) {
+        /* Google specific patch.
+         * patch of currency parsing for space and non-breaking space
+         * equivalence in ICU4.0 Google deployment
+         */
+        if (isPatternPropsWhiteSpace(ch)) {
             i = skipPatternWhiteSpace(str, i);
         }
         pos = match(text, pos, ch);
@@ -4096,7 +4176,7 @@ void DecimalFormat::setExponentSignAlwaysShown(UBool expSignAlways) {
 int32_t
 DecimalFormat::getGroupingSize() const
 {
-    return fGroupingSize;
+    return isGroupingUsed() ? fGroupingSize : 0;
 }
 
 //------------------------------------------------------------------------------
@@ -4150,6 +4230,24 @@ DecimalFormat::setDecimalSeparatorAlwaysShown(UBool newValue)
     handleChanged();
 #endif
 }
+
+//------------------------------------------------------------------------------
+// Checks if decimal point pattern match is required
+UBool 
+DecimalFormat::isDecimalPatternMatchRequired(void) const
+{
+    return fBoolFlags.contains(UNUM_PARSE_DECIMAL_MARK_REQUIRED);
+}
+
+//------------------------------------------------------------------------------
+// Checks if decimal point pattern match is required
+         
+void 
+DecimalFormat::setDecimalPatternMatchRequired(UBool newValue)
+{
+    fBoolFlags.set(UNUM_PARSE_DECIMAL_MARK_REQUIRED, newValue);
+}
+
 
 //------------------------------------------------------------------------------
 // Emits the pattern of this DecimalFormat instance.
@@ -5142,8 +5240,8 @@ void DecimalFormat::setCurrencyInternally(const UChar* theCurrency,
     double rounding = 0.0;
     int32_t frac = 0;
     if (fCurrencySignCount != fgCurrencySignCountZero && isCurr) {
-        rounding = ucurr_getRoundingIncrement(theCurrency, &ec);
-        frac = ucurr_getDefaultFractionDigits(theCurrency, &ec);
+        rounding = ucurr_getRoundingIncrementForUsage(theCurrency, fCurrencyUsage, &ec);
+        frac = ucurr_getDefaultFractionDigitsForUsage(theCurrency, fCurrencyUsage, &ec);
     }
 
     NumberFormat::setCurrency(theCurrency, ec);
@@ -5177,6 +5275,28 @@ void DecimalFormat::setCurrency(const UChar* theCurrency, UErrorCode& ec) {
 #if UCONFIG_FORMAT_FASTPATHS_49
     handleChanged();
 #endif
+}
+
+void DecimalFormat::setCurrencyUsage(UCurrencyUsage newContext, UErrorCode* ec){
+    fCurrencyUsage = newContext;
+
+    const UChar* theCurrency = getCurrency();
+
+    // We set rounding/digit based on currency context
+    if(theCurrency){
+        double rounding = ucurr_getRoundingIncrementForUsage(theCurrency, fCurrencyUsage, ec);
+        int32_t frac = ucurr_getDefaultFractionDigitsForUsage(theCurrency, fCurrencyUsage, ec);
+
+        if (U_SUCCESS(*ec)) {
+            setRoundingIncrement(rounding);
+            setMinimumFractionDigits(frac);
+            setMaximumFractionDigits(frac);
+        }
+    }
+}
+
+UCurrencyUsage DecimalFormat::getCurrencyUsage() const {
+    return fCurrencyUsage;
 }
 
 // Deprecated variant with no UErrorCode parameter
@@ -5441,6 +5561,7 @@ DecimalFormat& DecimalFormat::setAttribute( UNumberFormatAttribute attr,
     /* These are stored in fBoolFlags */
     case UNUM_PARSE_NO_EXPONENT:
     case UNUM_FORMAT_FAIL_IF_MORE_THAN_MAX_DIGITS:
+    case UNUM_PARSE_DECIMAL_MARK_REQUIRED:
       if(!fBoolFlags.isValidValue(newValue)) {
           status = U_ILLEGAL_ARGUMENT_ERROR;
       } else {
@@ -5451,6 +5572,9 @@ DecimalFormat& DecimalFormat::setAttribute( UNumberFormatAttribute attr,
     case UNUM_SCALE:
         fScale = newValue;
         break;
+
+    case UNUM_CURRENCY_USAGE:
+        setCurrencyUsage((UCurrencyUsage)newValue, &status);
 
     default:
       status = U_UNSUPPORTED_ERROR;
@@ -5525,10 +5649,14 @@ int32_t DecimalFormat::getAttribute( UNumberFormatAttribute attr,
     /* These are stored in fBoolFlags */
     case UNUM_PARSE_NO_EXPONENT:
     case UNUM_FORMAT_FAIL_IF_MORE_THAN_MAX_DIGITS:
+    case UNUM_PARSE_DECIMAL_MARK_REQUIRED:
       return fBoolFlags.get(attr);
 
     case UNUM_SCALE:
         return fScale;
+
+    case UNUM_CURRENCY_USAGE:
+        return fCurrencyUsage;
 
     default:
         status = U_UNSUPPORTED_ERROR;

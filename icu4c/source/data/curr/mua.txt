@@ -96,7 +96,7 @@ mua{
             "solai Guine",
         }
         INR{
-            "Rs.",
+            "₹",
             "solai India",
         }
         JPY{
@@ -236,5 +236,5 @@ mua{
             "Solai Zimbabwe",
         }
     }
-    Version{"2.0.92.87"}
+    Version{"2.1.7.39"}
 }

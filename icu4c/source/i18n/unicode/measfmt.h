@@ -12,7 +12,6 @@
 #define MEASUREFORMAT_H
 
 #include "unicode/utypes.h"
-#include "unicode/measure.h"
 
 #if !UCONFIG_NO_FORMATTING
 
@@ -27,9 +26,10 @@
 #ifndef U_HIDE_DRAFT_API
 /**
  * Constants for various widths.
- * There are 3 widths: Wide, Short, Narrow.
+ * There are 4 widths: Wide, Short, Narrow, Numeric.
  * For example, for English, when formatting "3 hours"
- * Wide is "3 hours"; short is "3 hrs"; narrow is "3h"
+ * Wide is "3 hours"; short is "3 hrs"; narrow is "3h";
+ * formatting "3 hours 17 minutes" as numeric give "3:17"
  * @draft ICU 53
  */
 enum UMeasureFormatWidth {
@@ -72,12 +72,15 @@ typedef enum UMeasureFormatWidth UMeasureFormatWidth;
 
 U_NAMESPACE_BEGIN
 
+class Measure;
+class MeasureUnit;
 class NumberFormat;
 class PluralRules;
 class MeasureFormatCacheData;
 class SharedNumberFormat;
 class SharedPluralRules;
 class QuantityFormatter;
+class SimplePatternFormatter;
 class ListFormatter;
 class DateFormat;
 
@@ -189,6 +192,29 @@ class U_I18N_API MeasureFormat : public Format {
             UErrorCode &status) const;
 #endif  /* U_HIDE_DRAFT_API */
 
+#ifndef U_HIDE_INTERNAL_API
+    /**
+     * Works like formatMeasures but adds a per unit. An example of such a
+     * formatted string is 3 meters, 3.5 centimeters per second.
+     * @param measures array of measure objects.
+     * @param measureCount the number of measure objects.
+     * @param perUnit The per unit. In the example formatted string,
+     *        it is *MeasureUnit::createSecond(status).
+     * @param appendTo formatted string appended here.
+     * @param pos the field position.
+     * @param status the error.
+     * @return appendTo reference
+     *
+     * @internal
+     */
+    UnicodeString &formatMeasuresPer(
+            const Measure *measures,
+            int32_t measureCount,
+            const MeasureUnit &perUnit,
+            UnicodeString &appendTo,
+            FieldPosition &pos,
+            UErrorCode &status) const;
+#endif /* U_HIDE_INTERNAL_API */
 
     /**
      * Return a formatter for CurrencyAmount objects in the given
@@ -316,6 +342,20 @@ class U_I18N_API MeasureFormat : public Format {
             int32_t index,
             int32_t widthIndex,
             UErrorCode &status) const;
+
+    const SimplePatternFormatter *getPerUnitFormatter(
+            int32_t index,
+            int32_t widthIndex) const;
+
+    const SimplePatternFormatter *getPerFormatter(
+            int32_t widthIndex,
+            UErrorCode &status) const;
+
+    int32_t withPerUnit(
+        const UnicodeString &formatted,
+        const MeasureUnit &perUnit,
+        UnicodeString &appendTo,
+        UErrorCode &status) const;
 
     UnicodeString &formatMeasure(
         const Measure &measure,

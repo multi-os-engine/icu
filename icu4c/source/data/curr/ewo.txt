@@ -96,7 +96,7 @@ ewo{
             "Síli yá Giné",
         }
         INR{
-            "Rs.",
+            "₹",
             "Rupí yá ɛ́ndía",
         }
         JPY{
@@ -236,5 +236,5 @@ ewo{
             "Dolár yá Zimbabwé",
         }
     }
-    Version{"2.0.92.87"}
+    Version{"2.1.6.69"}
 }

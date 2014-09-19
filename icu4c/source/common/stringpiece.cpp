@@ -6,6 +6,10 @@
 // Author: wilsonh@google.com (Wilson Hsieh)
 //
 
+#ifndef GOOGLE_VENDOR_SRC_BRANCH
+#include "strings/stringpiece.h"
+#endif
+
 #include "unicode/utypes.h"
 #include "unicode/stringpiece.h"
 #include "cstring.h"

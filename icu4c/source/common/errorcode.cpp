@@ -14,12 +14,25 @@
 *   created by: Markus W. Scherer
 */
 
+#ifndef GOOGLE_VENDOR_SRC_BRANCH
+#include "base/logging.h"
+#endif
 #include "unicode/utypes.h"
 #include "unicode/errorcode.h"
 
 U_NAMESPACE_BEGIN
 
+#ifdef GOOGLE_VENDOR_SRC_BRANCH
 ErrorCode::~ErrorCode() {}
+#else
+ErrorCode::~ErrorCode() {
+    LOG_IF(DFATAL, isFailure()) << errorName();
+}
+
+void ErrorCode::handleFailure() const {
+    LOG(FATAL) << errorName();
+}
+#endif
 
 UErrorCode ErrorCode::reset() {
     UErrorCode code = errorCode;

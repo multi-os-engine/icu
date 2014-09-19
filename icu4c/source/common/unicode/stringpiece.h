@@ -31,6 +31,18 @@
 
 // Arghh!  I wish C++ literals were "string".
 
+// Google Patch.  Only include the google3 string piece, and the associated constructor from it,
+//                if we are building in google3, and if we are compiling something outside of ICU itself.
+#if defined(GOOGLE_VENDOR_SRC_BRANCH) || defined(U_COMMON_IMPLEMENTATION) || defined(U_I18N_IMPLEMENTATION) || \
+    defined(U_IO_IMPLEMENTATION) || defined(U_LAYOUT_IMPLEMENTATION) || defined(U_LAYOUTEX_IMPLEMENTATION)
+#define NO_GOOGLE_STRING_PIECE_IN_ICU
+#endif
+
+#ifndef NO_GOOGLE_STRING_PIECE_IN_ICU
+#include "strings/stringpiece.h"
+#endif
+// End Google Patch
+
 U_NAMESPACE_BEGIN
 
 /**
@@ -74,6 +86,32 @@ class U_COMMON_API StringPiece : public UMemory {
   StringPiece(const std::string& str)
     : ptr_(str.data()), length_(static_cast<int32_t>(str.size())) { }
 #endif
+// Begin Google-specific addition
+#ifdef HAS_GLOBAL_STRING
+  /**
+   * Constructs from a google3 ::string.
+   * google3-specific overload of the previous constructor.
+   *
+   * google3's <string> header does not only define std::string
+   * but also ::string which is a different (more efficient) class
+   * and is the one used in most google3 code.
+   * Define a separate StringPiece constructor for that to avoid
+   * copy-constructing an intermediate std::string
+   * (::string -> std::string -> icu::StringPiece).
+   *
+   * google3's <string> header #defines HAS_GLOBAL_STRING
+   * iff ::string and ::std::string are distinct types.
+   */
+  StringPiece(const ::string& str)
+    : ptr_(str.data()), length_(static_cast<int32_t>(str.size())) { }
+#endif
+#ifndef NO_GOOGLE_STRING_PIECE_IN_ICU
+  /**
+   * Constructs from a google3 ::StringPiece (strings/stringpiece.h).
+   */
+  StringPiece(const ::StringPiece& str) : ptr_(str.data()), length_(str.length()) { }
+#endif
+// End Google-specific addition
   /**
    * Constructs from a const char * pointer and a specified length.
    * @param offset a const char * pointer (need not be terminated)

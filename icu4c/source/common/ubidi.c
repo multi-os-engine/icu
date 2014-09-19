@@ -679,10 +679,10 @@ bracketInit(UBiDi *pBiDi, BracketData *bd) {
     bd->isoRuns[0].contextPos=0;
     if(pBiDi->openingsMemory) {
         bd->openings=pBiDi->openingsMemory;
-        bd->openingsSize=pBiDi->openingsSize;
+        bd->openingsCount=pBiDi->openingsSize / sizeof(Opening);
     } else {
         bd->openings=bd->simpleOpenings;
-        bd->openingsSize=SIMPLE_OPENINGS_SIZE;
+        bd->openingsCount=SIMPLE_OPENINGS_SIZE;
     }
     bd->isNumbersSpecial=bd->pBiDi->reorderingMode==UBIDI_REORDER_NUMBERS_SPECIAL ||
                          bd->pBiDi->reorderingMode==UBIDI_REORDER_INVERSE_FOR_NUMBERS_SPECIAL;
@@ -743,7 +743,7 @@ static UBool                            /* return TRUE if success */
 bracketAddOpening(BracketData *bd, UChar match, int32_t position) {
     IsoRun *pLastIsoRun=&bd->isoRuns[bd->isoRunLast];
     Opening *pOpening;
-    if(pLastIsoRun->limit>=bd->openingsSize) {  /* no available new entry */
+    if(pLastIsoRun->limit>=bd->openingsCount) {  /* no available new entry */
         UBiDi *pBiDi=bd->pBiDi;
         if(!getInitialOpeningsMemory(pBiDi, pLastIsoRun->limit * 2))
             return FALSE;
@@ -751,7 +751,7 @@ bracketAddOpening(BracketData *bd, UChar match, int32_t position) {
             uprv_memcpy(pBiDi->openingsMemory, bd->simpleOpenings,
                         SIMPLE_OPENINGS_SIZE * sizeof(Opening));
         bd->openings=pBiDi->openingsMemory;     /* may have changed */
-        bd->openingsSize=pBiDi->openingsSize;
+        bd->openingsCount=pBiDi->openingsSize / sizeof(Opening);
     }
     pOpening=&bd->openings[pLastIsoRun->limit];
     pOpening->position=position;
@@ -2656,16 +2656,10 @@ ubidi_setPara(UBiDi *pBiDi, const UChar *text, int32_t length,
     pBiDi->direction=direction;
     switch(direction) {
     case UBIDI_LTR:
-        /* make sure paraLevel is even */
-        pBiDi->paraLevel=(UBiDiLevel)((pBiDi->paraLevel+1)&~1);
-
         /* all levels are implicitly at paraLevel (important for ubidi_getLevels()) */
         pBiDi->trailingWSStart=0;
         break;
     case UBIDI_RTL:
-        /* make sure paraLevel is odd */
-        pBiDi->paraLevel|=1;
-
         /* all levels are implicitly at paraLevel (important for ubidi_getLevels()) */
         pBiDi->trailingWSStart=0;
         break;

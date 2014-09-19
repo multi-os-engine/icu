@@ -96,7 +96,7 @@ mg{
             "Farantsa Gineanina",
         }
         INR{
-            "Rs.",
+            "₹",
             "Ropia Indianina",
         }
         JPY{
@@ -236,5 +236,5 @@ mg{
             "Dôlara Zimbaboeanina",
         }
     }
-    Version{"2.0.97.28"}
+    Version{"2.1.7.39"}
 }
