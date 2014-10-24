@@ -1,6 +1,6 @@
 /**
  *******************************************************************************
- * Copyright (C) 2000-2014, International Business Machines Corporation and    *
+ * Copyright (C) 2000-2015, International Business Machines Corporation and    *
  * others. All Rights Reserved.                                                *
  *******************************************************************************
  */
@@ -1475,6 +1475,8 @@ public class TimeZoneTest extends TestFmwk
         // Some canonical IDs in CLDR are defined as "Link"
         // in Olson tzdata.
         final String[][] excluded1 = {
+                {"Africa/Addis_Ababa", "Africa/Nairobi"},
+                {"Africa/Asmera", "Africa/Nairobi"},
                 {"Africa/Bamako", "Africa/Abidjan"},
                 {"Africa/Bangui", "Africa/Lagos"},
                 {"Africa/Banjul", "Africa/Abidjan"},
@@ -1483,10 +1485,13 @@ public class TimeZoneTest extends TestFmwk
                 {"Africa/Bujumbura", "Africa/Maputo"},
                 {"Africa/Conakry", "Africa/Abidjan"},
                 {"Africa/Dakar", "Africa/Abidjan"},
+                {"Africa/Dar_es_Salaam", "Africa/Nairobi"},
+                {"Africa/Djibouti", "Africa/Nairobi"},
                 {"Africa/Douala", "Africa/Lagos"},
                 {"Africa/Freetown", "Africa/Abidjan"},
                 {"Africa/Gaborone", "Africa/Maputo"},
                 {"Africa/Harare", "Africa/Maputo"},
+                {"Africa/Kampala", "Africa/Nairobi"},
                 {"Africa/Khartoum", "Africa/Juba"},
                 {"Africa/Kigali", "Africa/Maputo"},
                 {"Africa/Kinshasa", "Africa/Lagos"},
@@ -1498,6 +1503,7 @@ public class TimeZoneTest extends TestFmwk
                 {"Africa/Maseru", "Africa/Johannesburg"},
                 {"Africa/Malabo", "Africa/Lagos"},
                 {"Africa/Mbabane", "Africa/Johannesburg"},
+                {"Africa/Mogadishu", "Africa/Nairobi"},
                 {"Africa/Niamey", "Africa/Lagos"},
                 {"Africa/Nouakchott", "Africa/Abidjan"},
                 {"Africa/Ouagadougou", "Africa/Abidjan"},
@@ -1522,6 +1528,12 @@ public class TimeZoneTest extends TestFmwk
                 {"America/Virgin", "America/Anguilla"},
                 {"Antarctica/South_Pole", "Antarctica/McMurdo"},
                 {"Arctic/Longyearbyen", "Europe/Oslo"},
+                {"Asia/Kuwait", "Asia/Aden"},
+                {"Asia/Muscat", "Asia/Dubai"},
+                {"Asia/Phnom_Penh", "Asia/Bangkok"},
+                {"Asia/Qatar", "Asia/Bahrain"},
+                {"Asia/Riyadh", "Asia/Aden"},
+                {"Asia/Vientiane", "Asia/Bangkok"},
                 {"Atlantic/Jan_Mayen", "Europe/Oslo"},
                 {"Atlantic/St_Helena", "Africa/Abidjan"},
                 {"Europe/Bratislava", "Europe/Prague"},
@@ -1538,6 +1550,9 @@ public class TimeZoneTest extends TestFmwk
                 {"Europe/Vaduz", "Europe/Zurich"},
                 {"Europe/Vatican", "Europe/Rome"},
                 {"Europe/Zagreb", "Europe/Belgrade"},
+                {"Indian/Antananarivo", "Africa/Nairobi"},
+                {"Indian/Comoro", "Africa/Nairobi"},
+                {"Indian/Mayotte", "Africa/Nairobi"},
                 {"Pacific/Auckland", "Antarctica/McMurdo"},
                 {"Pacific/Johnston", "Pacific/Honolulu"},
         };
