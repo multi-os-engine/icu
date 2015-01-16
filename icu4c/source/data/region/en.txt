@@ -193,7 +193,7 @@ en{
         MH{"Marshall Islands"}
         MK{"Macedonia (FYROM)"}
         ML{"Mali"}
-        MM{"Myanmar (Burma)"}
+        MM{"Myanmar"}
         MN{"Mongolia"}
         MO{"Macau"}
         MP{"Northern Mariana Islands"}
