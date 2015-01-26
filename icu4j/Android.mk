@@ -29,6 +29,19 @@ icu4j_test_src_files := \
     $(filter-out main/tests/localespi/%, \
     $(call all-java-files-under,main/tests))
 
+# The default initialize-package-file function (build/core/definitions.mk) will
+# strip all directory entries from JAR files. That does not work well with ICU,
+# which in many places depends on directory entries being present in order to
+# find data in JARs. Therefore the default function is overridden here to not
+# strip any directory entries (only deleting .class files).
+
+default-initialize-package-file := $(value initialize-package-file)
+override define initialize-package-file
+@mkdir -p $(dir $(2))
+$(hide) cp -f $(1) $(2)
+$(hide) zip -qd $(2) "*.class" || true
+endef
+
 # Not all src dirs contain resources, some instead contain other random files
 # that should not be included as resources. The ones that should be included
 # can be identifed by the fact that they contain particular subdir trees.
@@ -136,3 +149,7 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_EXTRA_JAR_ARGS += \
     "com/ibm/icu/dev/test/serializable/data"
 
 endif  # HOST_OS == linux
+
+override define initialize-package-file :=
+$(value default-initialize-package-file)
+endef
