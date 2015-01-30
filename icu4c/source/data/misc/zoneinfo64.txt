@@ -1,12 +1,12 @@
 //---------------------------------------------------------
-// Copyright (C) 2003-2014, International Business Machines
+// Copyright (C) 2003-2015, International Business Machines
 // Corporation and others.  All Rights Reserved.
 //---------------------------------------------------------
 // Build tool: tz2icu
-// Build date: Tue Nov 11 16:31:19 2014
+// Build date: Fri Jan 30 22:24:10 2015
 // Olson source: ftp://elsie.nci.nih.gov/pub/
 // Olson version: 2014j
-// ICU version: 53.1.0.1
+// ICU version: 54.1.0.1
 //---------------------------------------------------------
 // >> !!! >>   THIS IS A MACHINE-GENERATED FILE   << !!! <<
 // >> !!! >>>            DO NOT EDIT             <<< !!! <<
@@ -3338,7 +3338,7 @@ zoneinfo64:table(nofallback) {
   "CA", //Z#166 America/Moncton
   "MX", //Z#167 America/Monterrey
   "UY", //Z#168 America/Montevideo
-  "CA", //Z#169 America/Montreal
+  "001",//Z#169 America/Montreal
   "MS", //Z#170 America/Montserrat
   "BS", //Z#171 America/Nassau
   "US", //Z#172 America/New_York

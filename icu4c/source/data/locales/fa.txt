@@ -1,6 +1,6 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/fa.xml
@@ -45,7 +45,7 @@ fa{
                 minusSign{"‎−"}
                 nan{"ناعدد"}
                 perMille{"؉"}
-                percentSign{"‏٪"} // Android-changed: http://b/15476051.
+                percentSign{"٪"}
                 plusSign{"‎+‎"}
                 superscriptingExponent{"×"}
                 timeSeparator{":"}
@@ -210,7 +210,7 @@ fa{
                 }
             }
         }
-        default{"gregorian"}  // android-changed
+        default{"persian"}
         generic{
             DateTimePatterns{
                 "H:mm:ss (zzzz)",
