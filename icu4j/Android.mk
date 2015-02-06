@@ -60,6 +60,40 @@ icu4j_data_jars := \
     $(shell find $(LOCAL_PATH)/main/shared/data -name "*.jar" \
     | sed "s,^$(LOCAL_PATH)/\(.*/\(.*\)\.jar\)$$,icu4j-\2:\1,")
 
+# A reimplementation in Bash of the @full-locale-names target rule from the
+# main/shared/build/common-targets.xml Ant build file. This generates index
+# files from the ICU4J data JAR and adds these index files to the library JAR.
+
+ICUDATA_TMP := $(call intermediates-dir-for,JAVA_LIBRARIES,icudata,HOST,COMMON)
+BUILD_FULL_LOCALE_NAMES := $(ICUDATA_TMP)/fullLocaleNames.mk
+$(BUILD_FULL_LOCALE_NAMES): $(LOCAL_PATH)/main/shared/data/icudata.jar
+	$(hide) mkdir -p $(dir $@)
+	$(hide) \
+	set -e ;\
+	declare -A map ;\
+	for line in $$( \
+	    jar tf $< |\
+	    grep -E "/icudt[^/]+/(.+/)?(.{2,3}(_.*)?|root)\.res$$" |\
+	    grep -v '/res_index\.res$$' \
+	) ; do \
+	    file=$${line##*/} ; map[$${line%/*}]+=$$IFS$${file%%.res} ;\
+	done ;\
+	for dir in $${!map[@]} ; do \
+	    mkdir -p $(ICUDATA_TMP)/$$dir ;\
+	    for res in $${map[$$dir]} ; do \
+	        echo $$res ;\
+	    done |\
+	    LC_COLLATE=C sort > $(ICUDATA_TMP)/$$dir/fullLocaleNames.lst ;\
+	done ;\
+	( \
+	    echo '$$(LOCAL_INTERMEDIATE_TARGETS): $@' ;\
+	    echo '$$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_EXTRA_JAR_ARGS+=\' ;\
+	    for dir in $${!map[@]} ; do \
+	        echo " -C \"$(ICUDATA_TMP)\" \"$$dir/fullLocaleNames.lst\"\\" ;\
+	    done ;\
+	    echo \
+	) > $@
+
 include $(CLEAR_VARS)
 LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := $(icu4j_data_jars)
 include $(BUILD_MULTI_PREBUILT)
@@ -77,6 +111,7 @@ LOCAL_DONT_DELETE_JAR_DIRS := true
 LOCAL_JAVACFLAGS := $(icu4j_javac_flags)
 LOCAL_MODULE := icu4j
 include $(BUILD_STATIC_JAVA_LIBRARY)
+include $(BUILD_FULL_LOCALE_NAMES)
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(icu4j_src_files)
@@ -86,6 +121,7 @@ LOCAL_DONT_DELETE_JAR_DIRS := true
 LOCAL_JAVACFLAGS := $(icu4j_javac_flags)
 LOCAL_MODULE := icu4j-host
 include $(BUILD_HOST_JAVA_LIBRARY)
+include $(BUILD_FULL_LOCALE_NAMES)
 
 ifeq ($(HOST_OS),linux)
 include $(CLEAR_VARS)
@@ -96,6 +132,7 @@ LOCAL_DONT_DELETE_JAR_DIRS := true
 LOCAL_JAVACFLAGS := $(icu4j_javac_flags)
 LOCAL_MODULE := icu4j-hostdex
 include $(BUILD_HOST_DALVIK_JAVA_LIBRARY)
+include $(BUILD_FULL_LOCALE_NAMES)
 endif  # HOST_OS == linux
 
 include $(CLEAR_VARS)
