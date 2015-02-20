@@ -76,6 +76,11 @@ LOCAL_JAVACFLAGS := $(icu4j_javac_flags)
 LOCAL_MODULE := icu4j
 include $(BUILD_STATIC_JAVA_LIBRARY)
 
+include $(CLEAR_VARS)
+LOCAL_STATIC_JAVA_LIBRARIES := icu4j icu4j-icudata icu4j-icutzdata
+LOCAL_MODULE := icu4j-target
+include $(BUILD_STATIC_JAVA_LIBRARY)
+
 # In order to append $(icu4c_data) to the dataPath line in ICUConfig.properties
 # this hack here removes the path to that file in the source tree and instead
 # appends the path to a dynamically generated modified file to the list of
