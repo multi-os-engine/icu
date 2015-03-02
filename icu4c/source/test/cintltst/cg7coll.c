@@ -157,7 +157,9 @@ static void TestG7Locales()
 
         defRules = ucol_getRules(myCollation, &rlen);
         if (rlen == 0 && (strcmp(locale, "fr_CA") == 0 || strcmp(locale, "ja_JP") == 0)) {
-            log_data_err("%s UCollator missing rule string\n", locale);
+            // Android patch: Add --omitCollationRules to genrb.
+            log_info("%s UCollator missing rule string\n", locale);
+            // Android patch end.
             if (log_knownIssue("10671", "TestG7Locales does not test ignore-punctuation")) {
                 ucol_close(myCollation);
                 continue;

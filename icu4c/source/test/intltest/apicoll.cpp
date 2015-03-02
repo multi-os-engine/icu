@@ -168,7 +168,9 @@ CollationAPITest::TestProperty(/* char* par */)
     }
     const UnicodeString &daRules = rcol->getRules();
     if(daRules.isEmpty()) {
-        dataerrln("missing da_DK tailoring rule string");
+        // Android patch: Add --omitCollationRules to genrb.
+        infoln("missing da_DK tailoring rule string");
+        // Android patch end.
     } else {
         doAssert(daRules.indexOf("aa") >= 0, "da_DK rules do not contain 'aa'");
     }

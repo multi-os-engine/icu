@@ -4227,7 +4227,9 @@ static void doTestOneTestCase(const OneTestCase testcases[],
     }
     myCollation = ucol_openRules(rule, length, UCOL_ON, UCOL_TERTIARY, &parse_error, &status);
     if(U_FAILURE(status)){
-        log_err_status(status, "ERROR: in creation of rule based collator: %s\n", myErrorName(status));
+        // Android patch: Add --omitCollationRules to genrb.
+        log_info("ERROR: in creation of rule based collator: %s\n", myErrorName(status));
+        // Android patch end.
         log_info("  offset=%d  \"%s\" | \"%s\"\n",
                  parse_error.offset,
                  aescstrdup(parse_error.preContext, -1),
@@ -5562,7 +5564,9 @@ static void TestImport(void)
 
     virules = (UChar*) ucol_getRules(vicoll, &viruleslength);
     if(viruleslength == 0) {
-        log_data_err("missing vi tailoring rule string\n");
+        // Android patch: Add --omitCollationRules to genrb.
+        log_info("missing vi tailoring rule string\n");
+        // Android patch end.
         ucol_close(vicoll);
         return;
     }
@@ -5666,7 +5670,9 @@ static void TestImportWithType(void)
     }
     virules = ucol_getRules(vicoll, &viruleslength);
     if(viruleslength == 0) {
-        log_data_err("missing vi tailoring rule string\n");
+        // Android patch: Add --omitCollationRules to genrb.
+        log_info("missing vi tailoring rule string\n");
+        // Android patch end.
         ucol_close(vicoll);
         return;
     }

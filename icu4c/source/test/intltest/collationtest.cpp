@@ -1250,7 +1250,9 @@ void CollationTest::buildTailoring(UCHARBUF *f, IcuTestErrorCode &errorCode) {
         return;
     }
     if(errorCode.isFailure()) {
-        dataerrln("RuleBasedCollator(rules) failed - %s", errorCode.errorName());
+        // Android patch: Add --omitCollationRules to genrb.
+        infoln("RuleBasedCollator(rules) failed - %s", errorCode.errorName());
+        // Android patch end.
         infoln(UnicodeString("  reason: ") + reason);
         if(parseError.offset >= 0) { infoln("  rules offset: %d", (int)parseError.offset); }
         if(parseError.preContext[0] != 0 || parseError.postContext[0] != 0) {

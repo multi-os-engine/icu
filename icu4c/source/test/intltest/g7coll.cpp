@@ -112,7 +112,9 @@ void G7CollationTest::TestG7Locales(/* char* par */)
         const UnicodeString &rules = ((RuleBasedCollator*)myCollation.getAlias())->getRules();
         if (rules.isEmpty() &&
                 (locale == Locale::getCanadaFrench() || locale == Locale::getJapanese())) {
-            dataerrln("%s Collator missing rule string", locale.getName());
+            // Android patch: Add --omitCollationRules to genrb.
+            infoln("%s Collator missing rule string", locale.getName());
+            // Android patch end.
             if (logKnownIssue("10671", "TestG7Locales does not test ignore-punctuation")) {
                 continue;
             }

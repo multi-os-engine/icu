@@ -1421,7 +1421,9 @@ static void TestGetVersionColl(){
     resB = ures_open(U_ICUDATA_COLL,locName, &status);
     rules = tres_getString(resB,-1,"UCARules",&len, &status);
     if(!rules || U_FAILURE(status)) {
-        log_data_err("Could not load UCARules for locale %s\n", locName);
+        // Android patch: Add --omitCollationRules to genrb.
+        log_info("Could not load UCARules for locale %s\n", locName);
+        // Android patch end.
         status = U_ZERO_ERROR;
     } else if(u_strlen(rules) != len){
         log_err("UCARules string not nul terminated! \n");

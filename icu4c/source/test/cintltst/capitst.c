@@ -380,7 +380,9 @@ void TestProperty()
     log_verbose("ucol_getRules() testing ...\n");
     rules = ucol_getRules(ruled, &tempLength);
     if(tempLength == 0) {
-        log_data_err("missing da_DK tailoring rule string\n");
+        // Android patch: Add --omitCollationRules to genrb.
+        log_info("missing da_DK tailoring rule string\n");
+        // Android patch end.
     } else {
         UChar aa[2] = { 0x61, 0x61 };
         doAssert(u_strFindFirst(rules, tempLength, aa, 2) != NULL,
@@ -399,7 +401,9 @@ void TestProperty()
         log_verbose("ucol_getRulesEx() testing ...\n");
         tempLength=ucol_getRulesEx(col,UCOL_FULL_RULES,buffer,bufLen );
         if(tempLength == 0) {
-            log_data_err("missing *full* rule string\n");
+            // Android patch: Add --omitCollationRules to genrb.
+            log_info("missing *full* rule string\n");
+            // Android patch end.
         }
         log_verbose("getRulesEx tests end.\n");
         free(buffer);
