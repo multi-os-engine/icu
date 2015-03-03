@@ -272,7 +272,9 @@ UTF-16LE,version=1		UnicodeLittle { JAVA* }  x-UTF-16LE-BOM { JAVA }
 #   MalformedInputException: Missing byte-order mark.
 #   In this case, ICU4C sets a U_ILLEGAL_ESCAPE_SEQUENCE UErrorCode value
 #   and a UCNV_ILLEGAL UConverterCallbackReason.
-UTF-16,version=1
+# BEGIN Android-changed
+UTF-16,version=1                JavaUnicode # alias made up to avoid java.nio.charset.IllegalCharsetNameException
+# END Android-changed
 
 # This is the same as standard UTF-16 but always writes a big-endian byte stream,
 # regardless of the platform endianness, as expected by the Java compatibility tests.
@@ -872,10 +874,11 @@ windows-1361-2000 { UTR22* }
                         x-Johab { JAVA* }
 
 windows-874-2000 { UTR22* }   # Thai (w/ euro update)
-                        TIS-620 { WINDOWS }
-                        windows-874 { JAVA* WINDOWS* }
-                        MS874 { JAVA }
-                        x-windows-874 { JAVA }
+                        # BEGIN android-changed
+                        TIS-620 { IANA* WINDOWS JAVA }
+                        windows-874 { JAVA WINDOWS* }
+                        # END android-changed
+                        MS874 { JAVA* }
                         # iso-8859-11 { WINDOWS } # iso-8859-11 is similar to TIS-620. ibm-13162 is a closer match.
 
 ibm-874_P100-1995 { UTR22* }    # Thai PC (w/o euro update).
