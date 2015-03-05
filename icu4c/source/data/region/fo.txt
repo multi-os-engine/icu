@@ -300,7 +300,6 @@ fo{
     }
     Countries%short{
         GB{"UK"}
-        MO{"Makao"}
         PS{"Palestina"}
         US{"USA"}
     }
