@@ -71,7 +71,7 @@ LOCAL_MODULE := icu4j
 include $(BUILD_STATIC_JAVA_LIBRARY)
 
 # Path to the ICU4C data files in the Android device file system:
-icu4c_data := /system/usr/icu
+icu4c_data := /data/misc/zoneinfo/current/icu:/system/usr/icu
 icu4j_config_root := $(LOCAL_PATH)/main/classes/core/src
 include external/icu/icu4j/adjust_icudt_path.mk
 
