@@ -16,8 +16,8 @@
 
 LOCAL_PATH := $(call my-dir)
 
-# Path to the ICU4C data files in the Android device file system:
-icu4c_data := /system/usr/icu
+# Paths to the ICU4C data files in the Android device file system:
+icu4c_data := /data/misc/zoneinfo/current/icu:/system/usr/icu
 
 # User-supplied locale service providers (using the java.text.spi or
 # java.util.spi mechanisms) are not supported in Android:
