@@ -280,6 +280,15 @@ public final class ICUBinary {
     static {
         // Normally com.ibm.icu.impl.ICUBinary.dataPath.
         String dataPath = ICUConfig.get(ICUBinary.class.getName() + ".dataPath");
+
+        // TODO: Check the relative JAR path that we're loading ICU config from, or
+        // just explicitly set this in System.java like we do for other properties.
+        //
+        // It's much less work than all the awful sed etc. that we do during build
+        // time, and we're already setting similar properties there.
+        if (dataPath == null) {
+            dataPath = "/system/usr/icu";
+        }
         if (dataPath != null) {
             addDataFilesFromPath(dataPath, icuDataFiles);
         }
