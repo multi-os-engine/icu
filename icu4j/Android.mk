@@ -70,8 +70,22 @@ LOCAL_SRC_FILES := $(icu4j_src_files)
 LOCAL_JAVA_RESOURCE_DIRS := $(icu4j_resource_dirs)
 LOCAL_DONT_DELETE_JAR_DIRS := true
 LOCAL_JAVACFLAGS := $(icu4j_javac_flags)
-LOCAL_MODULE := icu4j
+LOCAL_MODULE := icu4j-static
 include $(BUILD_STATIC_JAVA_LIBRARY)
+
+# Build ICU4J for installation on device. We rename all classes to
+# com.android.ibm.icu.* from com.ibm.icu.* since we're including it
+# in the boot classpath. We also build against the public SDK stubs
+# to avoid circular dependencies (core-libart will be a sibling of icu4j
+# in the boot classpath).
+include $(CLEAR_VARS)
+LOCAL_DONT_DELETE_JAR_DIRS := true
+LOCAL_JAVACFLAGS := $(icu4j_javac_flags)
+LOCAL_JARJAR_RULES := $(LOCAL_PATH)/jarjar-rules.txt
+LOCAL_STATIC_JAVA_LIBRARIES := icu4j-static
+LOCAL_MODULE := icu4j
+LOCAL_SDK_VERSION := 21
+include $(BUILD_JAVA_LIBRARY)
 
 # In order to append $(icu4c_data) to the dataPath line in ICUConfig.properties
 # this hack here removes the path to that file in the source tree and instead
@@ -103,12 +117,10 @@ include $(BUILD_HOST_JAVA_LIBRARY)
 
 ifeq ($(HOST_OS),linux)
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := $(icu4j_src_files)
-LOCAL_JAVA_RESOURCE_DIRS := $(icu4j_resource_dirs)
-LOCAL_STATIC_JAVA_LIBRARIES := icu4j-icudata-host icu4j-icutzdata-host
+LOCAL_STATIC_JAVA_LIBRARIES := icu4j-host
 LOCAL_DONT_DELETE_JAR_DIRS := true
-LOCAL_JAVACFLAGS := $(icu4j_javac_flags)
 LOCAL_MODULE := icu4j-hostdex
+LOCAL_JARJAR_RULES := $(LOCAL_PATH)/jarjar-rules.txt
 include $(BUILD_HOST_DALVIK_JAVA_LIBRARY)
 endif  # HOST_OS == linux
 
@@ -117,7 +129,7 @@ LOCAL_SRC_FILES := $(icu4j_test_src_files)
 LOCAL_JAVA_RESOURCE_DIRS := $(icu4j_test_resource_dirs)
 LOCAL_STATIC_JAVA_LIBRARIES := icu4j-testdata
 LOCAL_DONT_DELETE_JAR_DIRS := true
-LOCAL_JAVA_LIBRARIES := icu4j
+LOCAL_JAVA_LIBRARIES := icu4j-static
 LOCAL_JAVACFLAGS := $(icu4j_test_javac_flags)
 LOCAL_MODULE := icu4j-tests
 include $(BUILD_STATIC_JAVA_LIBRARY)
@@ -134,7 +146,7 @@ LOCAL_DONT_DELETE_JAR_DIRS := true
 LOCAL_JAVA_LIBRARIES := icu4j-host
 LOCAL_JAVACFLAGS := $(icu4j_test_javac_flags)
 LOCAL_MODULE := icu4j-tests-host
-include $(BUILD_HOST_JAVA_LIBRARY)
+include $(BUILD_HOST_STATIC_JAVA_LIBRARY)
 
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_EXTRA_JAR_ARGS += \
     -C "$(LOCAL_PATH)/main/tests/core/src" \
@@ -142,13 +154,11 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_EXTRA_JAR_ARGS += \
 
 ifeq ($(HOST_OS),linux)
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := $(icu4j_test_src_files)
-LOCAL_JAVA_RESOURCE_DIRS := $(icu4j_test_resource_dirs)
-LOCAL_STATIC_JAVA_LIBRARIES := icu4j-testdata-host
+LOCAL_STATIC_JAVA_LIBRARIES := icu4j-tests-host
 LOCAL_DONT_DELETE_JAR_DIRS := true
 LOCAL_JAVA_LIBRARIES := icu4j-hostdex
-LOCAL_JAVACFLAGS := $(icu4j_test_javac_flags)
 LOCAL_MODULE := icu4j-tests-hostdex
+LOCAL_JARJAR_RULES := $(LOCAL_PATH)/jarjar-rules.txt
 include $(BUILD_HOST_DALVIK_JAVA_LIBRARY)
 
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_EXTRA_JAR_ARGS += \
