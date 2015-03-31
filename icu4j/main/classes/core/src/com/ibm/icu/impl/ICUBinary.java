@@ -280,6 +280,7 @@ public final class ICUBinary {
     static {
         // Normally com.ibm.icu.impl.ICUBinary.dataPath.
         String dataPath = ICUConfig.get(ICUBinary.class.getName() + ".dataPath");
+        System.out.println("dataPath =" + dataPath);
         if (dataPath != null) {
             addDataFilesFromPath(dataPath, icuDataFiles);
         }
