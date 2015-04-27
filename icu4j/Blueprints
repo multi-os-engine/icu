@@ -1,0 +1,141 @@
+//
+// Copyright (C) 2014 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+// Path to the ICU4C data files in the Android device file system:
+icu4c_data = ["/system/usr/icu"]
+
+// User-supplied locale service providers (using the java.text.spi or
+// java.util.spi mechanisms) are not supported in Android:
+//
+// http://developer.android.com/reference/java/util/Locale.html
+
+icu4j_src_files = [
+    "main/classes/**/*.java",
+    "-main/classes/localespi/**/*.java",
+]
+
+icu4j_test_src_files = [
+    "main/tests/**/*.java",
+    "-main/tests/localespi/**/*.java",
+]
+
+// Not all src dirs contain resources, some instead contain other random files
+// that should not be included as resources. The ones that should be included
+// can be identifed by the fact that they contain particular subdir trees.
+
+// ANDROIDMK TRANSLATION ERROR: unsupported directive
+// define  all-subdir-with-subdir
+// $(patsubst $(LOCAL_PATH)/%/$(2),%,$(wildcard $(LOCAL_PATH)/$(1)/$(2)))
+//
+icu4j_resource_dirs = [
+    "main/classes/*/src",
+    "-main/classes/localespi/src",
+]
+
+icu4j_test_resource_dirs = [
+    "main/tests/*/src",
+    "-main/tests/localespi/src",
+]
+
+// For each data *.jar file, define a corresponding icu4j-* target.
+
+prebuilt_java_library {
+    name: "icu4j-icutzdata",
+    srcs: ["main/shared/data/icutzdata.jar"],
+}
+
+prebuilt_java_library {
+    name: "icu4j-testdata",
+    srcs: ["main/shared/data/testdata.jar"],
+}
+
+prebuilt_java_library {
+    name: "icu4j-icudata",
+    srcs: ["main/shared/data/icudata.jar"],
+}
+
+
+java_library_static {
+    name: "icu4j",
+    host_supported: true,
+    srcs: icu4j_src_files,
+    java_resource_dirs: icu4j_resource_dirs,
+    // ANDROIDMK TRANSLATION ERROR: unsupported assignment to LOCAL_DONT_DELETE_JAR_DIRS
+    // LOCAL_DONT_DELETE_JAR_DIRS:=true
+}
+
+// In order to append $(icu4c_data) to the dataPath line in ICUConfig.properties
+// this hack here removes the path to that file in the source tree and instead
+// appends the path to a dynamically generated modified file to the list of
+// arguments passed to the jar tool.
+
+//config_path = ["com/ibm/icu/ICUConfig.properties"]
+//config_root = [LOCAL_PATH + "/main/classes/core/src"]
+
+//tmp_resource_dir = [intermediates.COMMON + "/tmp"]
+
+// ANDROIDMK TRANSLATION ERROR: unsupported line
+// rule:       $(tmp_resource_dir)/$(config_path): $(config_root)/$(config_path)
+// $(hide) mkdir -p $(dir $@)
+// $(hide) sed "/.dataPath =/s/$$/ $(subst /,/,$(icu4c_data))/" $< > $@
+//
+// ANDROIDMK TRANSLATION ERROR: unsupported line
+// rule:       $(LOCAL_INTERMEDIATE_TARGETS): $(tmp_resource_dir)/$(config_path)
+// ANDROIDMK TRANSLATION ERROR: unsupported target assignment
+// $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_EXTRA_JAR_ARGS:=$(subst -C "$(config_root)" "$(config_path)",,$(extra_jar_args))      -C "$(tmp_resource_dir)" "$(config_path)"
+java_library_host {
+    name: "icu4j-host",
+    srcs: icu4j_src_files,
+    java_resource_dirs: icu4j_resource_dirs,
+    java_static_libs: [
+        "icu4j-icudata",
+        "icu4j-icutzdata",
+    ],
+    // ANDROIDMK TRANSLATION ERROR: unsupported assignment to LOCAL_DONT_DELETE_JAR_DIRS
+    // LOCAL_DONT_DELETE_JAR_DIRS:=true
+}
+
+java_library_static {
+    name: "icu4j-tests",
+    host_supported: true,
+    srcs: icu4j_test_src_files,
+    java_resource_dirs: icu4j_test_resource_dirs,
+    java_static_libs: ["icu4j-testdata"],
+    // ANDROIDMK TRANSLATION ERROR: unsupported assignment to LOCAL_DONT_DELETE_JAR_DIRS
+    // LOCAL_DONT_DELETE_JAR_DIRS:=true
+    java_libs: ["icu4j"],
+    target: {
+        darwin: {
+            disabled: true,
+        },
+    },
+}
+
+// ANDROIDMK TRANSLATION ERROR: unsupported target assignment
+// $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_EXTRA_JAR_ARGS+=-C "$(LOCAL_PATH)/main/tests/core/src"      "com/ibm/icu/dev/test/serializable/data"
+java_library_host {
+    srcs: icu4j_test_src_files,
+    java_resource_dirs: icu4j_test_resource_dirs,
+    java_static_libs: ["icu4j-testdata"],
+    // ANDROIDMK TRANSLATION ERROR: unsupported assignment to LOCAL_DONT_DELETE_JAR_DIRS
+    // LOCAL_DONT_DELETE_JAR_DIRS:=true
+    java_libs: ["icu4j-host"],
+    name: "icu4j-tests-host",
+}
+
+// ANDROIDMK TRANSLATION ERROR: unsupported target assignment
+// $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_EXTRA_JAR_ARGS+=-C "$(LOCAL_PATH)/main/tests/core/src"      "com/ibm/icu/dev/test/serializable/data"
+
