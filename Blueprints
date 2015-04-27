@@ -1,0 +1,10 @@
+optional_android_logging_libraries = []
+
+// Uncomment to be able to use ALOG* with #include "cutils/log.h".
+//optional_android_logging_libraries += ["liblog"]
+
+subdirs = [
+    "icu4c/source/common",
+    "icu4c/source/i18n",
+    "icu4j",
+]
