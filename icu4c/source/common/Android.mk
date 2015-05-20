@@ -139,6 +139,10 @@ local_cflags += -O3 -fvisibility=hidden
 
 local_cflags += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-sign-compare
 
+# aliasing rule violations in
+# RuleBasedBreakIterator::handlePrevious and RBBITableBuilder::exportTable
+local_cflags += -fno-strict-aliasing
+
 #
 # Build for the target (device).
 #

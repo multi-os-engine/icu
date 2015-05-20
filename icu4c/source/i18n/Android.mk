@@ -116,6 +116,8 @@ c_includes = \
 local_cflags := -D_REENTRANT
 local_cflags += -DU_I18N_IMPLEMENTATION
 local_cflags += -O3 -fvisibility=hidden
+# Assorted violations in fmtable.cpp
+local_cflags += -fno-strict-aliasing
 
 
 #
