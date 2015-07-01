@@ -24,12 +24,16 @@ icu4c_data = ["/system/usr/icu"]
 
 icu4j_src_files = [
     "main/classes/**/*.java",
-    "-main/classes/localespi/**/*.java",
+]
+icu4j_exclude_src_files = [
+    "main/classes/localespi/**/*.java",
 ]
 
 icu4j_test_src_files = [
     "main/tests/**/*.java",
-    "-main/tests/localespi/**/*.java",
+]
+icu4j_test_exclude_src_files = [
+    "main/tests/localespi/**/*.java",
 ]
 
 // Not all src dirs contain resources, some instead contain other random files
@@ -42,12 +46,16 @@ icu4j_test_src_files = [
 //
 icu4j_resource_dirs = [
     "main/classes/*/src",
-    "-main/classes/localespi/src",
+]
+icu4j_exclude_resource_dirs = [
+    "main/classes/localespi/src",
 ]
 
 icu4j_test_resource_dirs = [
     "main/tests/*/src",
-    "-main/tests/localespi/src",
+]
+icu4j_test_exclude_resource_dirs = [
+    "main/tests/localespi/src",
 ]
 
 // For each data *.jar file, define a corresponding icu4j-* target.
@@ -72,7 +80,9 @@ java_library_static {
     name: "icu4j",
     host_supported: true,
     srcs: icu4j_src_files,
+    exclude_srcs : icu4j_exclude_src_files,
     java_resource_dirs: icu4j_resource_dirs,
+    exclude_java_resource_dirs: icu4j_exclude_resource_dirs,
     // ANDROIDMK TRANSLATION ERROR: unsupported assignment to LOCAL_DONT_DELETE_JAR_DIRS
     // LOCAL_DONT_DELETE_JAR_DIRS:=true
 }
@@ -99,7 +109,9 @@ java_library_static {
 java_library_host {
     name: "icu4j-host",
     srcs: icu4j_src_files,
+    exclude_srcs: icu4j_exclude_src_files,
     java_resource_dirs: icu4j_resource_dirs,
+    exclude_java_resource_dirs: icu4j_exclude_resource_dirs,
     java_static_libs: [
         "icu4j-icudata",
         "icu4j-icutzdata",
@@ -112,7 +124,9 @@ java_library_static {
     name: "icu4j-tests",
     host_supported: true,
     srcs: icu4j_test_src_files,
+    exclude_srcs: icu4j_test_exclude_src_files,
     java_resource_dirs: icu4j_test_resource_dirs,
+    exclude_java_resource_dirs: icu4j_test_exclude_resource_dirs,
     java_static_libs: ["icu4j-testdata"],
     // ANDROIDMK TRANSLATION ERROR: unsupported assignment to LOCAL_DONT_DELETE_JAR_DIRS
     // LOCAL_DONT_DELETE_JAR_DIRS:=true
@@ -128,7 +142,9 @@ java_library_static {
 // $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_EXTRA_JAR_ARGS+=-C "$(LOCAL_PATH)/main/tests/core/src"      "com/ibm/icu/dev/test/serializable/data"
 java_library_host {
     srcs: icu4j_test_src_files,
+    exclude_srcs: icu4j_test_exclude_src_files,
     java_resource_dirs: icu4j_test_resource_dirs,
+    exclude_java_resource_dirs: icu4j_test_exclude_resource_dirs,
     java_static_libs: ["icu4j-testdata"],
     // ANDROIDMK TRANSLATION ERROR: unsupported assignment to LOCAL_DONT_DELETE_JAR_DIRS
     // LOCAL_DONT_DELETE_JAR_DIRS:=true
