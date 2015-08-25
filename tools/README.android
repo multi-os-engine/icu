@@ -1,0 +1,11 @@
+This directory contains tools for ICU data updates.
+
+update-tzdata.py
+  - downloads tzdata updates and regenerates the ICU and
+    libcore/bionic timezone data files.
+    ICU and CTS tests for bionic / libcore should be run after.
+
+updateicudata.py
+  - regerates the ICU data files.
+    ICU and CTS tests for libcore should be run after.
+
