@@ -888,6 +888,10 @@ public final class ULocale implements Serializable, Comparable<ULocale> {
         return ICUResourceBundle.getAvailableULocales();
     }
 
+    public static Set<String> getAvailableLocaleNameSet() {
+        return ICUResourceBundle.getAvailableLocaleNameSet();
+    }
+
     /**
      * Returns a list of all 2-letter country codes defined in ISO 3166.
      * Can be used to create Locales.
