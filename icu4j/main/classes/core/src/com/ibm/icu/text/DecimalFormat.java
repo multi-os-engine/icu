@@ -1485,6 +1485,13 @@ public class DecimalFormat extends NumberFormat {
                     // Length of grouping separator is 1.
                     addAttribute(Field.GROUPING_SEPARATOR, result.length() - 1, result.length());
                 }
+
+                // Record field information for the caller, if this is the first grouping separator.
+                if (fieldPosition.getFieldAttribute() == Field.GROUPING_SEPARATOR
+                        && fieldPosition.getBeginIndex() == 0) {
+                    fieldPosition.setBeginIndex(result.length() - 1);
+                    fieldPosition.setEndIndex(result.length());
+                }
             }
         }
 
@@ -1713,7 +1720,14 @@ public class DecimalFormat extends NumberFormat {
                     intEnd = result.length();
                     addAttribute(Field.INTEGER, intBegin, result.length());
                 }
+                // Record field information for caller before / after adding decimal separator.
+                if (fieldPosition.getFieldAttribute() == Field.DECIMAL_SEPARATOR) {
+                    fieldPosition.setBeginIndex(result.length());
+                }
                 result.append(decimal);
+                if (fieldPosition.getFieldAttribute() == Field.DECIMAL_SEPARATOR) {
+                    fieldPosition.setEndIndex(result.length());
+                }
                 // [Spark/CDL] Add attribute for decimal separator
                 if (parseAttr) {
                     // Length of decimal separator is 1.
@@ -1780,10 +1794,16 @@ public class DecimalFormat extends NumberFormat {
             }
         }
 
+        if (fieldPosition.getFieldAttribute() == Field.EXPONENT_SYMBOL) {
+            fieldPosition.setBeginIndex(result.length());
+        }
         // The exponent is output using the pattern-specified minimum exponent
         // digits. There is no maximum limit to the exponent digits, since truncating
         // the exponent would result in an unacceptable inaccuracy.
         result.append(symbols.getExponentSeparator());
+        if (fieldPosition.getFieldAttribute() == Field.EXPONENT_SYMBOL) {
+            fieldPosition.setEndIndex(result.length());
+        }
         // [Spark/CDL] For exponent symbol, add an attribute.
         if (parseAttr) {
             addAttribute(Field.EXPONENT_SYMBOL, result.length() -
@@ -1796,6 +1816,13 @@ public class DecimalFormat extends NumberFormat {
             exponent = 0;
 
         boolean negativeExponent = exponent < 0;
+
+        if (negativeExponent || exponentSignAlwaysShown) {
+            if (fieldPosition.getFieldAttribute() == Field.EXPONENT_SIGN) {
+                fieldPosition.setBeginIndex(result.length());
+            }
+        }
+
         if (negativeExponent) {
             exponent = -exponent;
             result.append(symbols.getMinusString());
@@ -1814,6 +1841,13 @@ public class DecimalFormat extends NumberFormat {
                 addAttribute(Field.EXPONENT_SIGN, expSignBegin, result.length());
             }
         }
+
+        if (negativeExponent || exponentSignAlwaysShown) {
+             if (fieldPosition.getFieldAttribute() == Field.EXPONENT_SIGN) {
+                fieldPosition.setEndIndex(result.length());
+            }
+        }
+
         int expBegin = result.length();
         digitList.set(exponent);
         {
@@ -1827,6 +1861,10 @@ public class DecimalFormat extends NumberFormat {
         for (i = 0; i < digitList.decimalAt; ++i) {
             result.append((i < digitList.count) ? digits[digitList.getDigitValue(i)]
                           : digits[0]);
+        }
+        if (fieldPosition.getFieldAttribute() == Field.EXPONENT) {
+            fieldPosition.setBeginIndex(expBegin);
+            fieldPosition.setEndIndex(result.length());
         }
         // [Spark/CDL] Add attribute for exponent part.
         if (parseAttr) {
