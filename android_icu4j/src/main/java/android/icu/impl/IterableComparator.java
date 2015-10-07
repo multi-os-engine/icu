@@ -10,6 +10,7 @@ package android.icu.impl;
 import java.util.Comparator;
 import java.util.Iterator;
 
+/** @hide All android.icu classes are currently hidden */
 public class IterableComparator<T> implements Comparator<Iterable<T>> {
     private final Comparator<T> comparator;
     private final int shorterFirst; // = 1 for shorter first, -1 otherwise

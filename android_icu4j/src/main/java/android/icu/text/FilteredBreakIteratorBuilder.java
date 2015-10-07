@@ -35,6 +35,7 @@ import android.icu.util.ULocale;
  * 
  * @internal ICU 54 technology preview
  * @deprecated This API might change or be removed in a future release.
+ * @hide All android.icu classes are currently hidden
  */
 @Deprecated
 public abstract class FilteredBreakIteratorBuilder {

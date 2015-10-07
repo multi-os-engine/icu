@@ -19,6 +19,7 @@ import android.icu.text.UnicodeSet;
 import android.icu.util.CharsTrie;
 import android.icu.util.CharsTrie.Entry;
 
+/** @hide All android.icu classes are currently hidden */
 public final class ContractionsAndExpansions {
     // C++: The following fields are @internal, only public for access by callback.
     private CollationData data;

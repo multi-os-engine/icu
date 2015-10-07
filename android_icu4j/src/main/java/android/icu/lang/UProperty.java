@@ -26,6 +26,7 @@ package android.icu.lang;
  * @author Syn Wee Quek
  * @stable ICU 2.6
  * @see android.icu.lang.UCharacter
+ * @hide All android.icu classes are currently hidden
  */
 public interface UProperty
 {

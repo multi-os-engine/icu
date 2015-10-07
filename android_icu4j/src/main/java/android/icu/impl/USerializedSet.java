@@ -18,6 +18,7 @@ package android.icu.impl;
  * without object creation. See ICU4C icu/source/common/uset.c.
  *
  * @internal
+ * @hide All android.icu classes are currently hidden
  */
 public final class USerializedSet {
     /**

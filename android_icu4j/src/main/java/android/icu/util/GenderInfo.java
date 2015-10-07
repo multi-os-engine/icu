@@ -23,6 +23,7 @@ import android.icu.impl.SimpleCache;
  * @author markdavis
  * @internal
  * @deprecated This API is ICU internal only.
+ * @hide All android.icu classes are currently hidden
  */
 @Deprecated
 public class GenderInfo {

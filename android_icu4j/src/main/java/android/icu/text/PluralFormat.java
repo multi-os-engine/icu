@@ -130,6 +130,7 @@ import android.icu.util.ULocale.Category;
  *
  * @author tschumann (Tim Schumann)
  * @stable ICU 3.8
+ * @hide All android.icu classes are currently hidden
  */
 public class PluralFormat extends UFormat {
     private static final long serialVersionUID = 1L;

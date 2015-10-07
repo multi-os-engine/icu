@@ -79,6 +79,7 @@ import android.icu.impl.UCharacterProperty;
  * 
  * @author Mark Davis, with help from Markus Scherer
  * @stable ICU 2.1
+ * @hide All android.icu classes are currently hidden
  */
 
 public final class UTF16 {

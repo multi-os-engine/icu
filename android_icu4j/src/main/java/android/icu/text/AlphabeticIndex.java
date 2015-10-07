@@ -121,6 +121,7 @@ import android.icu.util.ULocale;
  *
  * @author Mark Davis
  * @stable ICU 4.8
+ * @hide All android.icu classes are currently hidden
  */
 public final class AlphabeticIndex<V> implements Iterable<Bucket<V>> {
     /**

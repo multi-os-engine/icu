@@ -144,6 +144,7 @@ import android.icu.util.ULocale;
  *     are normally used with text from many different scripts. </blockquote>
  *
  * @stable ICU 4.6
+ * @hide All android.icu classes are currently hidden
  */
 public class SpoofChecker {
 

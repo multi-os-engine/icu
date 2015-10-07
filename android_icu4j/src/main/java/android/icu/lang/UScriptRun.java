@@ -49,6 +49,7 @@ import android.icu.text.UTF16;
  *
  * @internal
  * @deprecated This API is ICU internal only.
+ * @hide All android.icu classes are currently hidden
  */
 @Deprecated
 public final class UScriptRun

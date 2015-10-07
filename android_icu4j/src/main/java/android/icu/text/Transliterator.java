@@ -224,6 +224,7 @@ import android.icu.util.UResourceBundle;
  * 
  * @author Alan Liu
  * @stable ICU 2.0
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class Transliterator implements StringTransform  {
     /**

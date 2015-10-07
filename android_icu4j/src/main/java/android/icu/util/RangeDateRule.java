@@ -19,6 +19,7 @@ import java.util.List;
  * Implementation of DateRule that takes a range.
  * @draft ICU 2.8 (retainAll)
  * @provisional This API might change or be removed in a future release.
+ * @hide All android.icu classes are currently hidden
  */
 public class RangeDateRule implements DateRule {
     /**

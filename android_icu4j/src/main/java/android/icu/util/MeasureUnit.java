@@ -34,6 +34,7 @@ import android.icu.text.UnicodeSet;
  * @see android.icu.util.Measure
  * @author Alan Liu
  * @stable ICU 3.0
+ * @hide All android.icu classes are currently hidden
  */
 public class MeasureUnit implements Serializable {
     private static final long serialVersionUID = -1839973855554750484L;

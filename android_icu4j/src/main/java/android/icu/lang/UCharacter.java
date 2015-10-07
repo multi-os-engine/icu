@@ -161,6 +161,7 @@ import android.icu.util.VersionInfo;
  * @author Syn Wee Quek
  * @stable ICU 2.1
  * @see android.icu.lang.UCharacterEnums
+ * @hide All android.icu classes are currently hidden
  */
 
 public final class UCharacter implements ECharacterCategory, ECharacterDirection

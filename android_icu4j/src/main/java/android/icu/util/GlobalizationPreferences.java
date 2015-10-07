@@ -75,6 +75,7 @@ import android.icu.text.SimpleDateFormat;
  *
  * @draft ICU 3.6 (retainAll)
  * @provisional This API might change or be removed in a future release.
+ * @hide All android.icu classes are currently hidden
  */
 
 //TODO:

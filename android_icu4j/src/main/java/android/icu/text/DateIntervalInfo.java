@@ -148,6 +148,7 @@ import android.icu.util.UResourceBundle;
  * calendar; non-Gregorian calendars are supported from ICU 4.4.1.  
  * 
  * @stable ICU 4.0
+ * @hide All android.icu classes are currently hidden
  */
 
 public class DateIntervalInfo implements Cloneable, Freezable<DateIntervalInfo>, Serializable {

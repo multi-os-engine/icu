@@ -44,6 +44,7 @@ import java.util.TimeZone;
  * @author Laura Werner
  * @author Alan Liu
  * @internal
+ * @hide All android.icu classes are currently hidden
  */
 public class CalendarAstronomer {
     

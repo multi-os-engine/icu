@@ -17,6 +17,7 @@ import android.icu.util.UResourceBundleIterator;
 /**
  * This class abstracts access to calendar (Calendar and DateFormat) data.
  * @internal ICU 3.0
+ * @hide All android.icu classes are currently hidden
  */
 public class CalendarData {
     /**

@@ -71,6 +71,7 @@ import android.icu.util.ULocale.Category;
  * @author Laura Werner
  * @author Alan Liu
  * @stable ICU 2.8
+ * @hide All android.icu classes are currently hidden
  */
 public class HebrewCalendar extends Calendar {
     // jdk1.4.2 serialver

@@ -33,6 +33,7 @@ import android.icu.util.ULocale;
  * @draft ICU 55
  * @provisional This API might change or be removed in a future release.
  *
+ * @hide All android.icu classes are currently hidden
  */
 public final class ScientificNumberFormatter {
     

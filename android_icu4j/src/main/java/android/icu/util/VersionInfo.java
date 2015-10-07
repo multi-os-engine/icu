@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Class to store version numbers of the form major.minor.milli.micro.
  * @author synwee
  * @stable ICU 2.6
+ * @hide All android.icu classes are currently hidden
  */
 public final class VersionInfo implements Comparable<VersionInfo>
 {

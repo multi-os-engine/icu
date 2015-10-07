@@ -23,6 +23,7 @@ package android.icu.lang;
  * @author markdavis
  * @internal
  * @deprecated This API is ICU internal only.
+ * @hide All android.icu classes are currently hidden
  */
 @Deprecated
 public class CharSequences {

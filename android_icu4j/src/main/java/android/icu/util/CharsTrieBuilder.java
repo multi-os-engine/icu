@@ -20,6 +20,7 @@ import java.nio.CharBuffer;
  *
  * @stable ICU 4.8
  * @author Markus W. Scherer
+ * @hide All android.icu classes are currently hidden
  */
 public final class CharsTrieBuilder extends StringTrieBuilder {
     /**

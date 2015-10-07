@@ -20,6 +20,7 @@ import java.nio.ByteBuffer;
  *
  * @stable ICU 4.8
  * @author Markus W. Scherer
+ * @hide All android.icu classes are currently hidden
  */
 public final class BytesTrieBuilder extends StringTrieBuilder {
     /**

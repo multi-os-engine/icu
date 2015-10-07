@@ -502,6 +502,7 @@ import android.icu.util.UResourceBundleIterator;
  * @see PluralFormat
  * @see PluralRules
  * @stable ICU 2.0
+ * @hide All android.icu classes are currently hidden
  */
 public class RuleBasedNumberFormat extends NumberFormat {
 

@@ -137,6 +137,7 @@ import android.icu.util.ULocale.Category;
  * @see android.icu.util.TimeZone
  * @author Mark Davis, Chen-Lieh Huang, Alan Liu
  * @stable ICU 2.0
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class DateFormat extends UFormat {
 

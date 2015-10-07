@@ -26,6 +26,7 @@ import android.icu.util.ULocale;
  * more information on language, script, region, variant, key, and
  * values, see {@link android.icu.util.ULocale}.
  * @stable ICU 4.4
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class LocaleDisplayNames {
     /**

@@ -607,6 +607,7 @@ import android.icu.util.ULocale.Category;
  * @author       Mark Davis
  * @author       Alan Liu
  * @stable ICU 2.0
+ * @hide All android.icu classes are currently hidden
  */
 public class DecimalFormat extends NumberFormat {
 

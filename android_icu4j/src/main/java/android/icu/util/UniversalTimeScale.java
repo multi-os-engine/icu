@@ -49,6 +49,7 @@ import android.icu.math.BigDecimal;
  * chapter in the ICU User Guide.</p>
  *
  * @stable ICU 3.2
+ * @hide All android.icu classes are currently hidden
  */
 
 public final class UniversalTimeScale

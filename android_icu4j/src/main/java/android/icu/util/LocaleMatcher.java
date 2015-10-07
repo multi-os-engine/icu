@@ -44,6 +44,7 @@ import android.icu.impl.Utility;
  * 
  * @author markdavis@google.com
  * @stable ICU 4.4
+ * @hide All android.icu classes are currently hidden
  */
 public class LocaleMatcher {
     

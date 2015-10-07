@@ -208,6 +208,7 @@ import android.icu.util.ULocale;
  * @see CharacterIterator
  * @stable ICU 2.0
  *
+ * @hide All android.icu classes are currently hidden
  */
 
 public abstract class BreakIterator implements Cloneable

@@ -166,6 +166,7 @@ import android.icu.util.ULocale;
  * </p>
  * 
  * @stable ICU 3.8
+ * @hide All android.icu classes are currently hidden
  */
 public class PluralRules implements Serializable {
 

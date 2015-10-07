@@ -28,6 +28,7 @@ import android.icu.util.UResourceBundle;
  *
  * @author Mark Davis
  * @stable ICU 50
+ * @hide All android.icu classes are currently hidden
  */
 final public class ListFormatter {
     private final SimplePatternFormatter two;

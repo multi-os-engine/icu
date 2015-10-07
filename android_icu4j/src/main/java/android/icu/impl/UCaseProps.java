@@ -31,6 +31,7 @@ import android.icu.text.UnicodeSet;
 import android.icu.util.ICUUncheckedIOException;
 import android.icu.util.ULocale;
 
+/** @hide All android.icu classes are currently hidden */
 public final class UCaseProps {
 
     // constructors etc. --------------------------------------------------- ***

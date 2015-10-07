@@ -34,6 +34,7 @@ import android.icu.util.Freezable;
  * Unicode well.
  * 
  * @author markdavis
+ * @hide All android.icu classes are currently hidden
  */
 public class UnicodeRegex implements Cloneable, Freezable<UnicodeRegex>, StringTransform {
     // Note: we don't currently have any state, but intend to in the future,

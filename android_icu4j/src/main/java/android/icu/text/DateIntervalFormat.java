@@ -246,6 +246,7 @@ import android.icu.util.ULocale.Category;
  *
  * </pre>
  * @stable ICU 4.0
+ * @hide All android.icu classes are currently hidden
  */
 
 public class DateIntervalFormat extends UFormat {

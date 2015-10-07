@@ -100,6 +100,7 @@ import android.icu.text.UnicodeSet;
  * </p>
  * @author syn wee
  * @stable ICU 2.4
+ * @hide All android.icu classes are currently hidden
  */
 public final class StringTokenizer implements Enumeration<Object>
 {

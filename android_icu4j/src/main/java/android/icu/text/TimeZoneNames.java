@@ -74,6 +74,7 @@ import android.icu.util.ULocale;
  * what locale is used for getting an instance of <code>TimeZoneNames</code>.
  *
  * @stable ICU 49
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class TimeZoneNames implements Serializable {
 

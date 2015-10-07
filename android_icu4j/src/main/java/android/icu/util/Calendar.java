@@ -637,6 +637,7 @@ import android.icu.util.ULocale.Category;
  * @see          DateFormat
  * @author Mark Davis, David Goldsmith, Chen-Lieh Huang, Alan Liu, Laura Werner
  * @stable ICU 2.0
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class Calendar implements Serializable, Cloneable, Comparable<Calendar> {
 

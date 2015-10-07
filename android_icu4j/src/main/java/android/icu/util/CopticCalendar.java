@@ -20,6 +20,7 @@ import java.util.Locale;
  *
  * @see android.icu.util.Calendar
  * @stable ICU 3.4
+ * @hide All android.icu classes are currently hidden
  */
 public final class CopticCalendar extends CECalendar 
 {

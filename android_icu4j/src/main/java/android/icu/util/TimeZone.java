@@ -111,6 +111,7 @@ import android.icu.util.ULocale.Category;
  * @see          SimpleTimeZone
  * @author       Mark Davis, David Goldsmith, Chen-Lieh Huang, Alan Liu
  * @stable ICU 2.0
+ * @hide All android.icu classes are currently hidden
  */
 abstract public class TimeZone implements Serializable, Cloneable, Freezable<TimeZone> {
     /**

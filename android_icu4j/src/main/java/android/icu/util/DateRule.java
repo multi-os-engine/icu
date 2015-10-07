@@ -22,6 +22,7 @@ import java.util.Date;
  * @see SimpleDateRule
  * @draft ICU 2.8 (retainAll)
  * @provisional This API might change or be removed in a future release.
+ * @hide All android.icu classes are currently hidden
  */
 public interface DateRule
 {

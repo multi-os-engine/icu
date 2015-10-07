@@ -34,6 +34,7 @@ import android.icu.util.ULocale.Category;
  * currency plural pattern of the locale.
  *
  * @stable ICU 4.2
+ * @hide All android.icu classes are currently hidden
  */
 
 public class CurrencyPluralInfo implements Cloneable, Serializable {

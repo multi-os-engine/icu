@@ -284,6 +284,7 @@ import android.icu.util.VersionInfo;
  * @stable ICU 2.0
  * @see UnicodeSetIterator
  * @see UnicodeSetSpanner
+ * @hide All android.icu classes are currently hidden
  */
 public class UnicodeSet extends UnicodeFilter implements Iterable<String>, Comparable<UnicodeSet>, Freezable<UnicodeSet> {
 

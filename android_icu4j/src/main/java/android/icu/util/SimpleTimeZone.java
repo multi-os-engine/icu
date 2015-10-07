@@ -29,6 +29,7 @@ import android.icu.impl.Grego;
  * @see      TimeZone
  * @author   David Goldsmith, Mark Davis, Chen-Lieh Huang, Alan Liu
  * @stable ICU 2.0
+ * @hide All android.icu classes are currently hidden
  */
 public class SimpleTimeZone extends BasicTimeZone {
     private static final long serialVersionUID = -7034676239311322769L;

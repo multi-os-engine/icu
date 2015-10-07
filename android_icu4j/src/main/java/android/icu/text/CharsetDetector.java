@@ -35,6 +35,7 @@ import java.util.List;
  * ignore html or xml style markup that could otherwise obscure the content.
  * <p/>
  * @stable ICU 3.4
+ * @hide All android.icu classes are currently hidden
  */
 public class CharsetDetector {
 

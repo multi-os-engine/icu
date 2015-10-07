@@ -331,6 +331,7 @@ import android.icu.util.ULocale.Category;
  * @author       Mark Davis
  * @author       Markus Scherer
  * @stable ICU 3.0
+ * @hide All android.icu classes are currently hidden
  */
 public class MessageFormat extends UFormat {
 

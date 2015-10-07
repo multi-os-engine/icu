@@ -14,6 +14,7 @@ import java.text.Format.Field;
  * Adds the ability to get the decimal digits
  * @internal
  * @deprecated This API is ICU internal only.
+ * @hide All android.icu classes are currently hidden
  */
 @Deprecated
 public class UFieldPosition extends FieldPosition {

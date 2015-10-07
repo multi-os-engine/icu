@@ -51,6 +51,7 @@ import android.icu.impl.UTS46;
  * 
  * @author Ram Viswanadha, Markus Scherer
  * @stable ICU 2.8
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class IDNA {
     /** 

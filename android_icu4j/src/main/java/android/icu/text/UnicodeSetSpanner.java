@@ -41,6 +41,7 @@ import android.icu.util.OutputInt;
  * 
  * @draft ICU 54
  * @provisional This is a draft API and might change in a future release of ICU.
+ * @hide All android.icu classes are currently hidden
  */
 public class UnicodeSetSpanner {
 

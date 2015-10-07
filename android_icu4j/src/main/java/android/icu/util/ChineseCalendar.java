@@ -80,6 +80,7 @@ import android.icu.util.ULocale.Category;
  * @see android.icu.util.Calendar
  * @author Alan Liu
  * @stable ICU 2.8
+ * @hide All android.icu classes are currently hidden
  */
 public class ChineseCalendar extends Calendar {
     // jdk1.4.2 serialver

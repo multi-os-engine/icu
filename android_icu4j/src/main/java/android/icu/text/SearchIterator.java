@@ -48,6 +48,7 @@ import java.text.CharacterIterator;
  * @stable ICU 2.0
  * @see BreakIterator
  * @see RuleBasedCollator
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class SearchIterator 
 {

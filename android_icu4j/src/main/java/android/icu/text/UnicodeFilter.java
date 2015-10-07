@@ -15,6 +15,7 @@ package android.icu.text;
  * to only process selected characters through a
  * transformation.
  * @stable ICU 2.0
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class UnicodeFilter implements UnicodeMatcher {
 

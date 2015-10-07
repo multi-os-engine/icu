@@ -24,6 +24,7 @@ import android.icu.util.ULocale;
  * implementation behind setLenientParseMode, which is based on Collator.
  * @internal
  * @deprecated This API is ICU internal only.
+ * @hide All android.icu classes are currently hidden
  */
 @Deprecated
 public class RbnfScannerProviderImpl implements RbnfLenientScannerProvider {

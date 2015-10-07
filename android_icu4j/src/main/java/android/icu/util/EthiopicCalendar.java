@@ -23,6 +23,7 @@ import android.icu.util.ULocale.Category;
  *
  * @see android.icu.util.Calendar
  * @stable ICU 3.4
+ * @hide All android.icu classes are currently hidden
  */
 public final class EthiopicCalendar extends CECalendar 
 {

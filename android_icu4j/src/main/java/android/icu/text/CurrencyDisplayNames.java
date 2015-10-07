@@ -19,6 +19,7 @@ import android.icu.util.ULocale;
  * This class is not intended for public subclassing.
  * 
  * @stable ICU 4.4
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class CurrencyDisplayNames {
     /**

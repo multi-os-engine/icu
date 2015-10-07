@@ -109,6 +109,7 @@ import android.icu.text.LocaleDisplayNames.DialectHandling;
  * @author Alan Liu
  * @author Ram Viswanadha
  * @stable ICU 2.8
+ * @hide All android.icu classes are currently hidden
  */
 public final class ULocale implements Serializable, Comparable<ULocale> {
     // using serialver from jdk1.4.2_05

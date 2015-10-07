@@ -37,6 +37,7 @@ import java.util.Iterator;
  * Do not alter the UnicodeSet while iterating.
  * @author M. Davis
  * @stable ICU 2.0
+ * @hide All android.icu classes are currently hidden
  */
 public class UnicodeSetIterator {
     

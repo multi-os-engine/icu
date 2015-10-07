@@ -58,6 +58,7 @@ import android.icu.util.ICUUncheckedIOException;
  * Different functions may return different boundaries.
  * @stable ICU 4.4
  * @author Markus W. Scherer
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class Normalizer2 {
     /**

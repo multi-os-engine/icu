@@ -273,6 +273,7 @@ import java.util.Map;
  * @author Alan Liu
  * @internal
  * @deprecated This API is ICU internal only.
+ * @hide All android.icu classes are currently hidden
  */
 @Deprecated
 public class RuleBasedTransliterator extends Transliterator {

@@ -11,6 +11,7 @@ import java.util.ListResourceBundle;
 
 import android.icu.impl.ICUData;
 
+/** @hide All android.icu classes are currently hidden */
 public class BreakIteratorRules_th extends ListResourceBundle {
     private static final String DATA_NAME = "data/th.brk";
 
