@@ -246,6 +246,7 @@ import android.icu.util.ULocale.Category;
  *
  * </pre>
  * @stable ICU 4.0
+ * @hide All android.icu classes are currently hidden
  */
 
 public class DateIntervalFormat extends UFormat {
@@ -344,7 +345,7 @@ public class DateIntervalFormat extends UFormat {
      * @param dtItvInfo  the DateIntervalInfo object to be adopted.
      * @param simpleDateFormat will be used for formatting
      * 
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -401,7 +402,7 @@ public class DateIntervalFormat extends UFormat {
      * This is a convenient override of 
      * getInstance(String skeleton, ULocale locale)  
      *
-     * <p>Example code:{@.jcite com.ibm.icu.samples.text.dateintervalformat.DateIntervalFormatSample:---dtitvfmtPreDefinedExample}
+     * <p>Example code:{{@literal @}.jcite com.ibm.icu.samples.text.dateintervalformat.DateIntervalFormatSample:---dtitvfmtPreDefinedExample}
      * @param skeleton  the skeleton on which interval format based.
      * @param locale    the given locale
      * @return          a date time interval formatter.
@@ -481,7 +482,7 @@ public class DateIntervalFormat extends UFormat {
      * This is a convenient override of
      * getInstance(String skeleton, ULocale locale, DateIntervalInfo dtitvinf)
      * 
-     * <p>Example code:{@.jcite com.ibm.icu.samples.text.dateintervalformat.DateIntervalFormatSample:---dtitvfmtCustomizedExample}
+     * <p>Example code:{{@literal @}.jcite com.ibm.icu.samples.text.dateintervalformat.DateIntervalFormatSample:---dtitvfmtCustomizedExample}
      * @param skeleton  the skeleton on which interval format based.
      * @param locale    the given locale
      * @param dtitvinf  the DateIntervalInfo object to be adopted.
@@ -610,7 +611,7 @@ public class DateIntervalFormat extends UFormat {
     }
 
     /**
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -834,7 +835,7 @@ public class DateIntervalFormat extends UFormat {
      *                  is supported, upon return this param is unchanged.
      * @return          A newly created Formattable* object, or NULL
      *                  on failure.
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -1729,7 +1730,7 @@ public class DateIntervalFormat extends UFormat {
     
     /**
      * Get the internal patterns for the skeleton
-     * @internal CLDR
+     * {@literal @}internal CLDR
      * @deprecated This API is ICU internal only.
      */
     @Deprecated

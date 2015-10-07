@@ -19,6 +19,7 @@ import android.icu.util.ULocale;
  * such as "2 days from now" or "3 hours ago".
  * 
  * @stable ICU 3.8
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class DurationFormat extends UFormat {
 
@@ -35,7 +36,7 @@ public abstract class DurationFormat extends UFormat {
 
     /**
      * Subclass interface
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -44,7 +45,7 @@ public abstract class DurationFormat extends UFormat {
     
     /**
      * Subclass interface
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated

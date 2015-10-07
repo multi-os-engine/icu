@@ -34,6 +34,7 @@ import android.icu.util.Freezable;
  * Unicode well.
  * 
  * @author markdavis
+ * @hide All android.icu classes are currently hidden
  */
 public class UnicodeRegex implements Cloneable, Freezable<UnicodeRegex>, StringTransform {
     // Note: we don't currently have any state, but intend to in the future,
@@ -43,7 +44,7 @@ public class UnicodeRegex implements Cloneable, Freezable<UnicodeRegex>, StringT
 
     /**
      * Set the symbol table for internal processing
-     * @internal
+     * {@literal @}internal
      */
     public SymbolTable getSymbolTable() {
         return symbolTable;
@@ -51,7 +52,7 @@ public class UnicodeRegex implements Cloneable, Freezable<UnicodeRegex>, StringT
 
     /**
      * Get the symbol table for internal processing
-     * @internal
+     * {@literal @}internal
      */
     public UnicodeRegex setSymbolTable(SymbolTable symbolTable) {
         this.symbolTable = symbolTable;

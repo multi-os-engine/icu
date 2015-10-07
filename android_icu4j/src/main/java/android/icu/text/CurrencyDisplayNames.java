@@ -19,6 +19,7 @@ import android.icu.util.ULocale;
  * This class is not intended for public subclassing.
  * 
  * @stable ICU 4.4
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class CurrencyDisplayNames {
     /**
@@ -47,8 +48,8 @@ public abstract class CurrencyDisplayNames {
      * 
      * @param locale the locale into which to localize the names
      * @return a CurrencyDisplayNames
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static CurrencyDisplayNames getInstance(Locale locale) {
         return getInstance(locale, true);
@@ -84,8 +85,8 @@ public abstract class CurrencyDisplayNames {
      * @param locale the JDK locale into which to localize the names
      * @param noSubstitute if true, do not return substitute values.
      * @return a CurrencyDisplayNames
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static CurrencyDisplayNames getInstance(Locale locale, boolean noSubstitute) {
         return getInstance(ULocale.forLocale(locale), noSubstitute);
@@ -94,7 +95,7 @@ public abstract class CurrencyDisplayNames {
     /**
      * Returns true if currency display name data is available.
      * @return true if currency display name data is available
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -163,7 +164,7 @@ public abstract class CurrencyDisplayNames {
     /**
      * Sole constructor.  (For invocation by subclass constructors,
      * typically implicit.)
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated

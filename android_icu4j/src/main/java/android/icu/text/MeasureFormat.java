@@ -107,6 +107,7 @@ import android.icu.util.UResourceBundle;
  * @see android.icu.text.UFormat
  * @author Alan Liu
  * @stable ICU 3.0
+ * @hide All android.icu classes are currently hidden
  */
 public class MeasureFormat extends UFormat {
 
@@ -233,8 +234,8 @@ public class MeasureFormat extends UFormat {
      * @param locale the JDK locale.
      * @param formatWidth hints how long formatted strings should be.
      * @return The new MeasureFormat object.
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static MeasureFormat getInstance(Locale locale, FormatWidth formatWidth) {
         return getInstance(ULocale.forLocale(locale), formatWidth);
@@ -288,8 +289,8 @@ public class MeasureFormat extends UFormat {
      * @param formatWidth hints how long formatted strings should be.
      * @param format This is defensively copied.
      * @return The new MeasureFormat object.
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static MeasureFormat getInstance(Locale locale, FormatWidth formatWidth, NumberFormat format) {
         return getInstance(ULocale.forLocale(locale), formatWidth, format);
@@ -347,8 +348,8 @@ public class MeasureFormat extends UFormat {
      * Parses text from a string to produce a <code>Measure</code>.
      * @see java.text.Format#parseObject(java.lang.String, java.text.ParsePosition)
      * @throws UnsupportedOperationException Not supported.
-     * @draft ICU 53 (Retain)
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 53 (Retain)
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     @Override
     public Measure parseObject(String source, ParsePosition pos) {
@@ -386,7 +387,7 @@ public class MeasureFormat extends UFormat {
      * @param lowValue low value in range
      * @param highValue high value in range
      * @return the formatted string.
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -499,8 +500,8 @@ public class MeasureFormat extends UFormat {
      * @param appendTo formatted string appended here.
      * @param pos      The field position.
      * @return appendTo.
-     * @draft ICU 55
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 55
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public StringBuilder formatMeasurePerUnit(
             Measure measure,
@@ -646,8 +647,8 @@ public class MeasureFormat extends UFormat {
      * JDK locale.
      * @param locale desired JDK locale
      * @return a formatter object
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static MeasureFormat getCurrencyFormat(Locale locale) {
         return getCurrencyFormat(ULocale.forLocale(locale));
@@ -1271,7 +1272,7 @@ public class MeasureFormat extends UFormat {
      * @param forLocale locale to get the format for
      * @param width the format width
      * @return range formatter, such as "{0}–{1}"
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -1317,7 +1318,7 @@ public class MeasureFormat extends UFormat {
      * @param forLocale locale to get the range pattern for
      * @param width the format width.
      * @return range pattern
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated

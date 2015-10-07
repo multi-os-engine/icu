@@ -40,6 +40,7 @@ import android.icu.util.ULocale;
  * may be added at any time.
  *
  * @stable ICU 2.4
+ * @hide All android.icu classes are currently hidden
  */
 public final class UScript {
     /**
@@ -1072,8 +1073,8 @@ public final class UScript {
      *
      * @param nameOrAbbr name of the script or ISO 15924 code
      * @return The script code value, or INVALID_CODE if the code cannot be found.
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static final int getCodeFromName(String nameOrAbbr) {
         int propNum = UCharacter.getPropertyValueEnumNoThrow(UProperty.SCRIPT, nameOrAbbr);
