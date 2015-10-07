@@ -31,7 +31,7 @@ import android.icu.util.ULocale.Category;
 import android.icu.util.UResourceBundle;
 
 /**
- * {@icuenhanced java.text.NumberFormat}.{@icu _usage_}
+ * {{@literal @}icuenhanced java.text.NumberFormat}.{{@literal @}icu _usage_}
  *
  * <code>NumberFormat</code> is the abstract base class for all number
  * formats. This class provides the interface for formatting and parsing
@@ -167,60 +167,61 @@ import android.icu.util.UResourceBundle;
  * @author       Helena Shih
  * @author       Alan Liu
  * @stable ICU 2.0
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class NumberFormat extends UFormat {
 
     /**
-     * {@icu} Constant to specify normal number style of format.
+     * {{@literal @}icu} Constant to specify normal number style of format.
      * @stable ICU 4.2
      */
     public static final int NUMBERSTYLE = 0;
     /**
-     * {@icu} Constant to specify currency style of format which uses currency symbol
+     * {{@literal @}icu} Constant to specify currency style of format which uses currency symbol
      * to represent currency, for example: "$3.00".
      * @stable ICU 4.2
      */
     public static final int CURRENCYSTYLE = 1;
     /**
-     * {@icu} Constant to specify a style of format to display percent.
+     * {{@literal @}icu} Constant to specify a style of format to display percent.
      * @stable ICU 4.2
      */
     public static final int PERCENTSTYLE = 2;
     /**
-     * {@icu} Constant to specify a style of format to display scientific number.
+     * {{@literal @}icu} Constant to specify a style of format to display scientific number.
      * @stable ICU 4.2
      */
     public static final int SCIENTIFICSTYLE = 3;
     /**
-     * {@icu} Constant to specify a integer number style format.
+     * {{@literal @}icu} Constant to specify a integer number style format.
      * @stable ICU 4.2
      */
     public static final int INTEGERSTYLE = 4;
     /**
-     * {@icu} Constant to specify currency style of format which uses currency
+     * {{@literal @}icu} Constant to specify currency style of format which uses currency
      * ISO code to represent currency, for example: "USD3.00".
      * @stable ICU 4.2
      */
     public static final int ISOCURRENCYSTYLE = 5;
     /**
-     * {@icu} Constant to specify currency style of format which uses currency
+     * {{@literal @}icu} Constant to specify currency style of format which uses currency
      * long name with plural format to represent currency, for example,
      * "3.00 US Dollars".
      * @stable ICU 4.2
      */
     public static final int PLURALCURRENCYSTYLE = 6;
     /**
-     * {@icu} Constant to specify currency style of format which uses currency symbol
+     * {{@literal @}icu} Constant to specify currency style of format which uses currency symbol
      * to represent currency for accounting, for example: "($3.00), instead of
      * "-$3.00" ({@link #CURRENCYSTYLE}).
      * @stable ICU 53
      */
     public static final int ACCOUNTINGCURRENCYSTYLE = 7;
     /**
-     * {@icu} Constant to specify currency cash style of format which uses currency
+     * {{@literal @}icu} Constant to specify currency cash style of format which uses currency
      * ISO code to represent currency, for example: "NT$3" instead of "NT$3.23".
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release. 
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release. 
      */
     public static final int CASHCURRENCYSTYLE = 8;
     /**
@@ -243,7 +244,7 @@ public abstract class NumberFormat extends UFormat {
     
     /**
      * Formats a number and appends the resulting text to the given string buffer.
-     * {@icunote} recognizes <code>BigInteger</code>
+     * {{@literal @}icunote} recognizes <code>BigInteger</code>
      * and <code>BigDecimal</code> objects.
      * @see java.text.Format#format(Object, StringBuffer, FieldPosition)
      * @stable ICU 2.0
@@ -306,7 +307,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Convenience method to format a BigInteger.
+     * {{@literal @}icu} Convenience method to format a BigInteger.
      * @stable ICU 2.0
      */
     public final String format(BigInteger number) {
@@ -324,7 +325,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Convenience method to format an ICU BigDecimal.
+     * {{@literal @}icu} Convenience method to format an ICU BigDecimal.
      * @stable ICU 2.0
      */
     public final String format(android.icu.math.BigDecimal number) {
@@ -333,7 +334,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Convenience method to format a CurrencyAmount.
+     * {{@literal @}icu} Convenience method to format a CurrencyAmount.
      * @stable ICU 3.0
      */
     public final String format(CurrencyAmount currAmt) {
@@ -359,7 +360,7 @@ public abstract class NumberFormat extends UFormat {
                                         StringBuffer toAppendTo,
                                         FieldPosition pos);
     /**
-     * {@icu} Formats a BigInteger. Specialization of format.
+     * {{@literal @}icu} Formats a BigInteger. Specialization of format.
      * @see java.text.Format#format(Object, StringBuffer, FieldPosition)
      * @stable ICU 2.0
      */
@@ -367,7 +368,7 @@ public abstract class NumberFormat extends UFormat {
                                         StringBuffer toAppendTo,
                                         FieldPosition pos);
     /**
-     * {@icu} Formats a BigDecimal. Specialization of format.
+     * {{@literal @}icu} Formats a BigDecimal. Specialization of format.
      * @see java.text.Format#format(Object, StringBuffer, FieldPosition)
      * @stable ICU 2.0
      */
@@ -375,7 +376,7 @@ public abstract class NumberFormat extends UFormat {
                                         StringBuffer toAppendTo,
                                         FieldPosition pos);
     /**
-     * {@icu} Formats an ICU BigDecimal. Specialization of format.
+     * {{@literal @}icu} Formats an ICU BigDecimal. Specialization of format.
      * @see java.text.Format#format(Object, StringBuffer, FieldPosition)
      * @stable ICU 2.0
      */
@@ -383,7 +384,7 @@ public abstract class NumberFormat extends UFormat {
                                         StringBuffer toAppendTo,
                                         FieldPosition pos);
     /**
-     * {@icu} Formats a CurrencyAmount. Specialization of format.
+     * {{@literal @}icu} Formats a CurrencyAmount. Specialization of format.
      * @see java.text.Format#format(Object, StringBuffer, FieldPosition)
      * @stable ICU 3.0
      */
@@ -485,7 +486,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Sets whether strict parsing is in effect.  When this is true, the
+     * {{@literal @}icu} Sets whether strict parsing is in effect.  When this is true, the
      * following conditions cause a parse failure (examples use the pattern "#,##0.#"):<ul>
      * <li>Leading or doubled grouping separators<br>
      * ',123' and '1,,234" fail</li>
@@ -506,7 +507,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Returns whether strict parsing is in effect.
+     * {{@literal @}icu} Returns whether strict parsing is in effect.
      * @return true if strict parsing is in effect
      * @see #setParseStrict
      * @stable ICU 3.6
@@ -516,7 +517,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Set a particular DisplayContext value in the formatter,
+     * {{@literal @}icu} Set a particular DisplayContext value in the formatter,
      * such as CAPITALIZATION_FOR_STANDALONE. 
      * 
      * @param context The DisplayContext value to set. 
@@ -529,7 +530,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Get the formatter's DisplayContext value for the specified DisplayContext.Type,
+     * {{@literal @}icu} Get the formatter's DisplayContext value for the specified DisplayContext.Type,
      * such as CAPITALIZATION.
      * 
      * @param type the DisplayContext.Type whose value to return
@@ -569,7 +570,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Returns the default number format for the specified locale.
+     * {{@literal @}icu} Returns the default number format for the specified locale.
      * The default format is one of the styles provided by the other
      * factory methods: getNumberInstance, getCurrencyInstance or getPercentInstance.
      * Exactly which one is locale-dependent.
@@ -580,7 +581,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Returns a specific style number format for default <code>FORMAT</code> locale.
+     * {{@literal @}icu} Returns a specific style number format for default <code>FORMAT</code> locale.
      * @param style  number format style
      * @see Category#FORMAT
      * @stable ICU 4.2
@@ -590,7 +591,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Returns a specific style number format for a specific locale.
+     * {{@literal @}icu} Returns a specific style number format for a specific locale.
      * @param inLocale  the specific locale.
      * @param style     number format style
      * @stable ICU 4.2
@@ -618,7 +619,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Returns a general-purpose number format for the specified locale.
+     * {{@literal @}icu} Returns a general-purpose number format for the specified locale.
      * @stable ICU 3.2
      */
     public static NumberFormat getNumberInstance(ULocale inLocale) {
@@ -660,7 +661,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Returns an integer number format for the specified locale. The
+     * {{@literal @}icu} Returns an integer number format for the specified locale. The
      * returned number format is configured to round floating point numbers
      * to the nearest integer using IEEE half-even rounding (see {@link
      * android.icu.math.BigDecimal#ROUND_HALF_EVEN ROUND_HALF_EVEN}) for formatting,
@@ -695,7 +696,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Returns a currency format for the specified locale.
+     * {{@literal @}icu} Returns a currency format for the specified locale.
      * @return a number format for currency
      * @stable ICU 3.2
      */
@@ -723,7 +724,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Returns a percentage format for the specified locale.
+     * {{@literal @}icu} Returns a percentage format for the specified locale.
      * @return a number format for percents
      * @stable ICU 3.2
      */
@@ -732,7 +733,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Returns a scientific format for the current default <code>FORMAT</code> locale.
+     * {{@literal @}icu} Returns a scientific format for the current default <code>FORMAT</code> locale.
      * @return a scientific number format
      * @see Category#FORMAT
      * @stable ICU 2.0
@@ -742,7 +743,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Returns a scientific format for the specified locale.
+     * {{@literal @}icu} Returns a scientific format for the specified locale.
      * @return a scientific number format
      * @stable ICU 2.0
      */
@@ -751,7 +752,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Returns a scientific format for the specified locale.
+     * {{@literal @}icu} Returns a scientific format for the specified locale.
      * @return a scientific number format
      * @stable ICU 3.2
      */
@@ -973,10 +974,10 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Returns the list of Locales for which NumberFormats are available.
+     * {{@literal @}icu} Returns the list of Locales for which NumberFormats are available.
      * @return the available locales
-     * @draft ICU 3.2 (retain)
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 3.2 (retain)
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static ULocale[] getAvailableULocales() {
         if (shim == null) {
@@ -986,7 +987,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Registers a new NumberFormatFactory.  The factory is adopted by
+     * {{@literal @}icu} Registers a new NumberFormatFactory.  The factory is adopted by
      * the service and must not be modified.  The returned object is a
      * key that can be used to unregister this factory.
      * 
@@ -1006,7 +1007,7 @@ public abstract class NumberFormat extends UFormat {
     }
 
     /**
-     * {@icu} Unregisters the factory or instance associated with this key (obtained from
+     * {{@literal @}icu} Unregisters the factory or instance associated with this key (obtained from
      * registerInstance or registerFactory).
      * @param registryKey a key obtained from registerFactory
      * @return true if the object was successfully unregistered
@@ -1253,7 +1254,7 @@ public abstract class NumberFormat extends UFormat {
      * should override this method as needed.  Unlike getCurrency(),
      * this method should never return null.
      * @return a non-null Currency
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated

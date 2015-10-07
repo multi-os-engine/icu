@@ -52,6 +52,7 @@ import android.icu.util.ULocale.Category;
  * implementation, and adds features not present in the JDK.
  * @author Alan Liu
  * @stable ICU 2.2
+ * @hide All android.icu classes are currently hidden
  */
 public class Currency extends MeasureUnit {
     private static final long serialVersionUID = -5839973855554750484L;
@@ -92,23 +93,23 @@ public class Currency extends MeasureUnit {
 
     /**
      * Currency Usage used for Decimal Format
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release. 
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release. 
      */
     public enum CurrencyUsage{
         /**
          * a setting to specify currency usage which determines currency digit and rounding
          * for standard usage, for example: "50.00 NT$"
-         * @draft ICU 54
-         * @provisional This API might change or be removed in a future release.
+         * {@literal @}draft ICU 54
+         * {@literal @}provisional This API might change or be removed in a future release.
          */
         STANDARD,
         
         /**
          * a setting to specify currency usage which determines currency digit and rounding
          * for cash usage, for example: "50 NT$"
-         * @draft ICU 54
-         * @provisional This API might change or be removed in a future release.
+         * {@literal @}draft ICU 54
+         * {@literal @}provisional This API might change or be removed in a future release.
          */
         CASH
     }
@@ -203,8 +204,8 @@ public class Currency extends MeasureUnit {
      * @param loc the JDK locale for which to retrieve currency codes.
      * @param d the date for which to retrieve currency codes for the given locale.
      * @return The array of ISO currency codes.
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static String[] getAvailableCurrencyCodes(Locale loc, Date d) {
         return getAvailableCurrencyCodes(ULocale.forLocale(loc), d);
@@ -652,7 +653,7 @@ public class Currency extends MeasureUnit {
      * @return the ISO 4217 code, as a string, of the best match, or
      * null if there is no match
      *
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -783,8 +784,8 @@ public class Currency extends MeasureUnit {
      * @param Usage the usage of currency(Standard or Cash)
      * @return a non-negative number of fraction digits to be
      * displayed
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release. 
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release. 
      */
     public int getDefaultFractionDigits(CurrencyUsage Usage) {
         CurrencyMetaInfo info = CurrencyMetaInfo.getInstance();
@@ -808,8 +809,8 @@ public class Currency extends MeasureUnit {
      * rounding is done by this currency with the Usage.
      * @param Usage the usage of currency(Standard or Cash)
      * @return the non-negative rounding increment, or 0.0 if none
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release. 
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release. 
      */
     public double getRoundingIncrement(CurrencyUsage Usage) {
         CurrencyMetaInfo info = CurrencyMetaInfo.getInstance();

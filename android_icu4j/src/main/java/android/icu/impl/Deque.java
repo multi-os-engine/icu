@@ -17,6 +17,7 @@ import java.util.NoSuchElementException;
  * Thin wrapper of java.util.LinkedList implementing Java 6 Deque on
  * Java 5 runtime environment. This class might be removed when the minimum
  * Java runtime version is updated to 6 or later.
+ * @hide All android.icu classes are currently hidden
  */
 public class Deque<E> {
     private LinkedList<E> ll = new LinkedList<E>();

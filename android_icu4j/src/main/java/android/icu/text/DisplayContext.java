@@ -11,6 +11,7 @@ package android.icu.text;
  * Display context settings.
  * Note, the specific numeric values are internal and may change.
  * @stable ICU 51
+ * @hide All android.icu classes are currently hidden
  */
 public enum DisplayContext {
     /**
@@ -78,16 +79,16 @@ public enum DisplayContext {
      * A possible setting for DISPLAY_LENGTH:
      * use full names when generating a locale name,
      * e.g. "United States" for US.
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     LENGTH_FULL(Type.DISPLAY_LENGTH, 0),
     /**
      * A possible setting for DISPLAY_LENGTH:
      * use short names when generating a locale name,
      * e.g. "U.S." for US.
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     LENGTH_SHORT(Type.DISPLAY_LENGTH, 1);
 
@@ -109,8 +110,8 @@ public enum DisplayContext {
         CAPITALIZATION,
         /**
          * DISPLAY_LENGTH can be set to LENGTH_FULL or LENGTH_SHORT.
-         * @draft ICU 54
-         * @provisional This API might change or be removed in a future release.
+         * {@literal @}draft ICU 54
+         * {@literal @}provisional This API might change or be removed in a future release.
          */
         DISPLAY_LENGTH
     }

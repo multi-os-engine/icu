@@ -9,6 +9,7 @@ package android.icu.impl;
 
 import java.util.Comparator;
 
+/** @hide All android.icu classes are currently hidden */
 public class MultiComparator<T> implements Comparator<T> {
     private Comparator<T>[] comparators;
 

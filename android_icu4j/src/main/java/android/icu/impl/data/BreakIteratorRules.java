@@ -15,6 +15,7 @@ import java.util.ListResourceBundle;
  *  for each of the standard (built-in) boundary types.
  *
  *  Locales (Thai) needing a dictionary based iterator override this.
+ * @hide All android.icu classes are currently hidden
  */
 
 public class BreakIteratorRules extends ListResourceBundle {

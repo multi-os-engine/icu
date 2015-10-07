@@ -79,6 +79,7 @@ import android.icu.impl.UCharacterProperty;
  * 
  * @author Mark Davis, with help from Markus Scherer
  * @stable ICU 2.1
+ * @hide All android.icu classes are currently hidden
  */
 
 public final class UTF16 {
@@ -2618,8 +2619,8 @@ public final class UTF16 {
      * @return the code point IF the string is non-null and consists of a single code point.
      * otherwise returns -1.
      * @param s to test
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static int getSingleCodePoint(CharSequence s) {
         if (s == null || s.length() == 0) {
@@ -2653,8 +2654,8 @@ public final class UTF16 {
      * @param codePoint to test
      * @param s to test
      * @return equivalent of code point comparator comparing two strings.
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static int compareCodePoint(int codePoint, CharSequence s) {
         if (s == null) {
