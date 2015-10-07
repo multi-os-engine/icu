@@ -27,6 +27,7 @@ import android.icu.util.Currency.CurrencyUsage;
  * This class is not intended for public subclassing.
  * 
  * @stable ICU 4.4
+ * @hide All android.icu classes are currently hidden
  */
 public class CurrencyMetaInfo {
     private static final CurrencyMetaInfo impl;
@@ -55,7 +56,7 @@ public class CurrencyMetaInfo {
     /**
      * Returns true if there is data for the currency meta info.
      * @return true if there is actual data
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -65,7 +66,7 @@ public class CurrencyMetaInfo {
 
     /**
      * Subclass constructor.
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -103,7 +104,7 @@ public class CurrencyMetaInfo {
         
         /**
          * true if we are filtering only for currencies used as legal tender.
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @Deprecated
@@ -459,7 +460,7 @@ public class CurrencyMetaInfo {
         /**
          * Constructs a currency info.
          * 
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @Deprecated
@@ -548,15 +549,15 @@ public class CurrencyMetaInfo {
      * @param isoCode the currency code
      * @param currencyUsage the currency usage
      * @return the CurrencyDigits
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release. 
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release. 
      */
     public CurrencyDigits currencyDigits(String isoCode, CurrencyUsage currencyUsage) {
         return defaultDigits;
     }
 
     /**
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated

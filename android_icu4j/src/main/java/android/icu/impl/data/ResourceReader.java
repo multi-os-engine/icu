@@ -29,6 +29,7 @@ import android.icu.impl.PatternProps;
  * object the encoding is specified.
  *
  * @author Alan Liu
+ * @hide All android.icu classes are currently hidden
  */
 public class ResourceReader implements Closeable {
     private BufferedReader reader = null;

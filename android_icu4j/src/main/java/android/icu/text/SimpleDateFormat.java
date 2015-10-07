@@ -43,7 +43,7 @@ import android.icu.util.ULocale.Category;
 
 
 /**
- * {@icuenhanced java.text.SimpleDateFormat}.{@icu _usage_}
+ * {{@literal @}icuenhanced java.text.SimpleDateFormat}.{{@literal @}icu _usage_}
  *
  * <p><code>SimpleDateFormat</code> is a concrete class for formatting and
  * parsing dates in a locale-sensitive manner. It allows for formatting
@@ -712,6 +712,7 @@ import android.icu.util.ULocale.Category;
  * @see          TimeZoneFormat
  * @author       Mark Davis, Chen-Lieh Huang, Alan Liu
  * @stable ICU 2.0
+ * @hide All android.icu classes are currently hidden
  */
 public class SimpleDateFormat extends DateFormat {
 
@@ -1027,7 +1028,7 @@ public class SimpleDateFormat extends DateFormat {
     }
 
     /**
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -1066,7 +1067,7 @@ public class SimpleDateFormat extends DateFormat {
      * Creates an instance of SimpleDateFormat for the given format configuration
      * @param formatConfig the format configuration
      * @return A SimpleDateFormat instance
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -1255,7 +1256,7 @@ public class SimpleDateFormat extends DateFormat {
     }
 
     /**
-     * {@icu} Set a particular DisplayContext value in the formatter,
+     * {{@literal @}icu} Set a particular DisplayContext value in the formatter,
      * such as CAPITALIZATION_FOR_STANDALONE. Note: For getContext, see 
      * DateFormat.
      * 
@@ -1486,7 +1487,7 @@ public class SimpleDateFormat extends DateFormat {
      * Formats a single field. This is the version called internally; it
      * adds fieldNum and capitalizationContext parameters.
      *
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -1509,7 +1510,7 @@ public class SimpleDateFormat extends DateFormat {
      * the need to support the slow subFormat variant (above) which
      * has to pass it in to us.
      *
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -2031,7 +2032,7 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * Internal high-speed method.  Reuses a StringBuffer for results
      * instead of creating a String on the heap for each call.
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -2647,7 +2648,7 @@ public class SimpleDateFormat extends DateFormat {
      * number indicating matching failure, otherwise.  As a side effect,
      * sets the <code>cal</code> field <code>field</code> to the index
      * of the best match, if matching succeeded.
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -2815,7 +2816,7 @@ public class SimpleDateFormat extends DateFormat {
      * number indicating matching failure, otherwise.  As a side effect,
      * set the appropriate field of <code>cal</code> with the parsed
      * value.
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -3556,7 +3557,7 @@ public class SimpleDateFormat extends DateFormat {
     }
 
     /**
-     * {@icu} Gets the time zone formatter which this date/time
+     * {{@literal @}icu} Gets the time zone formatter which this date/time
      * formatter uses to format and parse a time zone.
      * 
      * @return the time zone formatter which this date/time
@@ -3568,7 +3569,7 @@ public class SimpleDateFormat extends DateFormat {
     }
 
     /**
-     * {@icu} Allows you to set the time zone formatter.
+     * {{@literal @}icu} Allows you to set the time zone formatter.
      * 
      * @param tzfmt the new time zone formatter
      * @stable ICU 49
@@ -3806,7 +3807,7 @@ public class SimpleDateFormat extends DateFormat {
      * @exception IllegalArgumentException when there is non-recognized
      *                                     pattern letter
      * @return                  Reference to 'appendTo' parameter.
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -4043,8 +4044,8 @@ public class SimpleDateFormat extends DateFormat {
      * @param fields the fields to override
      * @param overrideNF the NumbeferFormat used 
      * @exception IllegalArgumentException when the fields contain invalid field
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public void setNumberFormat(String fields, NumberFormat overrideNF) {
         overrideNF.setGroupingUsed(false);
@@ -4078,8 +4079,8 @@ public class SimpleDateFormat extends DateFormat {
      *
      * @param field the field the user wants
      * @return override NumberFormat used for the field
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public NumberFormat getNumberFormat(char field) {
         Character ovrField;

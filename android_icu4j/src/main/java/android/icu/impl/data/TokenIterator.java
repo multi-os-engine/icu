@@ -23,6 +23,7 @@ import android.icu.text.UTF16;
  * in the source test.  Furthermore, they may be delimited by
  * either single or double quotes (opening and closing quotes must
  * match).  Escapes are processed using standard ICU unescaping.
+ * @hide All android.icu classes are currently hidden
  */
 public class TokenIterator {
 

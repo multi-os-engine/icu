@@ -144,6 +144,7 @@ import android.icu.util.ULocale;
  *     are normally used with text from many different scripts. </blockquote>
  *
  * @stable ICU 4.6
+ * @hide All android.icu classes are currently hidden
  */
 public class SpoofChecker {
 
@@ -197,7 +198,7 @@ public class SpoofChecker {
     /**
      * Security Profile constant from UAX 31 for use in setAllowedChars.
      * Will probably be replaced by UnicodeSet property.
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -209,7 +210,7 @@ public class SpoofChecker {
     /**
      * Security Profile constant from UAX 31 for use in setAllowedChars.
      * Will probably be replaced by UnicodeSet property.
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -334,7 +335,7 @@ public class SpoofChecker {
      * Check that an identifier is no looser than the specified RestrictionLevel.
      * The default if this is not called is HIGHLY_RESTRICTIVE.
      *
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -369,7 +370,7 @@ public class SpoofChecker {
     /**
      * Check that an identifier does not mix numbers.
      *
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -585,8 +586,8 @@ public class SpoofChecker {
          *            is null, no restrictions will be placed on the allowed characters.
          *
          * @return self
-         * @draft ICU 54
-         * @provisional This API might change or be removed in a future release.
+         * {@literal @}draft ICU 54
+         * {@literal @}provisional This API might change or be removed in a future release.
          */
         public Builder setAllowedJavaLocales(Set<Locale> locales) {
             HashSet<ULocale> ulocales = new HashSet<ULocale>(locales.size());
@@ -636,7 +637,7 @@ public class SpoofChecker {
          * This method also sets RESTRICTION_LEVEL.
          * @param restrictionLevel The loosest restriction level allowed.
          * @return self
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @Deprecated
@@ -1438,7 +1439,7 @@ public class SpoofChecker {
      * Get the Restriction Level that is being tested.
      *
      * @return The restriction level
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -1478,8 +1479,8 @@ public class SpoofChecker {
      * have been specified, an empty set will be returned.
      *
      * @return A set of locales corresponding to the acceptable scripts.
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public Set<Locale> getAllowedJavaLocales() {
         HashSet<Locale> locales = new HashSet<Locale>(fAllowedLocales.size());
@@ -1528,7 +1529,7 @@ public class SpoofChecker {
         /**
          * The numerics found in the string, if MIXED_NUMBERS was set; otherwise null;
          *
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @Deprecated
@@ -1536,7 +1537,7 @@ public class SpoofChecker {
         /**
          * The restriction level that the text meets, if RESTRICTION_LEVEL is set; otherwise null.
          *
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @Deprecated
@@ -1866,7 +1867,7 @@ public class SpoofChecker {
      *
      *   @param other the SpoofChecker being compared with.
      *   @return true if the two SpoofCheckers are equal.
-     *   @internal
+     *   {@literal @}internal
      *   @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -1898,7 +1899,7 @@ public class SpoofChecker {
 
     /**
      * This is a stub implementation and not designed for generic use.
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated

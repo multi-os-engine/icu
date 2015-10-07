@@ -44,6 +44,7 @@ import android.icu.impl.Utility;
  * 
  * @author markdavis@google.com
  * @stable ICU 4.4
+ * @hide All android.icu classes are currently hidden
  */
 public class LocaleMatcher {
     
@@ -96,7 +97,7 @@ public class LocaleMatcher {
      * Internal testing function; may expose API later.
      * @param languagePriorityList LocalePriorityList to match
      * @param matcherData Internal matching data
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -108,7 +109,7 @@ public class LocaleMatcher {
      * Internal testing function; may expose API later.
      * @param languagePriorityList LocalePriorityList to match
      * @param matcherData Internal matching data
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -213,7 +214,7 @@ public class LocaleMatcher {
     }
 
     /**
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -571,7 +572,7 @@ public class LocaleMatcher {
 
     /**
      * Only for testing and use by tools. Interface may change!!
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -581,7 +582,7 @@ public class LocaleMatcher {
         ScoreData regionScores = new ScoreData(Level.region);
 
         /**
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @Deprecated
@@ -589,7 +590,7 @@ public class LocaleMatcher {
         }
 
         /**
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @Deprecated
@@ -598,7 +599,7 @@ public class LocaleMatcher {
         }
 
         /**
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @Deprecated
@@ -629,7 +630,7 @@ public class LocaleMatcher {
          * symmetric. We don't bother producing an equivalence class because there are
          * so few cases; this function depends on the other permutations being
          * added specifically.
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @SuppressWarnings("unused")
@@ -638,7 +639,7 @@ public class LocaleMatcher {
             return addDistance(desired, supported, percent, false, null);
         }
         /**
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @Deprecated
@@ -646,7 +647,7 @@ public class LocaleMatcher {
             return addDistance(desired, supported, percent, false, comment);
         }
         /**
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @Deprecated
@@ -714,7 +715,7 @@ public class LocaleMatcher {
 
         /** 
          * {@inheritDoc}
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @Deprecated
@@ -736,7 +737,7 @@ public class LocaleMatcher {
 
         /** 
          * {@inheritDoc}
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @Deprecated
@@ -746,7 +747,7 @@ public class LocaleMatcher {
 
         /** 
          * {@inheritDoc}
-         * @internal
+         * {@literal @}internal
          * @deprecated This API is ICU internal only.
          */
         @Deprecated
@@ -887,7 +888,7 @@ public class LocaleMatcher {
     }
     
     /**
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated
@@ -900,7 +901,7 @@ public class LocaleMatcher {
     }
 
     /**
-     * @internal
+     * {@literal @}internal
      * @deprecated This API is ICU internal only.
      */
     @Deprecated

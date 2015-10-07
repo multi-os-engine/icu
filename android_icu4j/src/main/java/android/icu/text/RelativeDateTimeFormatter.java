@@ -63,35 +63,36 @@ import android.icu.util.UResourceBundle;
  * (3 secs ago), and relative day periods ("yesterday afternoon"), etc.
  * 
  * @stable ICU 53
+ * @hide All android.icu classes are currently hidden
  */
 public final class RelativeDateTimeFormatter {
     
     /**
      * The formatting style
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      *
      */
     public static enum Style {
         
         /**
          * Everything spelled out.
-         * @draft ICU 54
-         * @provisional This API might change or be removed in a future release.
+         * {@literal @}draft ICU 54
+         * {@literal @}provisional This API might change or be removed in a future release.
          */
         LONG,
         
         /**
          * Abbreviations used when possible.
-         * @draft ICU 54
-         * @provisional This API might change or be removed in a future release.
+         * {@literal @}draft ICU 54
+         * {@literal @}provisional This API might change or be removed in a future release.
          */
         SHORT,
         
         /**
          * Use single letters when possible.
-         * @draft ICU 54
-         * @provisional This API might change or be removed in a future release.
+         * {@literal @}draft ICU 54
+         * {@literal @}provisional This API might change or be removed in a future release.
          */
         NARROW,
     }
@@ -293,8 +294,8 @@ public final class RelativeDateTimeFormatter {
      * 
      * @param locale the JDK locale.
      * @return An instance of RelativeDateTimeFormatter.
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static RelativeDateTimeFormatter getInstance(Locale locale) {
         return getInstance(ULocale.forLocale(locale));
@@ -323,8 +324,8 @@ public final class RelativeDateTimeFormatter {
      * and immutability of this class. May be null.
      * @param style the style.
      * @param capitalizationContext the capitalization context.
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static RelativeDateTimeFormatter getInstance(
             ULocale locale,
@@ -359,8 +360,8 @@ public final class RelativeDateTimeFormatter {
      * @param nf the number format object. It is defensively copied to ensure thread-safety
      * and immutability of this class. 
      * @return An instance of RelativeDateTimeFormatter.
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static RelativeDateTimeFormatter getInstance(Locale locale, NumberFormat nf) {
         return getInstance(ULocale.forLocale(locale), nf);
@@ -445,8 +446,8 @@ public final class RelativeDateTimeFormatter {
     /**
      * Return capitalization context.
      *
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public DisplayContext getCapitalizationContext() {
         return capitalizationContext;
@@ -455,8 +456,8 @@ public final class RelativeDateTimeFormatter {
     /**
      * Return style
      *
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public Style getFormatStyle() {
         return style;

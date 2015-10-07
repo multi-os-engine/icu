@@ -62,6 +62,7 @@ import android.icu.util.ULocale;
  * @see SimpleDateFormat
  * @see TimeZoneNames
  * @stable ICU 49
+ * @hide All android.icu classes are currently hidden
  */
 public class TimeZoneFormat extends UFormat implements Freezable<TimeZoneFormat>, Serializable {
 
@@ -317,8 +318,8 @@ public class TimeZoneFormat extends UFormat implements Freezable<TimeZoneFormat>
          * look for the IANA tz database compatible zone abbreviations in addition
          * to the localized names coming from the {@link TimeZoneNames} currently
          * used by the {@link TimeZoneFormat}. 
-         * @draft ICU 54
-         * @provisional This API might change or be removed in a future release.
+         * {@literal @}draft ICU 54
+         * {@literal @}provisional This API might change or be removed in a future release.
          */
         TZ_DATABASE_ABBREVIATIONS;
     }
@@ -499,8 +500,8 @@ public class TimeZoneFormat extends UFormat implements Freezable<TimeZoneFormat>
      * 
      * @param locale the JDK locale.
      * @return a frozen instance of <code>TimeZoneFormat</code> for the given locale.
-     * @draft ICU 54
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public static TimeZoneFormat getInstance(Locale locale) {
         return getInstance(ULocale.forLocale(locale));

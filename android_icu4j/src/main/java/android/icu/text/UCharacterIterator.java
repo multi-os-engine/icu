@@ -30,6 +30,7 @@ import android.icu.impl.UCharacterProperty;
  * code units and is limited to BMP (0 - 0xFFFF)
  * @author Ram
  * @stable ICU 2.4
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class UCharacterIterator 
                       implements Cloneable,UForwardCharacterIterator {

@@ -39,8 +39,9 @@ import android.icu.util.OutputInt;
  * </table>
  * </p>The entire string is traversed.
  * 
- * @draft ICU 54
- * @provisional This is a draft API and might change in a future release of ICU.
+ * {@literal @}draft ICU 54
+ * {@literal @}provisional This is a draft API and might change in a future release of ICU.
+ * @hide All android.icu classes are currently hidden
  */
 public class UnicodeSetSpanner {
 
@@ -53,8 +54,8 @@ public class UnicodeSetSpanner {
      * @param source
      *            the original UnicodeSet
      *
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public UnicodeSetSpanner(UnicodeSet source) {
         unicodeSet = source;
@@ -65,8 +66,8 @@ public class UnicodeSetSpanner {
      * 
      * @return the construction set.
      *
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public UnicodeSet getUnicodeSet() {
         return unicodeSet;
@@ -76,8 +77,8 @@ public class UnicodeSetSpanner {
     /**
      * {@inheritDoc}
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     @Override
     public boolean equals(Object other) {
@@ -87,8 +88,8 @@ public class UnicodeSetSpanner {
     /**
      * {@inheritDoc}
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     @Override
     public int hashCode() {
@@ -99,16 +100,16 @@ public class UnicodeSetSpanner {
      * Options for replaceFrom and countIn to control how to treat each matched span. 
      * It is similar to whether one is replacing [abc] by x, or [abc]* by x.
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public enum CountMethod {
         /**
          * Collapse spans. That is, modify/count the entire matching span as a single item, instead of separate
          * set elements.
          *
-         * @draft ICU 54
-         * @provisional This is a draft API and might change in a future release of ICU.
+         * {@literal @}draft ICU 54
+         * {@literal @}provisional This is a draft API and might change in a future release of ICU.
          */
         WHOLE_SPAN,
         /**
@@ -122,8 +123,8 @@ public class UnicodeSetSpanner {
          * <li>spanning with [ab{ab}] will also count two MIN_ELEMENTS.</li>
          * </ul>
          *
-         * @draft ICU 54
-         * @provisional This is a draft API and might change in a future release of ICU.
+         * {@literal @}draft ICU 54
+         * {@literal @}provisional This is a draft API and might change in a future release of ICU.
          */
         MIN_ELEMENTS,
         // Note: could in the future have an additional option MAX_ELEMENTS
@@ -137,8 +138,8 @@ public class UnicodeSetSpanner {
      *            the sequence to count characters in
      * @return the count. Zero if there are none.
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public int countIn(CharSequence sequence) {
         return countIn(sequence, CountMethod.MIN_ELEMENTS, SpanCondition.SIMPLE);
@@ -153,8 +154,8 @@ public class UnicodeSetSpanner {
      *            whether to treat an entire span as a match, or individual elements as matches
      * @return the count. Zero if there are none.
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public int countIn(CharSequence sequence, CountMethod countMethod) {
         return countIn(sequence, countMethod, SpanCondition.SIMPLE);
@@ -173,8 +174,8 @@ public class UnicodeSetSpanner {
      *            <br><b>WARNING: </b> when a UnicodeSet contains strings, there may be unexpected behavior in edge cases.
      * @return the count. Zero if there are none.
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public int countIn(CharSequence sequence, CountMethod countMethod, SpanCondition spanCondition) {
         int count = 0;
@@ -209,8 +210,8 @@ public class UnicodeSetSpanner {
      *            charsequence to replace matching spans in.
      * @return modified string.
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public String deleteFrom(CharSequence sequence) {
         return replaceFrom(sequence, "", CountMethod.WHOLE_SPAN, SpanCondition.SIMPLE);
@@ -225,8 +226,8 @@ public class UnicodeSetSpanner {
      *            specify whether to modify the matching spans (CONTAINED or SIMPLE) or the non-matching (NOT_CONTAINED)
      * @return modified string.
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public String deleteFrom(CharSequence sequence, SpanCondition spanCondition) {
         return replaceFrom(sequence, "", CountMethod.WHOLE_SPAN, spanCondition);
@@ -242,8 +243,8 @@ public class UnicodeSetSpanner {
      *            replacement sequence. To delete, use ""
      * @return modified string.
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public String replaceFrom(CharSequence sequence, CharSequence replacement) {
         return replaceFrom(sequence, replacement, CountMethod.MIN_ELEMENTS, SpanCondition.SIMPLE);
@@ -261,8 +262,8 @@ public class UnicodeSetSpanner {
      *            whether to treat an entire span as a match, or individual elements as matches
      * @return modified string.
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public String replaceFrom(CharSequence sequence, CharSequence replacement, CountMethod countMethod) {
         return replaceFrom(sequence, replacement, countMethod, SpanCondition.SIMPLE);
@@ -282,8 +283,8 @@ public class UnicodeSetSpanner {
      *            (NOT_CONTAINED)
      * @return modified string.
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public String replaceFrom(CharSequence sequence, CharSequence replacement, CountMethod countMethod,
             SpanCondition spanCondition) {
@@ -327,29 +328,29 @@ public class UnicodeSetSpanner {
     /**
      * Options for the trim() method
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public enum TrimOption {
         /**
          * Trim leading spans.
          * 
-         * @draft ICU 54
-         * @provisional This is a draft API and might change in a future release of ICU.
+         * {@literal @}draft ICU 54
+         * {@literal @}provisional This is a draft API and might change in a future release of ICU.
          */
         LEADING,
         /**
          * Trim leading and trailing spans.
          * 
-         * @draft ICU 54
-         * @provisional This is a draft API and might change in a future release of ICU.
+         * {@literal @}draft ICU 54
+         * {@literal @}provisional This is a draft API and might change in a future release of ICU.
          */
         BOTH,
         /**
          * Trim trailing spans.
          * 
-         * @draft ICU 54
-         * @provisional This is a draft API and might change in a future release of ICU.
+         * {@literal @}draft ICU 54
+         * {@literal @}provisional This is a draft API and might change in a future release of ICU.
          */
         TRAILING;
     }
@@ -369,8 +370,8 @@ public class UnicodeSetSpanner {
      *            the sequence to trim
      * @return a subsequence
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public CharSequence trim(CharSequence sequence) {
         return trim(sequence, TrimOption.BOTH, SpanCondition.SIMPLE);
@@ -394,8 +395,8 @@ public class UnicodeSetSpanner {
      *            LEADING, TRAILING, or BOTH
      * @return a subsequence
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public CharSequence trim(CharSequence sequence, TrimOption trimOption) {
         return trim(sequence, trimOption, SpanCondition.SIMPLE);
@@ -421,8 +422,8 @@ public class UnicodeSetSpanner {
      *            SIMPLE, CONTAINED or NOT_CONTAINED
      * @return a subsequence
      * 
-     * @draft ICU 54
-     * @provisional This is a draft API and might change in a future release of ICU.
+     * {@literal @}draft ICU 54
+     * {@literal @}provisional This is a draft API and might change in a future release of ICU.
      */
     public CharSequence trim(CharSequence sequence, TrimOption trimOption, SpanCondition spanCondition) {
         int endLeadContained, startTrailContained;

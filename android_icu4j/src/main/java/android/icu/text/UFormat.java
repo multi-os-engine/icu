@@ -19,16 +19,17 @@ import android.icu.util.ULocale;
  * @see android.icu.util.ULocale
  * @author weiv
  * @author Alan Liu
- * @draft ICU 2.8 (retain)
- * @provisional This API might change or be removed in a future release.
+ * {@literal @}draft ICU 2.8 (retain)
+ * {@literal @}provisional This API might change or be removed in a future release.
+ * @hide All android.icu classes are currently hidden
  */
 public abstract class UFormat extends Format {
     // jdk1.4.2 serialver
     private static final long serialVersionUID = -4964390515840164416L;
 
     /**
-     * @draft ICU 2.8 (retain)
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 2.8 (retain)
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public UFormat() {}
 
@@ -55,8 +56,8 @@ public abstract class UFormat extends Format {
      * @see android.icu.util.ULocale
      * @see android.icu.util.ULocale#VALID_LOCALE
      * @see android.icu.util.ULocale#ACTUAL_LOCALE
-     * @draft ICU 2.8 (retain)
-     * @provisional This API might change or be removed in a future release.
+     * {@literal @}draft ICU 2.8 (retain)
+     * {@literal @}provisional This API might change or be removed in a future release.
      */
     public final ULocale getLocale(ULocale.Type type) {
         return type == ULocale.ACTUAL_LOCALE ?
