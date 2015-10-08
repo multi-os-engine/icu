@@ -1,6 +1,6 @@
 /*
  *******************************************************************************
- * Copyright (C) 1996-2014, International Business Machines Corporation and    *
+ * Copyright (C) 1996-2015, International Business Machines Corporation and    *
  * others. All Rights Reserved.                                                *
  *******************************************************************************
  */
@@ -212,10 +212,10 @@ public class DecimalFormatSymbols implements Cloneable, Serializable {
     public void setZeroDigit(char zeroDigit) {
         if ( digits != null ) {
             this.digits[0] = zeroDigit;
-            if (Character.digit(zeroDigit,10) == 0) {
+            // Android patch (ticket #11903) begin.
                 for ( int i = 1 ; i < 10 ; i++ ) {
                     this.digits[i] = (char)(zeroDigit+i);
-                }
+            // Android patch (ticket #11903) end.
             }
         } else {
             this.zeroDigit = zeroDigit;
@@ -547,8 +547,7 @@ public class DecimalFormatSymbols implements Cloneable, Serializable {
     
     /**
     * Returns the multiplication sign
-    * @draft ICU 54
-    * @provisional This API might change or be removed in a future release.
+    * @stable ICU 54
     */
     public String getExponentMultiplicationSign() {
         return exponentMultiplicationSign;
@@ -556,8 +555,7 @@ public class DecimalFormatSymbols implements Cloneable, Serializable {
     
     /**
     * Sets the multiplication sign
-    * @draft ICU 54
-    * @provisional This API might change or be removed in a future release.
+    * @stable ICU 54
     */
     public void setExponentMultiplicationSign(String exponentMultiplicationSign) {
         this.exponentMultiplicationSign = exponentMultiplicationSign;
