@@ -1,0 +1,2 @@
+rule com.ibm.icu.** android.icu.@1
+
