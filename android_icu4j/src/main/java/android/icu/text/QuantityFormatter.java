@@ -1,14 +1,11 @@
 /* GENERATED SOURCE. DO NOT MODIFY. */
 /*
  *******************************************************************************
- * Copyright (C) 2013-2014, International Business Machines Corporation and    *
- * others. All Rights Reserved.                                                *
+ * Copyright (C) 2013-2015, International Business Machines Corporation and
+ * others. All Rights Reserved.
  *******************************************************************************
  */
 package android.icu.text;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import android.icu.impl.SimplePatternFormatter;
 
@@ -21,22 +18,39 @@ import android.icu.impl.SimplePatternFormatter;
  * PluralRules and DecimalFormat. It is package-protected as it is not meant for public use.
  */
 class QuantityFormatter {
-    
-    private static final Map<String, Integer> INDEX_MAP = new HashMap<String, Integer>();
-    private static final int MAX_INDEX;
-    
-    static {
-        int idx = 0;
-        // Other must be first.
-        INDEX_MAP.put("other", idx++);
-        INDEX_MAP.put("zero", idx++);
-        INDEX_MAP.put("one", idx++);
-        INDEX_MAP.put("two", idx++);
-        INDEX_MAP.put("few", idx++);
-        INDEX_MAP.put("many", idx++);
-        
-        MAX_INDEX = idx;
+    /**
+     * Plural forms in index order: "other", "zero", "one", "two", "few", "many"
+     * "other" must be first.
+     */
+    private static final int getPluralIndex(CharSequence pluralForm) {
+        switch (pluralForm.length()) {
+        case 3:
+            if ("one".contentEquals(pluralForm)) {
+                return 2;
+            } else if ("two".contentEquals(pluralForm)) {
+                return 3;
+            } else if ("few".contentEquals(pluralForm)) {
+                return 4;
+            }
+            break;
+        case 4:
+            if ("many".contentEquals(pluralForm)) {
+                return 5;
+            } else if ("zero".contentEquals(pluralForm)) {
+                return 1;
+            }
+            break;
+        case 5:
+            if ("other".contentEquals(pluralForm)) {
+                return 0;
+            }
+            break;
+        default:
+            break;
+        }
+        return -1;
     }
+    private static final int INDEX_COUNT = 6;
 
     /**
      * Builder builds a QuantityFormatter.
@@ -44,8 +58,11 @@ class QuantityFormatter {
      * @author rocketman
      */
     static class Builder {
-        
         private SimplePatternFormatter[] templates;
+
+        boolean hasPatterns() {
+            return templates != null;
+        }
 
         /**
          * Adds a template.
@@ -57,18 +74,19 @@ class QuantityFormatter {
          * @throws IllegalArgumentException if variant is not recognized or
          *  if template has more than just the {0} placeholder.
          */
-        public Builder add(String variant, String template) {
-            ensureCapacity();
-            Integer idx = INDEX_MAP.get(variant);
-            if (idx == null) {
-                throw new IllegalArgumentException(variant);
+        public Builder add(CharSequence variant, String template) {
+            int idx = getPluralIndex(variant);
+            if (idx < 0) {
+                throw new IllegalArgumentException(variant.toString());
             }
             SimplePatternFormatter newT = SimplePatternFormatter.compile(template);
             if (newT.getPlaceholderCount() > 1) {
                 throw new IllegalArgumentException(
                         "Extra placeholders: " + template);
             }
-            templates[idx.intValue()] = newT;
+            // Keep templates == null until we add one.
+            ensureCapacity();
+            templates[idx] = newT;
             return this;
         }
 
@@ -97,7 +115,7 @@ class QuantityFormatter {
         
         private void ensureCapacity() {
             if (templates == null) {
-                templates = new SimplePatternFormatter[MAX_INDEX];
+                templates = new SimplePatternFormatter[INDEX_COUNT];
             }
         }
 
@@ -128,9 +146,9 @@ class QuantityFormatter {
      * @param variant "zero", "one", "two", "few", "many", "other"
      * @return the SimplePatternFormatter
      */
-    public SimplePatternFormatter getByVariant(String variant) {
-        Integer idxObj = INDEX_MAP.get(variant);
-        SimplePatternFormatter template = templates[idxObj == null ? 0 : idxObj.intValue()];
+    public SimplePatternFormatter getByVariant(CharSequence variant) {
+        int idx = getPluralIndex(variant);
+        SimplePatternFormatter template = templates[idx < 0 ? 0 : idx];
         return template == null ? templates[0] : template;
     }
  
@@ -140,6 +158,4 @@ class QuantityFormatter {
         }
         return pluralRules.select(quantity);
     }
-
- 
 }
