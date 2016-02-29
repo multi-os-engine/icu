@@ -1,6 +1,6 @@
 /* GENERATED SOURCE. DO NOT MODIFY. */
 /*
- *   Copyright (C) 1996-2015, International Business Machines
+ *   Copyright (C) 1996-2016, International Business Machines
  *   Corporation and others.  All Rights Reserved.
  */
 
@@ -36,7 +36,7 @@ import android.icu.util.ULocale.Category;
  * <p>
  * DateFormat is an abstract class for date/time formatting subclasses which formats and parses dates or time in a
  * language-independent manner. The date/time formatting subclass, such as SimpleDateFormat, allows for formatting
- * (i.e., date -> text), parsing (text -> date), and normalization. The date is represented as a <code>Date</code>
+ * (i.e., date -&gt; text), parsing (text -&gt; date), and normalization. The date is represented as a <code>Date</code>
  * object or as the milliseconds since January 1, 1970, 00:00:00 GMT.
  * 
  * <p>
@@ -126,7 +126,7 @@ import android.icu.util.ULocale.Category;
  * <li>align any particular field, or find out where it is for selection on the screen.
  * </ul>
  * 
- * <h4>Synchronization</h4>
+ * <h3>Synchronization</h3>
  * 
  * Date formats are not synchronized. It is recommended to create separate format instances for each thread. If multiple
  * threads access a format concurrently, it must be synchronized externally.
@@ -1477,13 +1477,13 @@ public abstract class DateFormat extends UFormat {
      * lenient parsing, the parser may use heuristics to interpret inputs that
      * do not precisely match this object's format.  Without lenient parsing,
      * inputs must match this object's format more closely.
-     * <br/><br/> 
+     * <br><br>
      * <b>Note:</b> ICU 53 introduced finer grained control of leniency (and added 
      * new control points) making the preferred method a combination of 
-     * setCalendarLenient() & setBooleanAttribute() calls. 
+     * setCalendarLenient() &amp; setBooleanAttribute() calls.
      * This method supports prior functionality but may not support all 
-     * future leniency control & behavior of DateFormat. For control of pre 53 leniency,  
-     * Calendar and DateFormat whitespace & numeric tolerance, this method is safe to 
+     * future leniency control &amp; behavior of DateFormat. For control of pre 53 leniency,
+     * Calendar and DateFormat whitespace &amp; numeric tolerance, this method is safe to
      * use. However, mixing leniency control via this method and modification of the 
      * newer attributes via setBooleanAttribute() may produce undesirable 
      * results.
@@ -1501,7 +1501,7 @@ public abstract class DateFormat extends UFormat {
     }
 
     /**
-     * Returns whether both date/time parsing in the encapsulated Calendar object and DateFormat whitespace &
+     * Returns whether both date/time parsing in the encapsulated Calendar object and DateFormat whitespace &amp;
      * numeric processing is lenient.
      */
     public boolean isLenient()
@@ -1750,10 +1750,6 @@ public abstract class DateFormat extends UFormat {
     /**
      * Creates a {@link DateFormat} object that can be used to format times in
      * the calendar system specified by <code>cal</code>.
-     * <p>
-     * <b>Note:</b> When this functionality is moved into the core JDK, this method
-     * will probably be replaced by a new overload of {@link DateFormat#getInstance}.
-     * <p>
      * @param cal   The calendar system for which a time format is desired.
      *
      * @param timeStyle The type of time format desired.  This can be
@@ -1772,10 +1768,6 @@ public abstract class DateFormat extends UFormat {
     /**
      * Creates a {@link DateFormat} object that can be used to format times in
      * the calendar system specified by <code>cal</code>.
-     * <p>
-     * <b>Note:</b> When this functionality is moved into the core JDK, this method
-     * will probably be replaced by a new overload of {@link DateFormat#getInstance}.
-     * <p>
      * @param cal   The calendar system for which a time format is desired.
      *
      * @param timeStyle The type of time format desired.  This can be
@@ -1794,10 +1786,6 @@ public abstract class DateFormat extends UFormat {
     /**
      * Creates a {@link DateFormat} object that can be used to format dates and times in
      * the calendar system specified by <code>cal</code>.
-     * <p>
-     * <b>Note:</b> When this functionality is moved into the core JDK, this method
-     * will probably be replaced by a new overload of {@link DateFormat#getInstance}.
-     * <p>
      * @param cal   The calendar system for which a date/time format is desired.
      *
      * @param dateStyle The type of date format desired.  This can be
@@ -1821,10 +1809,6 @@ public abstract class DateFormat extends UFormat {
     /**
      * Creates a {@link DateFormat} object that can be used to format dates and times in
      * the calendar system specified by <code>cal</code>.
-     * <p>
-     * <b>Note:</b> When this functionality is moved into the core JDK, this method
-     * will probably be replaced by a new overload of {@link DateFormat#getInstance}.
-     * <p>
      * @param cal   The calendar system for which a date/time format is desired.
      *
      * @param dateStyle The type of date format desired.  This can be
@@ -1898,10 +1882,6 @@ public abstract class DateFormat extends UFormat {
     /**
      * Creates a {@link DateFormat} object that can be used to format times in
      * the calendar system specified by <code>cal</code>.
-     * <p>
-     * <b>Note:</b> When this functionality is moved into the core JDK, this method
-     * will probably be replaced by a new overload of {@link DateFormat#getInstance}.
-     * <p>
      * @param cal   The calendar system for which a time format is desired.
      *
      * @param timeStyle The type of time format desired.  This can be
@@ -1917,10 +1897,6 @@ public abstract class DateFormat extends UFormat {
     /**
      * Creates a {@link DateFormat} object for the default locale that can be used to format
      * dates and times in the calendar system specified by <code>cal</code>.
-     * <p>
-     * <b>Note:</b> When this functionality is moved into the core JDK, this method
-     * will probably be replaced by a new overload of {@link DateFormat#getInstance}.
-     * <p>
      * @param cal   The calendar system for which a date/time format is desired.
      *
      * @param dateStyle The type of date format desired.  This can be

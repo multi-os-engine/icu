@@ -1,7 +1,7 @@
 /* GENERATED SOURCE. DO NOT MODIFY. */
 /*
  *******************************************************************************
- * Copyright (C) 2008-2015, International Business Machines Corporation and    *
+ * Copyright (C) 2008-2016, International Business Machines Corporation and    *
  * others. All Rights Reserved.                                                *
  *******************************************************************************
  */
@@ -76,7 +76,7 @@ import android.icu.util.UResourceBundle;
  * second (though we do not currently have specific intervalFormat data for
  * skeletons with seconds). 
  * Those calendar fields can be defined in the following order:
- * year >  month > date > am-pm > hour >  minute > second
+ * year &gt; month &gt; date &gt; am-pm &gt; hour &gt;  minute &gt; second
  *  
  * The largest different calendar fields between 2 calendars is the
  * first different calendar field in above order.
@@ -352,7 +352,7 @@ public class DateIntervalInfo implements Cloneable, Freezable<DateIntervalInfo>,
 
 
     /** 
-     * Construct DateIntervalInfo for the given JDK locale,
+     * Construct DateIntervalInfo for the given {@link java.util.Locale}.
      * @param locale  the interval patterns are loaded from the appropriate 
      *                calendar data (specified calendar or default calendar)
      *                in this locale.
