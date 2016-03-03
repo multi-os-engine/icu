@@ -4342,6 +4342,14 @@ public class DateFormatTest extends com.ibm.icu.dev.test.TestFmwk {
         }
     }
 
+    public void TestFormatsWithNumberSystemsSimpleLibcore() {
+        java.text.SimpleDateFormat df = (java.text.SimpleDateFormat) java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT, new Locale("haw"));
+        String pattern = df.toPattern();
+        if (pattern == null || !pattern.equals("d/M/yy")) {
+            errln("FAIL: Unexpected result in format string: \"" + pattern + "\"");
+        }
+    }
+
     public void TestTwoDigitWOY() { // See ICU Ticket #8514
         String dateText = new String("98MON01");
         
