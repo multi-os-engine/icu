@@ -182,6 +182,28 @@
  */
 --
 
+# Remove unknown annotation @discouraged.
+--method:android.icu.util.IslamicCalendar#setCivil(boolean)
+/**
+     * Determines whether this object uses the fixed-cycle Islamic civil calendar
+     * or an approximation of the religious, astronomical calendar.
+     *
+     * @param beCivil   <code>true</code> to use the civil calendar,
+     *                  <code>false</code> to use the astronomical calendar.
+     * @stable ICU 2.8
+     */
+--
+
+# Remove unknown annotation @discouraged.
+--method:android.icu.util.IslamicCalendar#isCivil()
+/**
+     * Returns <code>true</code> if this object is using the fixed-cycle civil
+     * calendar, or <code>false</code> if using the religious, astronomical
+     * calendar.
+     * @stable ICU 2.8
+     */
+--
+
 # Remove @see reference to non-public class TimeUnitAmount.
 --type:android.icu.util.TimeUnit
 /**
