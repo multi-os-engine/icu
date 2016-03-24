@@ -2181,6 +2181,11 @@ public class TimeZoneTest extends TestFmwk
             }
         }
     }
+    
+    public void Test11619_UnrecognizedTimeZoneID() {
+        VTimeZone vzone = VTimeZone.create("ABadTimeZoneId");
+        this.assertNull("", vzone);
+    }
 
     private static boolean isDaylightTimeAvailable(TimeZone tz, long start) {
         if (tz.inDaylightTime(new Date(start))) {

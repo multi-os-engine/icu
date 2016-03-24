@@ -1,7 +1,7 @@
 /* GENERATED SOURCE. DO NOT MODIFY. */
 /*
  *******************************************************************************
- * Copyright (C) 2009-2014, International Business Machines Corporation and    *
+ * Copyright (C) 2009-2016, International Business Machines Corporation and    *
  * others. All Rights Reserved.                                                *
  *******************************************************************************
  */
@@ -46,11 +46,7 @@ public class RbnfLenientScannerTest extends TestFmwk {
             { "2 thousand six HUNDRED   fifty-7", "2,657" },
         };
 
-        if (logKnownIssue("9503", "Lenient parse problems with English RBNF")) {
-            logln("Can't do lenient parse test due to http://bugs.icu-project.org/trac/ticket/9503");
-        } else {
-            doLenientParseTest(formatter, lpTestData);
-        }
+        doLenientParseTest(formatter, lpTestData);
     }
 
     /**
@@ -73,11 +69,7 @@ public class RbnfLenientScannerTest extends TestFmwk {
             { "fifteen hundred and zero", "1,500" }
         };
 
-        if (logKnownIssue("9503", null)) {
-            logln("Can't do lenient parse test due to http://bugs.icu-project.org/trac/ticket/9503");
-        } else {
-            doLenientParseTest(formatter, lpTestData);
-        }
+        doLenientParseTest(formatter, lpTestData);
     }
 
     /**
