@@ -8,6 +8,8 @@
 package android.icu.text;
 
 import java.text.ParsePosition;
+import java.util.Arrays;
+import java.util.Objects;
 
 //===================================================================
 // NFSubstitution (abstract base class)
@@ -251,8 +253,12 @@ abstract class NFSubstitution {
     }
     
     public int hashCode() {
-        assert false : "hashCode not designed";
-        return 42;
+        return Arrays.hashCode(new int[] {
+                getClass().hashCode(),
+                pos,
+                Objects.hashCode(ruleSet),
+                Objects.hashCode(numberFormat)
+        });
     }
 
     /**
@@ -695,7 +701,12 @@ class MultiplierSubstitution extends NFSubstitution {
     public boolean equals(Object that) {
         return super.equals(that) && divisor == ((MultiplierSubstitution) that).divisor;
     }
-    
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() * 31 + Double.hashCode(divisor);
+    }
+
     //-----------------------------------------------------------------------
     // formatting
     //-----------------------------------------------------------------------
@@ -869,7 +880,12 @@ class ModulusSubstitution extends NFSubstitution {
             return false;
         }
     }
-    
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() * 31 + Double.hashCode(divisor);
+    }
+
     //-----------------------------------------------------------------------
     // formatting
     //-----------------------------------------------------------------------
@@ -1487,7 +1503,15 @@ class NumeratorSubstitution extends NFSubstitution {
             return false;
         }
     }
-    
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + Double.hashCode(denominator);
+        result = 31 * result + Boolean.hashCode(withZeros);
+        return result;
+    }
+
     //-----------------------------------------------------------------------
     // formatting
     //-----------------------------------------------------------------------

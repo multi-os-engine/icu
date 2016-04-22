@@ -205,6 +205,16 @@ public class CompactDecimalFormat extends DecimalFormat {
                 && pluralRules.equals(other.pluralRules);
     }
 
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + units.hashCode();
+        result = 31 * result + divisor.hashCode();
+        result = 31 * result + pluralToCurrencyAffixes.hashCode();
+        result = 31 * result + pluralRules.hashCode();
+        return result;
+    }
+
     private boolean mapsAreEqual(
             Map<String, DecimalFormat.Unit[]> lhs, Map<String, DecimalFormat.Unit[]> rhs) {
         if (lhs.size() != rhs.size()) {
