@@ -8,6 +8,8 @@
 package android.icu.text;
 
 import java.text.ParsePosition;
+import java.util.Arrays;
+import java.util.Objects;
 
 //===================================================================
 // NFSubstitution (abstract base class)
@@ -251,8 +253,11 @@ abstract class NFSubstitution {
     }
     
     public int hashCode() {
-        assert false : "hashCode not designed";
-        return 42;
+        int result = getClass().hashCode();
+        result = 31 * result + pos;
+        result = 31 * result + Objects.hashCode(ruleSet);
+        result = 31 * result + Objects.hashCode(numberFormat);
+        return result;
     }
 
     /**
@@ -693,9 +698,15 @@ class MultiplierSubstitution extends NFSubstitution {
      * @return true if the two substitutions are functionally equal
      */
     public boolean equals(Object that) {
+        // cast is safe because super.equals() checks class
         return super.equals(that) && divisor == ((MultiplierSubstitution) that).divisor;
     }
-    
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() * 31 + Double.hashCode(divisor);
+    }
+
     //-----------------------------------------------------------------------
     // formatting
     //-----------------------------------------------------------------------
@@ -862,6 +873,7 @@ class ModulusSubstitution extends NFSubstitution {
      */
     public boolean equals(Object that) {
         if (super.equals(that)) {
+            // cast is safe because super.equals() checks class
             ModulusSubstitution that2 = (ModulusSubstitution)that;
 
             return divisor == that2.divisor;
@@ -869,7 +881,12 @@ class ModulusSubstitution extends NFSubstitution {
             return false;
         }
     }
-    
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() * 31 + Double.hashCode(divisor);
+    }
+
     //-----------------------------------------------------------------------
     // formatting
     //-----------------------------------------------------------------------
@@ -1481,13 +1498,22 @@ class NumeratorSubstitution extends NFSubstitution {
      */
     public boolean equals(Object that) {
         if (super.equals(that)) {
+            // cast is safe because super.equals() checks class
             NumeratorSubstitution that2 = (NumeratorSubstitution)that;
             return denominator == that2.denominator && withZeros == that2.withZeros;
         } else {
             return false;
         }
     }
-    
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + Double.hashCode(denominator);
+        result = 31 * result + Boolean.hashCode(withZeros);
+        return result;
+    }
+
     //-----------------------------------------------------------------------
     // formatting
     //-----------------------------------------------------------------------

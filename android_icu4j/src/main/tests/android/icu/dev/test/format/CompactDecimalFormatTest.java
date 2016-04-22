@@ -329,7 +329,6 @@ public class CompactDecimalFormatTest extends TestFmwk {
                 ULocale.forLanguageTag("sw"), CompactStyle.LONG);
         assertEquals("equals", cdf, equalsCdf);
         assertNotEquals("not equals", cdf, notEqualsCdf);
-
     }
 
     public void checkLocale(ULocale locale, CompactStyle style, Object[][] testData) {
