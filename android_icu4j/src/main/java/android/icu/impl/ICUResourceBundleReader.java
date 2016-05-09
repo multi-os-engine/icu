@@ -9,7 +9,7 @@ package android.icu.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.ref.SoftReference;
+import java.lang.ref.Reference;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.IntBuffer;
@@ -115,8 +115,8 @@ public final class ICUResourceBundleReader {
     private static final CharBuffer EMPTY_16_BIT_UNITS = CharBuffer.wrap("\0");  // read-only
 
     /**
-     * Objects with more value bytes are stored in SoftReferences.
-     * Smaller objects (which are not much larger than a SoftReference)
+     * Objects with more value bytes are stored in References.
+     * Smaller objects (which are not much larger than a Reference)
      * are stored directly, avoiding the overhead of the reference.
      */
     static final int LARGE_SIZE = 24;
@@ -792,7 +792,7 @@ public final class ICUResourceBundleReader {
             return (Table)value;
         }
         Table table;
-        int size;  // Use size = 0 to never use SoftReferences for Tables?
+        int size;  // Use size = 0 to never use References for Tables?
         if(type == UResourceBundle.TABLE) {
             table = new Table1632(this, offset);
             size = table.getSize() * 2;
@@ -1127,7 +1127,7 @@ public final class ICUResourceBundleReader {
      * <p>This cache uses int[] and Object[] arrays to minimize object creation
      * and avoid auto-boxing.
      *
-     * <p>Large resource objects are stored in SoftReferences.
+     * <p>Large resource objects are stored in References.
      *
      * <p>For few resources, a small table is used with binary search.
      * When more resources are cached, then the data structure changes to be faster
@@ -1158,16 +1158,16 @@ public final class ICUResourceBundleReader {
         @SuppressWarnings("unchecked")
         private static final Object putIfCleared(Object[] values, int index, Object item, int size) {
             Object value = values[index];
-            if(!(value instanceof SoftReference)) {
+            if(!(value instanceof Reference)) {
                 assert size < LARGE_SIZE;  // Caller should be consistent for each resource.
                 return value;
             }
             assert size >= LARGE_SIZE;
-            value = ((SoftReference<Object>)value).get();
+            value = ((Reference<Object>)value).get();
             if(value != null) {
                 return value;
             }
-            values[index] = new SoftReference<Object>(item);
+            values[index] = CachesReferenceFactory.createReference(item);
             return item;
         }
 
@@ -1216,7 +1216,7 @@ public final class ICUResourceBundleReader {
                         return level.putIfAbsent(key, item, size);
                     }
                     keys[index] = key;
-                    values[index] = (size >= LARGE_SIZE) ? new SoftReference<Object>(item) : item;
+                    values[index] = (size >= LARGE_SIZE) ? CachesReferenceFactory.createReference(item) : item;
                     return item;
                 }
                 // Collision: Add a child level, move the old item there,
@@ -1329,8 +1329,8 @@ public final class ICUResourceBundleReader {
                     return null;
                 }
             }
-            if(value instanceof SoftReference) {
-                value = ((SoftReference<Object>)value).get();
+            if(value instanceof Reference) {
+                value = ((Reference<Object>)value).get();
             }
             return value;  // null if the reference was cleared
         }
@@ -1348,7 +1348,7 @@ public final class ICUResourceBundleReader {
                     }
                     ++length;
                     keys[index] = res;
-                    values[index] = (size >= LARGE_SIZE) ? new SoftReference<Object>(item) : item;
+                    values[index] = (size >= LARGE_SIZE) ? CachesReferenceFactory.createReference(item) : item;
                     return item;
                 } else /* not found && length == SIMPLE_LENGTH */ {
                     // Grow to become trie-like.
