@@ -25,7 +25,13 @@ import android.icu.util.UResourceBundle;
  */
 public class CalendarUtil {
 
-    private static ICUCache<String, String> CALTYPE_CACHE = new SimpleCache<String, String>();
+    private static SoftCache<String, String, ULocale> CALTYPE_CACHE =
+            new SoftCache<String, String, ULocale>() {
+                @Override
+                protected String createInstance(String key, ULocale locale) {
+                    return lookupCalendarType(locale);
+                }
+            };
 
     private static final String CALKEY = "calendar";
     private static final String DEFCAL = "gregorian";
@@ -39,9 +45,7 @@ public class CalendarUtil {
      * @return Calendar type string, such as "gregorian"
      */
     public static String getCalendarType(ULocale loc) {
-        String calType = null;
-
-        calType = loc.getKeywordValue(CALKEY);
+        String calType = loc.getKeywordValue(CALKEY);
         if (calType != null) {
             return calType;
         }
@@ -49,14 +53,13 @@ public class CalendarUtil {
         String baseLoc = loc.getBaseName();
 
         // Check the cache
-        calType = CALTYPE_CACHE.get(baseLoc);
-        if (calType != null) {
-            return calType;
-        }
+        return CALTYPE_CACHE.getInstance(baseLoc, loc);
+    }
 
+    static String lookupCalendarType(ULocale loc) {
         // Canonicalize, so grandfathered variant will be transformed to keywords
         ULocale canonical = ULocale.createCanonical(loc.toString());
-        calType = canonical.getKeywordValue("calendar");
+        String calType = canonical.getKeywordValue("calendar");
 
         if (calType == null) {
             // When calendar keyword is not available, use the locale's
@@ -75,7 +78,7 @@ public class CalendarUtil {
                                         "supplementalData",
                                         ICUResourceBundle.ICU_DATA_CLASS_LOADER);
                 UResourceBundle calPref = rb.get("calendarPreferenceData");
-                UResourceBundle order = null;
+                UResourceBundle order;
                 try {
                     order = calPref.get(region);
                 } catch (MissingResourceException mre) {
@@ -93,10 +96,6 @@ public class CalendarUtil {
                 calType = DEFCAL;
             }
         }
-
-        // Cache the resolved value for the next time
-        CALTYPE_CACHE.put(baseLoc, calType);
-
         return calType;
     }
 }
