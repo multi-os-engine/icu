@@ -95,7 +95,7 @@ public abstract class SoftCache<K, V, D> extends CacheBase<K, V, D> {
             if (value == null) {
                 ref = null;
             } else {
-                ref = new SoftReference<V>(value);
+                ref = CachesReferenceFactory.createReference(value);
             }
         }
 
