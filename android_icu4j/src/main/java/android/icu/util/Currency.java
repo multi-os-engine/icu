@@ -26,6 +26,7 @@ import android.icu.impl.ICUCache;
 import android.icu.impl.ICUDebug;
 import android.icu.impl.ICUResourceBundle;
 import android.icu.impl.SimpleCache;
+import android.icu.impl.SoftCache;
 import android.icu.impl.TextTrieMap;
 import android.icu.text.CurrencyDisplayNames;
 import android.icu.text.CurrencyMetaInfo;
@@ -214,8 +215,13 @@ public class Currency extends MeasureUnit {
     }
 
     private static final String EUR_STR = "EUR";
-    private static final ICUCache<ULocale, String> currencyCodeCache = new SimpleCache<ULocale, String>();
-    
+    private static final SoftCache<ULocale, String, String> currencyCodeCache = new SoftCache<ULocale, String, String>() {
+        @Override
+        protected String createInstance(ULocale loc, String variant) {
+            return lookupCurrencyForLocale(loc, variant);
+        }
+    };
+
     /**
      * Instantiate a currency from resource data.
      */
@@ -226,27 +232,31 @@ public class Currency extends MeasureUnit {
             return getInstance(EUR_STR);
         }
         
-        String code = currencyCodeCache.get(loc);
+        String code = currencyCodeCache.getInstance(loc, variant);
         if (code == null) {
-            String country = loc.getCountry();
-        
-            CurrencyMetaInfo info = CurrencyMetaInfo.getInstance();
-            List<String> list = info.currencies(CurrencyFilter.onRegion(country));
-            if (list.size() > 0) {
-                code = list.get(0);
-                boolean isPreEuro = "PREEURO".equals(variant);
-                if (isPreEuro && EUR_STR.equals(code)) {
-                    if (list.size() < 2) {
-                        return null;
-                    }
-                    code = list.get(1);
-                }
-            } else {
-                return null;
-            }
-            currencyCodeCache.put(loc, code);
+            return null;
         }
         return getInstance(code);
+    }
+
+    private static String lookupCurrencyForLocale(ULocale loc, String variant) {
+        String country = loc.getCountry();
+        String code;
+        CurrencyMetaInfo info = CurrencyMetaInfo.getInstance();
+        List<String> list = info.currencies(CurrencyFilter.onRegion(country));
+        if (list.size() > 0) {
+            code = list.get(0);
+            boolean isPreEuro = "PREEURO".equals(variant);
+            if (isPreEuro && EUR_STR.equals(code)) {
+                if (list.size() < 2) {
+                    return null;
+                }
+                code = list.get(1);
+            }
+        } else {
+            return null;
+        }
+        return code;
     }
 
     /**
