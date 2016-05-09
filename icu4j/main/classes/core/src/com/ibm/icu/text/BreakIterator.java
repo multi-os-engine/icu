@@ -7,13 +7,14 @@
 
 package com.ibm.icu.text;
 
-import java.lang.ref.SoftReference;
+import java.lang.ref.Reference;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.Locale;
 import java.util.MissingResourceException;
 
 import com.ibm.icu.impl.ICUDebug;
+import com.ibm.icu.impl.CachesReferenceFactory;
 import com.ibm.icu.util.ICUCloneNotSupportedException;
 import com.ibm.icu.util.ULocale;
 
@@ -556,7 +557,7 @@ public abstract class BreakIterator implements Cloneable
      */
     private static final int KIND_COUNT = 5;
 
-    private static final SoftReference<?>[] iterCache = new SoftReference<?>[5];
+    private static final Reference<?>[] iterCache = new Reference<?>[5];
 
     /**
      * Returns a new instance of BreakIterator that locates word boundaries.
@@ -867,7 +868,7 @@ s     */
         BreakIterator result = getShim().createBreakIterator(where, kind);
 
         BreakIteratorCache cache = new BreakIteratorCache(where, result);
-        iterCache[kind] = new SoftReference<BreakIteratorCache>(cache);
+        iterCache[kind] = CachesReferenceFactory.createReference(cache);
         if (result instanceof RuleBasedBreakIterator) {
             RuleBasedBreakIterator rbbi = (RuleBasedBreakIterator)result;
             rbbi.setBreakType(kind);
