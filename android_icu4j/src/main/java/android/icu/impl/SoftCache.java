@@ -7,19 +7,20 @@
 */
 package android.icu.impl;
 
+import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Generic, thread-safe cache implementation, storing SoftReferences to cached instances.
+ * Generic, thread-safe cache implementation, storing References to cached instances.
  * To use, instantiate a subclass which implements the createInstance() method,
  * and call get() with the key and the data. The get() call will use the data
  * only if it needs to call createInstance(), otherwise the data is ignored.
  *
- * By using SoftReferences to instances, the Java runtime can release instances
+ * For example, by using SoftReferences to instances, the Java runtime can release instances
  * once they are not used any more at all. If such an instance is then requested again,
- * the get() method will call createInstance() again and also create a new SoftReference.
- * The cache holds on to its map of keys to SoftReferenced instances forever.
+ * the get() method will call createInstance() again and also create a new Reference.
+ * The cache holds on to its map of keys to Referenced instances forever.
  *
  * @param <K> Cache lookup key type
  * @param <V> Cache instance value type
@@ -34,24 +35,28 @@ public abstract class SoftCache<K, V, D> extends CacheBase<K, V, D> {
         // We synchronize twice, once on the map and once on valueRef,
         // because we prefer the fine-granularity locking of the ConcurrentHashMap
         // over coarser locking on the whole cache instance.
-        // We use a SettableSoftReference (a second level of indirection) because
+        // We use a SettableReference (a second level of indirection) because
         // ConcurrentHashMap.putIfAbsent() never replaces the key's value, and if it were
-        // a simple SoftReference we would not be able to reset its value after it has been cleared.
+        // a simple Reference we would not be able to reset its value after it has been cleared.
         // (And ConcurrentHashMap.put() always replaces the value, which we don't want either.)
-        SettableSoftReference<V> valueRef = map.get(key);
+        SettableReference<V> valueRef = map.get(key);
         V value;
         if(valueRef != null) {
             synchronized(valueRef) {
+                if (valueRef.ref == null) {
+                    // The cached value is a null.
+                    return null;
+                }
+
                 value = valueRef.ref.get();
                 if(value != null) {
+                    // The cached value is non-null and has not been collected.
                     return value;
                 } else {
-                    // The instance has been evicted, its SoftReference cleared.
-                    // Create and set a new instance.
+                    // The cached value was non-null but has been evicted, its Reference
+                    // cleared. Create and set a new value.
                     value = createInstance(key, data);
-                    if (value != null) {
-                        valueRef.ref = new SoftReference<V>(value);
-                    }
+                    valueRef.setValue(value);
                     return value;
                 }
             }
@@ -61,12 +66,12 @@ public abstract class SoftCache<K, V, D> extends CacheBase<K, V, D> {
             if (value == null) {
                 return null;
             }
-            valueRef = map.putIfAbsent(key, new SettableSoftReference<V>(value));
+            valueRef = map.putIfAbsent(key, new SettableReference<V>(value));
             if(valueRef == null) {
                 // Normal "put": Our new value is now cached.
                 return value;
             } else {
-                // Race condition: Another thread beat us to putting a SettableSoftReference
+                // Race condition: Another thread beat us to putting a SettableReference
                 // into the map. Return its value, but just in case the garbage collector
                 // was aggressive, we also offer our new instance for caching.
                 return valueRef.setIfAbsent(value);
@@ -74,34 +79,60 @@ public abstract class SoftCache<K, V, D> extends CacheBase<K, V, D> {
         }
     }
     /**
-     * Value type for cache items: Has a SoftReference which can be set
-     * to a new value when the SoftReference has been cleared.
+     * Value type for cache items: Has a Reference which can be set
+     * to a new value when the Reference has been cleared.
      * The SoftCache class sometimes accesses the ref field directly.
      *
      * @param <V> Cache instance value type
      */
-    private static final class SettableSoftReference<V> {
-        private SettableSoftReference(V value) {
-            ref = new SoftReference<V>(value);
+    private static final class SettableReference<V> {
+        SettableReference(V value) {
+            setValue(value);
         }
+
         /**
-         * If the SoftReference has been cleared, then this replaces it with a new SoftReference
-         * for the new value and returns the new value; otherwise returns the current
-         * SoftReference's value.
-         * @param value Replacement value, for when the current reference has been cleared
-         * @return The value that is held by the SoftReference, old or new
+         * Store the value. The value may be {@code null}.
          */
-        private synchronized V setIfAbsent(V value) {
+        void setValue(V value) {
+            if (value == null) {
+                ref = null;
+            } else {
+                ref = new SoftReference<V>(value);
+            }
+        }
+
+        /**
+         * Set a new value iff the existing value has been cleared due to garbage collection.
+         *
+         * <p>If the Reference has been cleared, then this replaces it with a new Reference
+         * for the new value and returns the new value; otherwise returns the current
+         * Reference's value. If the old value was explicitly {@code null} then
+         * {@code null} is returned and the new value is ignored.
+         *
+         * @param value Replacement value, for when the current reference has been cleared
+         * @return The value that is held by the Reference, old or new
+         */
+        synchronized V setIfAbsent(V value) {
+            if (ref == null) {
+                // The old value is explicitly null.
+                return null;
+            }
+
             V oldValue = ref.get();
             if(oldValue == null) {
-                ref = new SoftReference<V>(value);
+                // The old value was non-null, but has been cleared. The new value is taken.
+                setValue(value);
                 return value;
             } else {
+                // The old value was and is non-null. The new value is ignored.
                 return oldValue;
             }
         }
-        private SoftReference<V> ref;  // never null
+
+        // ref == null means the cached value is actually null
+        // ref == a Reference means there is (or was) a cached, non-null, value.
+        private Reference<V> ref;  // never null
     }
-    private ConcurrentHashMap<K, SettableSoftReference<V>> map =
-        new ConcurrentHashMap<K, SettableSoftReference<V>>();
+    private ConcurrentHashMap<K, SettableReference<V>> map =
+        new ConcurrentHashMap<K, SettableReference<V>>();
 }
