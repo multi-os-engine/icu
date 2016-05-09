@@ -4623,7 +4623,7 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
      * @return the WeekData for the input region. It is never null.
      */
     public static WeekData getWeekDataForRegion(String region) {
-        return WEEK_DATA_CACHE.createInstance(region, region);
+        return WEEK_DATA_CACHE.getInstance(region, null /* unused */);
     }
     
     /**
@@ -4680,13 +4680,13 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
     /*
      * Cache to hold week data by region
      */
-    private static class WeekDataCache extends SoftCache<String, WeekData, String> {
+    private static class WeekDataCache extends SoftCache<String, WeekData, Void> {
 
         /* (non-Javadoc)
          * @see android.icu.impl.CacheBase#createInstance(java.lang.Object, java.lang.Object)
          */
         @Override
-        protected WeekData createInstance(String key, String data) {
+        protected WeekData createInstance(String key, Void unused) {
             return getWeekDataForRegionInternal(key);
         }
     }
@@ -4700,7 +4700,7 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
         if (region == null) {
             region = "001";
         }
-        WeekData wdata = WEEK_DATA_CACHE.getInstance(region, region);
+        WeekData wdata = WEEK_DATA_CACHE.getInstance(region, null /* unused */);
         setWeekData(wdata);
     }
 
