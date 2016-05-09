@@ -25,13 +25,12 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import android.icu.impl.ICUCache;
 import android.icu.impl.ICUResourceBundle;
 import android.icu.impl.ICUResourceTableAccess;
 import android.icu.impl.LocaleIDParser;
 import android.icu.impl.LocaleIDs;
 import android.icu.impl.LocaleUtility;
-import android.icu.impl.SimpleCache;
+import android.icu.impl.SoftCache;
 import android.icu.impl.locale.AsciiUtil;
 import android.icu.impl.locale.BaseLocale;
 import android.icu.impl.locale.Extension;
@@ -100,7 +99,12 @@ public final class ULocale implements Serializable, Comparable<ULocale> {
     // using serialver from jdk1.4.2_05
     private static final long serialVersionUID = 3715177670352309217L;
 
-    private static ICUCache<String, String> nameCache = new SimpleCache<String, String>();
+    private static SoftCache<String, String, Void> nameCache = new SoftCache<String, String, Void>() {
+        @Override
+        protected String createInstance(String tmpLocaleID, Void unused) {
+            return new LocaleIDParser(tmpLocaleID).getName();
+        }
+    };
 
     /**
      * Useful constant for language.
@@ -265,7 +269,12 @@ public final class ULocale implements Serializable, Comparable<ULocale> {
         FORMAT
     }
 
-    private static final SimpleCache<Locale, ULocale> CACHE = new SimpleCache<Locale, ULocale>();
+    private static final SoftCache<Locale, ULocale, Void> CACHE = new SoftCache<Locale, ULocale, Void>() {
+        @Override
+        protected ULocale createInstance(Locale key, Void unused) {
+            return JDKLocaleHelper.toULocale(key);
+        }
+    };
 
     /**
      * Cache the locale.
@@ -401,12 +410,7 @@ public final class ULocale implements Serializable, Comparable<ULocale> {
         if (loc == null) {
             return null;
         }
-        ULocale result = CACHE.get(loc);
-        if (result == null) {
-            result = JDKLocaleHelper.toULocale(loc);
-            CACHE.put(loc, result);
-        }
-        return result;
+        return CACHE.getInstance(loc, null /* unused */);
     }
 
     /**
@@ -1042,12 +1046,7 @@ public final class ULocale implements Serializable, Comparable<ULocale> {
         } else {
             tmpLocaleID = localeID;
         }
-        String name = nameCache.get(tmpLocaleID);
-        if (name == null) {
-            name = new LocaleIDParser(tmpLocaleID).getName();
-            nameCache.put(tmpLocaleID, name);
-        }
-        return name;
+        return nameCache.getInstance(tmpLocaleID, null /* unused */);
     }
 
     /**
