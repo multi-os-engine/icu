@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.MissingResourceException;
 
-import com.ibm.icu.impl.ICUCache;
 import com.ibm.icu.impl.ICUResourceBundle;
-import com.ibm.icu.impl.SimpleCache;
+import com.ibm.icu.impl.SoftCache;
 import com.ibm.icu.lang.UCharacter;
 import com.ibm.icu.util.ULocale;
 import com.ibm.icu.util.ULocale.Category;
@@ -114,7 +113,7 @@ public class NumberingSystem {
         final String[] OTHER_NS_KEYWORDS = { "native", "traditional", "finance" };
  
         NumberingSystem ns;
-        Boolean nsResolved = true;
+        boolean nsResolved = true;
 
         // Check for @numbers
         String numbersKeyword = locale.getKeywordValue("numbers");
@@ -134,37 +133,50 @@ public class NumberingSystem {
             ns = getInstanceByName(numbersKeyword);
             if ( ns != null ) {
                 return ns;
-            } else { // if @numbers keyword points to a bogus numbering system name, we return the default for the locale
-                numbersKeyword = "default";
-                nsResolved = false;
             }
+            // if @numbers keyword points to a bogus numbering system name, we return the default for the locale
+            numbersKeyword = "default";
+            nsResolved = false;
         }
-        
+
         // Attempt to get the numbering system from the cache
         String baseName = locale.getBaseName();
-        ns = cachedLocaleData.get(baseName+"@numbers="+numbersKeyword);
-        if (ns != null ) {
-            return ns;
-        }
-        
-        // Cache miss, create new instance
+        String key = baseName+"@numbers="+numbersKeyword;
+        LocaleLookupData localeLookupData = new LocaleLookupData(locale, numbersKeyword);
+        ns = cachedLocaleData.getInstance(key, localeLookupData);
+        return ns;
+    }
 
-        String originalNumbersKeyword = numbersKeyword;
+    private static class LocaleLookupData {
+        public final ULocale locale;
+        public final String numbersKeyword;
+
+        LocaleLookupData(ULocale locale, String numbersKeyword) {
+            this.locale = locale;
+            this.numbersKeyword = numbersKeyword;
+        }
+    }
+
+    static NumberingSystem lookupInstanceByLocale(LocaleLookupData localeLookupData) {
+        ULocale locale = localeLookupData.locale;
+        String numbersKeyword = localeLookupData.numbersKeyword;
+        NumberingSystem ns = null;
         String resolvedNumberingSystem = null;
+        boolean nsResolved = false;
         while (!nsResolved) {           
             try {
-                ICUResourceBundle rb = (ICUResourceBundle)UResourceBundle.getBundleInstance(ICUResourceBundle.ICU_BASE_NAME,locale);
+                ICUResourceBundle rb = (ICUResourceBundle)UResourceBundle.getBundleInstance(ICUResourceBundle.ICU_BASE_NAME, locale);
                 rb = rb.getWithFallback("NumberElements");
                 resolvedNumberingSystem = rb.getStringWithFallback(numbersKeyword);
                 nsResolved = true;
             } catch (MissingResourceException ex) { // Fall back behavior as defined in TR35
-                 if (numbersKeyword.equals("native") || numbersKeyword.equals("finance")) {
-                     numbersKeyword = "default";
-                 } else if (numbersKeyword.equals("traditional")) {
-                     numbersKeyword = "native";
-                 } else {
-                     nsResolved = true;
-                 }
+                if (numbersKeyword.equals("native") || numbersKeyword.equals("finance")) {
+                    numbersKeyword = "default";
+                } else if (numbersKeyword.equals("traditional")) {
+                    numbersKeyword = "native";
+                } else {
+                    nsResolved = true;
+                }
             }  
         }
 
@@ -175,10 +187,7 @@ public class NumberingSystem {
         if ( ns == null ) {
             ns = new NumberingSystem();
         }
-
-        cachedLocaleData.put(baseName+"@numbers="+originalNumbersKeyword, ns);
         return ns;
-    
     }
 
     /**
@@ -201,16 +210,14 @@ public class NumberingSystem {
      * @stable ICU 4.2
      */
     public static NumberingSystem getInstanceByName(String name) {
+        // Get the numbering system from the cache
+        return cachedStringData.getInstance(name, null /* unused */);
+    }
+
+    static NumberingSystem lookupInstanceByName(String name) {
         int radix;
         boolean isAlgorithmic;
         String description;
-        
-        // Get the numbering system from the cache
-        NumberingSystem ns = cachedStringData.get(name);
-        if (ns != null ) {
-            return ns;
-        }        
-        
         try {
             UResourceBundle numberingSystemsInfo = UResourceBundle.getBundleInstance(ICUResourceBundle.ICU_BASE_NAME, "numberingSystems");
             UResourceBundle nsCurrent = numberingSystemsInfo.get("numberingSystems");
@@ -228,9 +235,7 @@ public class NumberingSystem {
             return null;
         }
 
-        ns = getInstance(name,radix,isAlgorithmic,description);
-        cachedStringData.put(name, ns);                       
-        return ns;     
+        return getInstance(name, radix, isAlgorithmic, description);
     }
 
     /**
@@ -329,11 +334,22 @@ public class NumberingSystem {
     /**
      * Cache to hold the NumberingSystems by Locale.
      */
-    private static ICUCache<String, NumberingSystem> cachedLocaleData = new SimpleCache<String, NumberingSystem>();
-        
+    private static SoftCache<String, NumberingSystem, LocaleLookupData> cachedLocaleData = new SoftCache<String, NumberingSystem, LocaleLookupData>() {
+        @Override
+        protected NumberingSystem createInstance(String key, LocaleLookupData localeLookupData) {
+            return lookupInstanceByLocale(localeLookupData);
+        }
+    };
+
     /**
      * Cache to hold the NumberingSystems by name.
      */
-    private static ICUCache<String, NumberingSystem> cachedStringData = new SimpleCache<String, NumberingSystem>();
+    private static SoftCache<String, NumberingSystem, Void>  cachedStringData = new SoftCache<String, NumberingSystem, Void>() {
+        @Override
+        protected NumberingSystem createInstance(String key, Void unused) {
+            return lookupInstanceByName(key);
+        }
+    };
+
     
 }
