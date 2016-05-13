@@ -16,11 +16,11 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import com.ibm.icu.impl.CacheValueICUCache;
 import com.ibm.icu.impl.CalendarData;
 import com.ibm.icu.impl.CalendarUtil;
 import com.ibm.icu.impl.ICUCache;
 import com.ibm.icu.impl.ICUResourceBundle;
-import com.ibm.icu.impl.SimpleCache;
 import com.ibm.icu.impl.Utility;
 import com.ibm.icu.text.TimeZoneNames.NameType;
 import com.ibm.icu.util.Calendar;
@@ -1443,7 +1443,7 @@ public class DateFormatSymbols implements Serializable, Cloneable {
 
     // DateFormatSymbols cache
     private static ICUCache<String, DateFormatSymbols> DFSCACHE =
-        new SimpleCache<String, DateFormatSymbols>();
+        new CacheValueICUCache<String, DateFormatSymbols>();
 
     /**
      * Initializes format symbols for the locale and calendar type

@@ -17,11 +17,11 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import android.icu.impl.CacheValueICUCache;
 import android.icu.impl.CalendarData;
 import android.icu.impl.CalendarUtil;
 import android.icu.impl.ICUCache;
 import android.icu.impl.ICUResourceBundle;
-import android.icu.impl.SimpleCache;
 import android.icu.impl.Utility;
 import android.icu.text.TimeZoneNames.NameType;
 import android.icu.util.Calendar;
@@ -1401,7 +1401,7 @@ public class DateFormatSymbols implements Serializable, Cloneable {
 
     // DateFormatSymbols cache
     private static ICUCache<String, DateFormatSymbols> DFSCACHE =
-        new SimpleCache<String, DateFormatSymbols>();
+        new CacheValueICUCache<String, DateFormatSymbols>();
 
     /**
      * Initializes format symbols for the locale and calendar type

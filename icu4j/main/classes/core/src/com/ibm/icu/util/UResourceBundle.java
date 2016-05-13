@@ -7,23 +7,23 @@
 
 package com.ibm.icu.util;
 
-import java.lang.ref.SoftReference;
 import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.ibm.icu.impl.CacheValueICUCache;
 import com.ibm.icu.impl.ICUCache;
 import com.ibm.icu.impl.ICUResourceBundle;
 import com.ibm.icu.impl.ICUResourceBundleReader;
 import com.ibm.icu.impl.ResourceBundleWrapper;
-import com.ibm.icu.impl.SimpleCache;
 
 /**
  * {@icuenhanced java.util.ResourceBundle}.{@icu _usage_}
@@ -318,7 +318,7 @@ public abstract class UResourceBundle extends ResourceBundle {
 
     // Cache for ResourceBundle instantiation
     private static ICUCache<ResourceCacheKey, UResourceBundle> BUNDLE_CACHE =
-        new SimpleCache<ResourceCacheKey, UResourceBundle>();
+        new CacheValueICUCache<ResourceCacheKey, UResourceBundle>();
 
     /**
      * @internal
@@ -337,7 +337,7 @@ public abstract class UResourceBundle extends ResourceBundle {
          *
          */
         //TODO figure a way around this method(see method comment)
-        BUNDLE_CACHE = new SimpleCache<ResourceCacheKey, UResourceBundle>();
+        BUNDLE_CACHE = new CacheValueICUCache<ResourceCacheKey, UResourceBundle>();
     }
 
     /**
@@ -456,25 +456,10 @@ public abstract class UResourceBundle extends ResourceBundle {
     private static final int ROOT_ICU = 1;
     private static final int ROOT_JAVA = 2;
 
-    private static SoftReference<ConcurrentHashMap<String, Integer>> ROOT_CACHE =
-            new SoftReference<ConcurrentHashMap<String, Integer>>(new ConcurrentHashMap<String, Integer>());
+    private static Map<String, Integer> ROOT_CACHE = new ConcurrentHashMap<String, Integer>();
 
     private static int getRootType(String baseName, ClassLoader root) {
-        ConcurrentHashMap<String, Integer> m = null;
-        Integer rootType;
-
-        m = ROOT_CACHE.get();
-        if (m == null) {
-            synchronized(UResourceBundle.class) {
-                m = ROOT_CACHE.get();
-                if (m == null) {
-                    m = new ConcurrentHashMap<String, Integer>();
-                    ROOT_CACHE = new SoftReference<ConcurrentHashMap<String, Integer>>(m);
-                }
-            }
-        }
-
-        rootType = m.get(baseName);
+        Integer rootType = ROOT_CACHE.get(baseName);
 
         if (rootType == null) {
             String rootLocale = (baseName.indexOf('.')==-1) ? "root" : "";
@@ -491,29 +476,15 @@ public abstract class UResourceBundle extends ResourceBundle {
                 }
             }
 
-            rootType = Integer.valueOf(rt);
-            m.putIfAbsent(baseName, rootType);
+            rootType = rt;
+            ROOT_CACHE.put(baseName, rt);
         }
 
-        return rootType.intValue();
+        return rootType;
     }
 
     private static void setRootType(String baseName, int rootType) {
-        Integer rt = Integer.valueOf(rootType);
-        ConcurrentHashMap<String, Integer> m = null;
-
-        m = ROOT_CACHE.get();
-        if (m == null) {
-            synchronized(UResourceBundle.class) {
-                m = ROOT_CACHE.get();
-                if (m == null) {
-                    m = new ConcurrentHashMap<String, Integer>();
-                    ROOT_CACHE = new SoftReference<ConcurrentHashMap<String, Integer>>(m);
-                }
-            }
-        }
-
-        m.put(baseName, rt);
+        ROOT_CACHE.put(baseName, rootType);
     }
 
     /**
