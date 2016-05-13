@@ -12,10 +12,9 @@ import java.util.Locale;
 
 import android.icu.impl.CalendarData;
 import android.icu.impl.DontCareFieldPosition;
-import android.icu.impl.ICUCache;
 import android.icu.impl.ICUResourceBundle;
-import android.icu.impl.SimpleCache;
 import android.icu.impl.SimplePatternFormatter;
+import android.icu.impl.SoftCache;
 import android.icu.impl.StandardPlural;
 import android.icu.lang.UCharacter;
 import android.icu.util.Calendar;
@@ -584,17 +583,17 @@ public final class RelativeDateTimeFormatter {
     }
 
     private static class Cache {
-        private final ICUCache<String, RelativeDateTimeFormatterData> cache =
-            new SimpleCache<String, RelativeDateTimeFormatterData>();
+        private final SoftCache<String, RelativeDateTimeFormatterData, ULocale> cache =
+            new SoftCache<String, RelativeDateTimeFormatterData, ULocale>() {
+                @Override
+                protected RelativeDateTimeFormatterData createInstance(String key, ULocale locale) {
+                    return new Loader(locale).load();
+                }
+            };
 
         public RelativeDateTimeFormatterData get(ULocale locale) {
             String key = locale.toString();
-            RelativeDateTimeFormatterData result = cache.get(key);
-            if (result == null) {
-                result = new Loader(locale).load();
-                cache.put(key, result);
-            }
-            return result;
+            return cache.getInstance(key, locale);
         }
     }
 

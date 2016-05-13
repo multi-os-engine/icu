@@ -11,10 +11,9 @@ import java.util.Locale;
 
 import com.ibm.icu.impl.CalendarData;
 import com.ibm.icu.impl.DontCareFieldPosition;
-import com.ibm.icu.impl.ICUCache;
 import com.ibm.icu.impl.ICUResourceBundle;
-import com.ibm.icu.impl.SimpleCache;
 import com.ibm.icu.impl.SimplePatternFormatter;
+import com.ibm.icu.impl.SoftCache;
 import com.ibm.icu.impl.StandardPlural;
 import com.ibm.icu.lang.UCharacter;
 import com.ibm.icu.util.Calendar;
@@ -631,17 +630,17 @@ public final class RelativeDateTimeFormatter {
     }
 
     private static class Cache {
-        private final ICUCache<String, RelativeDateTimeFormatterData> cache =
-            new SimpleCache<String, RelativeDateTimeFormatterData>();
+        private final SoftCache<String, RelativeDateTimeFormatterData, ULocale> cache =
+            new SoftCache<String, RelativeDateTimeFormatterData, ULocale>() {
+                @Override
+                protected RelativeDateTimeFormatterData createInstance(String key, ULocale locale) {
+                    return new Loader(locale).load();
+                }
+            };
 
         public RelativeDateTimeFormatterData get(ULocale locale) {
             String key = locale.toString();
-            RelativeDateTimeFormatterData result = cache.get(key);
-            if (result == null) {
-                result = new Loader(locale).load();
-                cache.put(key, result);
-            }
-            return result;
+            return cache.getInstance(key, locale);
         }
     }
 
