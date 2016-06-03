@@ -37,19 +37,19 @@
 
 
 #define CONCAT_ESCAPE_MACRO( args, targetIndex,targetLength,strToAppend, err, len,sourceIndex){                             \
-    while(len-->0){                                                                                                         \
-        if(targetIndex < targetLength){                                                                                     \
-            args->target[targetIndex] = (unsigned char) *strToAppend;                                                       \
-            if(args->offsets!=NULL){                                                                                        \
-                *(offsets++) = sourceIndex-1;                                                                               \
+    while((len)-->0){                                                                                                         \
+        if((targetIndex) < (targetLength)){                                                                                     \
+            (args)->target[targetIndex] = (unsigned char) *(strToAppend);                                                       \
+            if((args)->offsets!=NULL){                                                                                        \
+                *(offsets++) = (sourceIndex)-1;                                                                               \
             }                                                                                                               \
-            targetIndex++;                                                                                                  \
+            (targetIndex)++;                                                                                                  \
         }                                                                                                                   \
         else{                                                                                                               \
-            args->converter->charErrorBuffer[(int)args->converter->charErrorBufferLength++] = (unsigned char) *strToAppend; \
-            *err =U_BUFFER_OVERFLOW_ERROR;                                                                                  \
+            (args)->converter->charErrorBuffer[(int)(args)->converter->charErrorBufferLength++] = (unsigned char) *(strToAppend); \
+            *(err) =U_BUFFER_OVERFLOW_ERROR;                                                                                  \
         }                                                                                                                   \
-        strToAppend++;                                                                                                      \
+        (strToAppend)++;                                                                                                      \
     }                                                                                                                       \
 }
 

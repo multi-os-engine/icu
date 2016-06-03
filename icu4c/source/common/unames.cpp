@@ -92,7 +92,7 @@ typedef struct {
  * @param names (const UCharNames *) pointer to the UCharNames indexes
  * @return (const uint16_t *) pointer to the groups table
  */
-#define GET_GROUPS(names) (const uint16_t *)((const char *)names+names->groupsOffset)
+#define GET_GROUPS(names) (const uint16_t *)((const char *)(names)+(names)->groupsOffset)
 
 typedef struct {
     const char *otherName;
@@ -117,8 +117,8 @@ static int32_t gMaxNameLength=0;
 static uint32_t gNameSet[8]={ 0 };
 
 #define U_NONCHARACTER_CODE_POINT U_CHAR_CATEGORY_COUNT
-#define U_LEAD_SURROGATE U_CHAR_CATEGORY_COUNT + 1
-#define U_TRAIL_SURROGATE U_CHAR_CATEGORY_COUNT + 2
+#define U_LEAD_SURROGATE (U_CHAR_CATEGORY_COUNT + 1)
+#define U_TRAIL_SURROGATE (U_CHAR_CATEGORY_COUNT + 2)
 
 #define U_CHAR_EXTENDED_CATEGORY_COUNT (U_CHAR_CATEGORY_COUNT + 3)
 
@@ -1195,8 +1195,8 @@ findAlgName(AlgorithmicRange *range, UCharNameChoice nameChoice, const char *oth
 
 /* sets of name characters, maximum name lengths ---------------------------- */
 
-#define SET_ADD(set, c) ((set)[(uint8_t)c>>5]|=((uint32_t)1<<((uint8_t)c&0x1f)))
-#define SET_CONTAINS(set, c) (((set)[(uint8_t)c>>5]&((uint32_t)1<<((uint8_t)c&0x1f)))!=0)
+#define SET_ADD(set, c) ((set)[(uint8_t)(c)>>5]|=((uint32_t)1<<((uint8_t)(c)&0x1f)))
+#define SET_CONTAINS(set, c) (((set)[(uint8_t)(c)>>5]&((uint32_t)1<<((uint8_t)(c)&0x1f)))!=0)
 
 static int32_t
 calcStringSetLength(uint32_t set[8], const char *s) {

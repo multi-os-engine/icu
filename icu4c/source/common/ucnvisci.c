@@ -50,7 +50,7 @@
 #define LF                  0x0A
 #define ASCII_END           0xA0
 #define NO_CHAR_MARKER      0xFFFE
-#define TELUGU_DELTA        DELTA * TELUGU
+#define TELUGU_DELTA        (DELTA * TELUGU)
 #define DEV_ABBR_SIGN       0x0970
 #define DEV_ANUDATTA        0x0952
 #define EXT_RANGE_BEGIN     0xA1
@@ -826,57 +826,57 @@ static const uint16_t nuktaSpecialCases[][2]={
 
 
 #define WRITE_TO_TARGET_FROM_U(args,offsets,source,target,targetLimit,targetByteUnit,err){      \
-    int32_t offset = (int32_t)(source - args->source-1);                                        \
+    int32_t offset = (int32_t)((source) - (args)->source-1);                                        \
       /* write the targetUniChar  to target */                                                  \
-    if(target < targetLimit){                                                                   \
-        if(targetByteUnit <= 0xFF){                                                             \
+    if((target) < (targetLimit)){                                                                   \
+        if((targetByteUnit) <= 0xFF){                                                             \
             *(target)++ = (uint8_t)(targetByteUnit);                                            \
             if(offsets){                                                                        \
-                *(offsets++) = offset;                                                          \
+                *((offsets)++) = offset;                                                          \
             }                                                                                   \
         }else{                                                                                  \
-            if (targetByteUnit > 0xFFFF) {                                                      \
-                *(target)++ = (uint8_t)(targetByteUnit>>16);                                    \
+            if ((targetByteUnit) > 0xFFFF) {                                                      \
+                *(target)++ = (uint8_t)((targetByteUnit)>>16);                                    \
                 if (offsets) {                                                                  \
                     --offset;                                                                   \
-                    *(offsets++) = offset;                                                      \
+                    *((offsets)++) = offset;                                                      \
                 }                                                                               \
             }                                                                                   \
-            if (!(target < targetLimit)) {                                                      \
-                args->converter->charErrorBuffer[args->converter->charErrorBufferLength++] =    \
-                                (uint8_t)(targetByteUnit >> 8);                                 \
-                args->converter->charErrorBuffer[args->converter->charErrorBufferLength++] =    \
-                                (uint8_t)targetByteUnit;                                        \
-                *err = U_BUFFER_OVERFLOW_ERROR;                                                 \
+            if (!((target) < (targetLimit))) {                                                      \
+                (args)->converter->charErrorBuffer[(args)->converter->charErrorBufferLength++] =    \
+                                (uint8_t)((targetByteUnit) >> 8);                                 \
+                (args)->converter->charErrorBuffer[(args)->converter->charErrorBufferLength++] =    \
+                                (uint8_t)(targetByteUnit);                                        \
+                *(err) = U_BUFFER_OVERFLOW_ERROR;                                                 \
             } else {                                                                            \
-                *(target)++ = (uint8_t)(targetByteUnit>>8);                                     \
+                *(target)++ = (uint8_t)((targetByteUnit)>>8);                                     \
                 if(offsets){                                                                    \
-                    *(offsets++) = offset;                                                      \
+                    *((offsets)++) = offset;                                                      \
                 }                                                                               \
-                if(target < targetLimit){                                                       \
-                    *(target)++ = (uint8_t)  targetByteUnit;                                    \
+                if((target) < (targetLimit)){                                                       \
+                    *(target)++ = (uint8_t)  (targetByteUnit);                                    \
                     if(offsets){                                                                \
-                        *(offsets++) = offset                            ;                      \
+                        *((offsets)++) = offset                            ;                      \
                     }                                                                           \
                 }else{                                                                          \
-                    args->converter->charErrorBuffer[args->converter->charErrorBufferLength++] =\
+                    (args)->converter->charErrorBuffer[(args)->converter->charErrorBufferLength++] =\
                                 (uint8_t) (targetByteUnit);                                     \
-                    *err = U_BUFFER_OVERFLOW_ERROR;                                             \
+                    *(err) = U_BUFFER_OVERFLOW_ERROR;                                             \
                 }                                                                               \
             }                                                                                   \
         }                                                                                       \
     }else{                                                                                      \
-        if (targetByteUnit & 0xFF0000) {                                                        \
-            args->converter->charErrorBuffer[args->converter->charErrorBufferLength++] =        \
-                        (uint8_t) (targetByteUnit >>16);                                        \
+        if ((targetByteUnit) & 0xFF0000) {                                                        \
+            (args)->converter->charErrorBuffer[(args)->converter->charErrorBufferLength++] =        \
+                        (uint8_t) ((targetByteUnit) >>16);                                        \
         }                                                                                       \
-        if(targetByteUnit & 0xFF00){                                                            \
-            args->converter->charErrorBuffer[args->converter->charErrorBufferLength++] =        \
-                        (uint8_t) (targetByteUnit >>8);                                         \
+        if((targetByteUnit) & 0xFF00){                                                            \
+            (args)->converter->charErrorBuffer[(args)->converter->charErrorBufferLength++] =        \
+                        (uint8_t) ((targetByteUnit) >>8);                                         \
         }                                                                                       \
-        args->converter->charErrorBuffer[args->converter->charErrorBufferLength++] =            \
+        (args)->converter->charErrorBuffer[(args)->converter->charErrorBufferLength++] =            \
                         (uint8_t) (targetByteUnit);                                             \
-        *err = U_BUFFER_OVERFLOW_ERROR;                                                         \
+        *(err) = U_BUFFER_OVERFLOW_ERROR;                                                         \
     }                                                                                           \
 }
 
@@ -1115,36 +1115,36 @@ static const uint16_t lookupTable[][2]={
 
 #define WRITE_TO_TARGET_TO_U(args,source,target,offsets,offset,targetUniChar,delta, err){\
     /* add offset to current Indic Block */                                              \
-    if(targetUniChar>ASCII_END &&                                                        \
-           targetUniChar != ZWJ &&                                                       \
-           targetUniChar != ZWNJ &&                                                      \
-           targetUniChar != DANDA &&                                                     \
-           targetUniChar != DOUBLE_DANDA){                                               \
+    if((targetUniChar)>ASCII_END &&                                                        \
+           (targetUniChar) != ZWJ &&                                                       \
+           (targetUniChar) != ZWNJ &&                                                      \
+           (targetUniChar) != DANDA &&                                                     \
+           (targetUniChar) != DOUBLE_DANDA){                                               \
                                                                                          \
-           targetUniChar+=(uint16_t)(delta);                                             \
+           (targetUniChar)+=(uint16_t)(delta);                                             \
     }                                                                                    \
     /* now write the targetUniChar */                                                    \
-    if(target<args->targetLimit){                                                        \
-        *(target)++ = (UChar)targetUniChar;                                              \
+    if((target)<(args)->targetLimit){                                                        \
+        *(target)++ = (UChar)(targetUniChar);                                              \
         if(offsets){                                                                     \
             *(offsets)++ = (int32_t)(offset);                                            \
         }                                                                                \
     }else{                                                                               \
-        args->converter->UCharErrorBuffer[args->converter->UCharErrorBufferLength++] =   \
-            (UChar)targetUniChar;                                                        \
-        *err = U_BUFFER_OVERFLOW_ERROR;                                                  \
+        (args)->converter->UCharErrorBuffer[(args)->converter->UCharErrorBufferLength++] =   \
+            (UChar)(targetUniChar);                                                        \
+        *(err) = U_BUFFER_OVERFLOW_ERROR;                                                  \
     }                                                                                    \
 }
 
 #define GET_MAPPING(sourceChar,targetUniChar,data){                                      \
-    targetUniChar = toUnicodeTable[(sourceChar)] ;                                       \
+    (targetUniChar) = toUnicodeTable[(sourceChar)] ;                                       \
     /* is the code point valid in current script? */                                     \
-    if(sourceChar> ASCII_END &&                                                          \
-            (validityTable[(targetUniChar & 0x7F)] & data->currentMaskToUnicode)==0){    \
+    if((sourceChar)> ASCII_END &&                                                          \
+            (validityTable[((targetUniChar) & 0x7F)] & (data)->currentMaskToUnicode)==0){    \
         /* Vocallic RR is assigne in ISCII Telugu and Unicode */                         \
-        if(data->currentDeltaToUnicode!=(TELUGU_DELTA) ||                                \
-                    targetUniChar!=VOCALLIC_RR){                                         \
-            targetUniChar=missingCharMarker;                                             \
+        if((data)->currentDeltaToUnicode!=(TELUGU_DELTA) ||                                \
+                    (targetUniChar)!=VOCALLIC_RR){                                         \
+            (targetUniChar)=missingCharMarker;                                             \
         }                                                                                \
     }                                                                                    \
 }

@@ -109,7 +109,7 @@ ucnv_extFindToU(const uint32_t *toUSection, int32_t length, uint8_t byte) {
  * or if the match length fits with the current converter state
  */
 #define UCNV_EXT_TO_U_VERIFY_SISO_MATCH(sisoState, match) \
-    ((sisoState)<0 || ((sisoState)==0) == (match==1))
+    ((sisoState)<0 || ((sisoState)==0) == ((match)==1))
 
 /*
  * this works like ucnv_extMatchFromU() except

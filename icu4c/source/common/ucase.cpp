@@ -121,11 +121,11 @@ static const uint8_t flagsOffset[256]={
 #define GET_SLOT_VALUE(excWord, idx, pExc16, value) \
     if(((excWord)&UCASE_EXC_DOUBLE_SLOTS)==0) { \
         (pExc16)+=SLOT_OFFSET(excWord, idx); \
-        (value)=*pExc16; \
+        (value)=*(pExc16); \
     } else { \
         (pExc16)+=2*SLOT_OFFSET(excWord, idx); \
-        (value)=*pExc16++; \
-        (value)=((value)<<16)|*pExc16; \
+        (value)=*(pExc16)++; \
+        (value)=((value)<<16)|*(pExc16); \
     }
 
 /* simple case mappings ----------------------------------------------------- */

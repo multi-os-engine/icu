@@ -39,7 +39,7 @@
 
 U_NAMESPACE_BEGIN
 
-#define ARRAY_SIZE(array) (int32_t)(sizeof array  / sizeof array[0])
+#define ARRAY_SIZE(array) (int32_t)(sizeof (array)  / sizeof (array)[0])
 
 static const UChar PLURAL_KEYWORD_OTHER[]={LOW_O,LOW_T,LOW_H,LOW_E,LOW_R,0};
 static const UChar PLURAL_DEFAULT_RULE[]={LOW_O,LOW_T,LOW_H,LOW_E,LOW_R,COLON,SPACE,LOW_N,0};

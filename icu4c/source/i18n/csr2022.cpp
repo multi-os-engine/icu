@@ -16,7 +16,7 @@
 
 U_NAMESPACE_BEGIN
 
-#define ARRAY_SIZE(array) (sizeof array / sizeof array[0])
+#define ARRAY_SIZE(array) (sizeof (array) / sizeof (array)[0])
 
 /**
  * Matching function shared among the 2022 detectors JP, CN and KR

@@ -860,7 +860,7 @@ const UConverterSharedData _UTF7Data=
 #define isLegalIMAP(c) (0x20<=(c) && (c)<=0x7e)
 
 /* direct-encode all of printable ASCII 0x20..0x7e except '&' 0x26 */
-#define inSetDIMAP(c) (isLegalIMAP(c) && c!=AMPERSAND)
+#define inSetDIMAP(c) (isLegalIMAP(c) && (c)!=AMPERSAND)
 
 #define TO_BASE64_IMAP(n) ((n)<63 ? toBase64[n] : COMMA)
 #define FROM_BASE64_IMAP(c) ((c)==COMMA ? 63 : (c)==SLASH ? -1 : fromBase64[c])

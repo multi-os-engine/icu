@@ -17,7 +17,7 @@
 #include "usc_impl.h"
 #include "cmemory.h"
 
-#define ARRAY_SIZE(array) (sizeof array  / sizeof array[0])
+#define ARRAY_SIZE(array) (sizeof (array)  / sizeof (array)[0])
 
 #define PAREN_STACK_DEPTH 32
 

@@ -142,7 +142,7 @@
 * been returned, and by first() and last() if there are no matches at all.
 * @stable ICU 2.4
 */
-#define USEARCH_DONE -1
+#define USEARCH_DONE (-1)
 
 /**
 * Data structure for searching
