@@ -57,7 +57,7 @@ static int8_t U_CALLCONV compareUnicodeString(UElement t1, UElement t2) {
  */
 class U_COMMON_API UStringSet : public UVector {
  public:
-  UStringSet(UErrorCode &status) : UVector(uprv_deleteUObject,
+  explicit UStringSet(UErrorCode &status) : UVector(uprv_deleteUObject,
                                            uhash_compareUnicodeString,
                                            1,
                                            status) {}
@@ -455,7 +455,7 @@ class U_COMMON_API SimpleFilteredBreakIteratorBuilder : public FilteredBreakIter
 public:
   virtual ~SimpleFilteredBreakIteratorBuilder();
   SimpleFilteredBreakIteratorBuilder(const Locale &fromLocale, UErrorCode &status);
-  SimpleFilteredBreakIteratorBuilder(UErrorCode &status);
+  explicit SimpleFilteredBreakIteratorBuilder(UErrorCode &status);
   virtual UBool suppressBreakAfter(const UnicodeString& exception, UErrorCode& status);
   virtual UBool unsuppressBreakAfter(const UnicodeString& exception, UErrorCode& status);
   virtual BreakIterator *build(BreakIterator* adoptBreakIterator, UErrorCode& status);

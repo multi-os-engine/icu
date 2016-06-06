@@ -231,7 +231,7 @@ struct DateIntervalSink : public ResourceTableSink {
      * Sink to handle each skeleton table.
      */
     struct SkeletonSink : public ResourceTableSink {
-        SkeletonSink(DateIntervalSink &sink) : outer(sink) {}
+        explicit SkeletonSink(DateIntervalSink &sink) : outer(sink) {}
         virtual ~SkeletonSink();
 
         virtual ResourceTableSink *getOrCreateTableSink(
@@ -250,7 +250,7 @@ struct DateIntervalSink : public ResourceTableSink {
      * Sink to store the date interval pattern for each skeleton pattern character.
      */
     struct PatternSink : public ResourceTableSink {
-        PatternSink(DateIntervalSink &sink) : outer(sink) {}
+        explicit PatternSink(DateIntervalSink &sink) : outer(sink) {}
         virtual ~PatternSink();
 
         virtual void put(const char *key, const ResourceValue &value, UErrorCode &errorCode) {

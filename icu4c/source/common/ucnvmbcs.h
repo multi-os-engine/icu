@@ -277,17 +277,17 @@ enum {
 
 #define MBCS_ENTRY_SET_STATE(entry, state) (int32_t)(((entry)&0x80ffffff)|((int32_t)(state)<<24L))
 
-#define MBCS_ENTRY_STATE(entry) ((((uint32_t)entry)>>24)&0x7f)
+#define MBCS_ENTRY_STATE(entry) ((((uint32_t)(entry))>>24)&0x7f)
 
 #define MBCS_ENTRY_IS_TRANSITION(entry) ((entry)>=0)
 #define MBCS_ENTRY_IS_FINAL(entry) ((entry)<0)
 
-#define MBCS_ENTRY_TRANSITION_STATE(entry) (((uint32_t)entry)>>24)
+#define MBCS_ENTRY_TRANSITION_STATE(entry) (((uint32_t)(entry))>>24)
 #define MBCS_ENTRY_TRANSITION_OFFSET(entry) ((entry)&0xffffff)
 
-#define MBCS_ENTRY_FINAL_STATE(entry) ((((uint32_t)entry)>>24)&0x7f)
+#define MBCS_ENTRY_FINAL_STATE(entry) ((((uint32_t)(entry))>>24)&0x7f)
 #define MBCS_ENTRY_FINAL_IS_VALID_DIRECT_16(entry) ((entry)<(int32_t)0x80100000)
-#define MBCS_ENTRY_FINAL_ACTION(entry) ((((uint32_t)entry)>>20)&0xf)
+#define MBCS_ENTRY_FINAL_ACTION(entry) ((((uint32_t)(entry))>>20)&0xf)
 #define MBCS_ENTRY_FINAL_VALUE(entry) ((entry)&0xfffff)
 #define MBCS_ENTRY_FINAL_VALUE_16(entry) (uint16_t)(entry)
 

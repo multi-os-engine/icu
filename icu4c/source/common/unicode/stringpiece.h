@@ -65,13 +65,13 @@ class U_COMMON_API StringPiece : public UMemory {
    * @param str a NUL-terminated const char * pointer
    * @stable ICU 4.2
    */
-  StringPiece(const char* str);
+  explicit StringPiece(const char* str);
 #if U_HAVE_STD_STRING
   /**
    * Constructs from a std::string.
    * @stable ICU 4.2
    */
-  StringPiece(const std::string& str)
+  explicit StringPiece(const std::string& str)
     : ptr_(str.data()), length_(static_cast<int32_t>(str.size())) { }
 #endif
   /**

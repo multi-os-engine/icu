@@ -40,7 +40,7 @@ struct CollationData;
  */
 class TailoredSet : public UMemory {
 public:
-    TailoredSet(UnicodeSet *t)
+    explicit TailoredSet(UnicodeSet *t)
             : data(NULL), baseData(NULL),
               tailored(t),
               suffix(NULL),

@@ -449,7 +449,7 @@ struct AllowedHourFormatsSink : public ResourceTableSink {
 
     struct LocaleSink : public ResourceTableSink {
         AllowedHourFormatsSink &outer;
-        LocaleSink(AllowedHourFormatsSink &outer) : outer(outer) {}
+        explicit LocaleSink(AllowedHourFormatsSink &outer) : outer(outer) {}
         virtual ~LocaleSink();
 
         virtual void put(const char *key, const ResourceValue &value, UErrorCode &status) {
@@ -494,7 +494,7 @@ struct AllowedHourFormatsSink : public ResourceTableSink {
 
     struct AllowedListSink : public ResourceArraySink {
         AllowedHourFormatsSink &outer;
-        AllowedListSink(AllowedHourFormatsSink &outer) : outer(outer) {}
+        explicit AllowedListSink(AllowedHourFormatsSink &outer) : outer(outer) {}
         virtual ~AllowedListSink();
 
         virtual void put(int32_t index, const ResourceValue &value, UErrorCode &status) {

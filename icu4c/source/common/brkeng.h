@@ -164,7 +164,7 @@ class UnhandledEngine : public LanguageBreakEngine {
    * <p>Default constructor.</p>
    *
    */
-  UnhandledEngine(UErrorCode &status);
+  explicit UnhandledEngine(UErrorCode &status);
 
   /**
    * <p>Virtual destructor.</p>
@@ -238,7 +238,7 @@ class ICULanguageBreakFactory : public LanguageBreakFactory {
    * <p>Standard constructor.</p>
    *
    */
-  ICULanguageBreakFactory(UErrorCode &status);
+  explicit ICULanguageBreakFactory(UErrorCode &status);
 
   /**
    * <p>Virtual destructor.</p>

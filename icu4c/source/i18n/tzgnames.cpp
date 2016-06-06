@@ -122,7 +122,7 @@ U_CDECL_END
 // ---------------------------------------------------
 class TimeZoneGenericNameMatchInfo : public UMemory {
 public:
-    TimeZoneGenericNameMatchInfo(UVector* matches);
+    explicit TimeZoneGenericNameMatchInfo(UVector* matches);
     ~TimeZoneGenericNameMatchInfo();
 
     int32_t size() const;
@@ -186,7 +186,7 @@ TimeZoneGenericNameMatchInfo::getTimeZoneID(int32_t index, UnicodeString& tzID) 
 // ---------------------------------------------------
 class GNameSearchHandler : public TextTrieMapSearchResultHandler {
 public:
-    GNameSearchHandler(uint32_t types);
+    explicit GNameSearchHandler(uint32_t types);
     virtual ~GNameSearchHandler();
 
     UBool handleMatch(int32_t matchLength, const CharacterNode *node, UErrorCode &status);

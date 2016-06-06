@@ -44,7 +44,7 @@ public:
                                         //    (Contains ptrs to uset nodes)
     RangeDescriptor   *fNext;           // Next RangeDescriptor in the linked list.
 
-    RangeDescriptor(UErrorCode &status);
+    explicit RangeDescriptor(UErrorCode &status);
     RangeDescriptor(const RangeDescriptor &other, UErrorCode &status);
     ~RangeDescriptor();
     void split(UChar32 where, UErrorCode &status);   // Spit this range in two at "where", with
@@ -75,7 +75,7 @@ private:
 
 class RBBISetBuilder : public UMemory {
 public:
-    RBBISetBuilder(RBBIRuleBuilder *rb);
+    explicit RBBISetBuilder(RBBIRuleBuilder *rb);
     ~RBBISetBuilder();
 
     void     build();

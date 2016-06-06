@@ -95,21 +95,21 @@ public:
      * @param d the double number.
      * @stable ICU 2.0
      */
-    Formattable(double d);
+    explicit Formattable(double d);
 
     /**
      * Creates a Formattable object with a long number.
      * @param l the long number.
      * @stable ICU 2.0
      */
-    Formattable(int32_t l);
+    explicit Formattable(int32_t l);
 
     /**
      * Creates a Formattable object with an int64_t number
      * @param ll the int64_t number.
      * @stable ICU 2.8
      */
-    Formattable(int64_t ll);
+    explicit Formattable(int64_t ll);
 
 #if !UCONFIG_NO_CONVERSION
     /**
@@ -118,7 +118,7 @@ public:
      * @param strToCopy the char string.
      * @stable ICU 2.0
      */
-    Formattable(const char* strToCopy);
+    explicit Formattable(const char* strToCopy);
 #endif
 
     /**
@@ -141,14 +141,14 @@ public:
      * @param strToCopy the UnicodeString string.
      * @stable ICU 2.0
      */
-    Formattable(const UnicodeString& strToCopy);
+    explicit Formattable(const UnicodeString& strToCopy);
 
     /**
      * Creates a Formattable object with a UnicodeString object to adopt from.
      * @param strToAdopt the UnicodeString string.
      * @stable ICU 2.0
      */
-    Formattable(UnicodeString* strToAdopt);
+    explicit Formattable(UnicodeString* strToAdopt);
 
     /**
      * Creates a Formattable object with an array of Formattable objects.
@@ -163,7 +163,7 @@ public:
      * @param objectToAdopt the UObject to set this object to
      * @stable ICU 3.0
      */
-    Formattable(UObject* objectToAdopt);
+    explicit Formattable(UObject* objectToAdopt);
 
     /**
      * Copy constructor.

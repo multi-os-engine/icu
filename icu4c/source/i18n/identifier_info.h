@@ -48,7 +48,7 @@ class U_I18N_API IdentifierInfo : public UMemory {
      * Create an identifier info object. Subsequently, call setIdentifier(), etc.
      * @internal
      */
-    IdentifierInfo(UErrorCode &status);
+    explicit IdentifierInfo(UErrorCode &status);
 
     /**
       * Destructor

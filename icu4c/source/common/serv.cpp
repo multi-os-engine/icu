@@ -279,7 +279,7 @@ public:
     Hashtable cache;
     const Locale locale;
 
-    DNCache(const Locale& _locale) 
+    explicit DNCache(const Locale& _locale) 
         : cache(), locale(_locale) 
     {
         // cache.setKeyDeleter(uprv_deleteUObject);

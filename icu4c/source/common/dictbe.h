@@ -59,7 +59,7 @@ class DictionaryBreakEngine : public LanguageBreakEngine {
    *
    * @param breakTypes A bitmap of types handled by the engine.
    */
-  DictionaryBreakEngine( uint32_t breakTypes );
+  explicit DictionaryBreakEngine( uint32_t breakTypes );
 
   /**
    * <p>Virtual destructor.</p>

@@ -881,7 +881,7 @@ static DateTimeRule* toWallTimeRule(const DateTimeRule* rule, int32_t rawOffset,
  */
 class VTZWriter {
 public:
-    VTZWriter(UnicodeString& out);
+    explicit VTZWriter(UnicodeString& out);
     ~VTZWriter();
 
     void write(const UnicodeString& str);
@@ -923,7 +923,7 @@ VTZWriter::write(const UChar* str, int32_t length) {
 
 class VTZReader {
 public:
-    VTZReader(const UnicodeString& input);
+    explicit VTZReader(const UnicodeString& input);
     ~VTZReader();
 
     UChar read(void);

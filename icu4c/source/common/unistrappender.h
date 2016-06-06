@@ -41,7 +41,7 @@ public:
      * dest is the UnicodeString being appended to. It must always
      * exist while this instance exists.
      */
-    UnicodeStringAppender(UnicodeString &dest) : fDest(&dest), fIdx(0) { }
+    explicit UnicodeStringAppender(UnicodeString &dest) : fDest(&dest), fIdx(0) { }
 
     inline void append(UChar x) {
         if (fIdx == UPRV_LENGTHOF(fBuffer)) {

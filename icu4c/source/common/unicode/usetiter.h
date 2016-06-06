@@ -104,7 +104,7 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
      * @param set set to iterate over
      * @stable ICU 2.4
      */
-    UnicodeSetIterator(const UnicodeSet& set);
+    explicit UnicodeSetIterator(const UnicodeSet& set);
 
     /**
      * Create an iterator over nothing.  <tt>next()</tt> and

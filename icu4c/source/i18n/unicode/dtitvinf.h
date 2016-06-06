@@ -164,7 +164,7 @@ public:
      * @param status   output param set to success/failure code on exit
      * @internal ICU 4.0
      */
-    DateIntervalInfo(UErrorCode& status);
+    explicit DateIntervalInfo(UErrorCode& status);
 #endif  /* U_HIDE_INTERNAL_API */
 
 

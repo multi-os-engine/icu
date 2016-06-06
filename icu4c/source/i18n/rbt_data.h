@@ -102,7 +102,7 @@ public:
      * Constructor
      * @param status Output param set to success/failure code on exit.
      */
-    TransliterationRuleData(UErrorCode& status);
+    explicit TransliterationRuleData(UErrorCode& status);
 
     /**
      * Copy Constructor

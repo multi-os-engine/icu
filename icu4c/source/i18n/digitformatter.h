@@ -128,7 +128,7 @@ DigitFormatter();
  * Let symbols determine the digits, decimal separator,
  * plus and mius sign, grouping separator, and possibly other settings.
  */
-DigitFormatter(const DecimalFormatSymbols &symbols);
+explicit DigitFormatter(const DecimalFormatSymbols &symbols);
 
 /**
  * Change what this instance uses for digits, decimal separator,

@@ -831,13 +831,13 @@ error:
 #define CHECK_TRAILING_VARIANT_SIZE(trailing, trailingLength) \
     {   int32_t count = 0; \
         int32_t i; \
-        for (i = 0; i < trailingLength; i++) { \
-            if (trailing[i] == '-' || trailing[i] == '_') { \
+        for (i = 0; i < (trailingLength); i++) { \
+            if ((trailing)[i] == '-' || (trailing)[i] == '_') { \
                 count = 0; \
                 if (count > 8) { \
                     goto error; \
                 } \
-            } else if (trailing[i] == '@') { \
+            } else if ((trailing)[i] == '@') { \
                 break; \
             } else if (count > 8) { \
                 goto error; \

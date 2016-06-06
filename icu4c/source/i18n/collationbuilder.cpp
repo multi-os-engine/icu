@@ -1578,7 +1578,7 @@ CollationBuilder::countTailoredNodes(const int64_t *nodesArray, int32_t i, int32
 
 class CEFinalizer : public CollationDataBuilder::CEModifier {
 public:
-    CEFinalizer(const int64_t *ces) : finalCEs(ces) {}
+    explicit CEFinalizer(const int64_t *ces) : finalCEs(ces) {}
     virtual ~CEFinalizer();
     virtual int64_t modifyCE32(uint32_t ce32) const {
         U_ASSERT(!Collation::isSpecialCE32(ce32));

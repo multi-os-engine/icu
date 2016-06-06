@@ -49,7 +49,7 @@ public:
    * @param textStr The unicode string used to create an iterator
    * @stable ICU 2.0
    */
-  StringCharacterIterator(const UnicodeString& textStr);
+  explicit StringCharacterIterator(const UnicodeString& textStr);
 
   /**
    * Create an iterator over the UnicodeString referred to by "textStr".

@@ -127,7 +127,7 @@ public:
      * @param err A UErrorCode value
      * @stable ICU 2.0
      */
-    ResourceBundle(UErrorCode &err);
+    explicit ResourceBundle(UErrorCode &err);
 
     /**
      * Standard constructor, onstructs a resource bundle for the locale-specific

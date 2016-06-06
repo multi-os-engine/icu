@@ -47,7 +47,7 @@
         (const char *)(pResData)->pRoot+(keyOffset) : \
         (pResData)->poolBundleKeys+((keyOffset)&0x7fffffff))
 
-#define URESDATA_ITEM_NOT_FOUND -1
+#define URESDATA_ITEM_NOT_FOUND (-1)
 
 /* empty resources, returned when the resource offset is 0 */
 static const uint16_t gEmpty16=0;

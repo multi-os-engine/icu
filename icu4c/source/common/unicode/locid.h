@@ -264,7 +264,7 @@ public:
      * @see uloc_getDefault
      * @stable ICU 2.0
      */
-    Locale( const   char * language,
+    explicit Locale( const   char * language,
             const   char * country  = 0,
             const   char * variant  = 0,
             const   char * keywordsAndValues = 0);
@@ -733,7 +733,7 @@ private:
     enum ELocaleType {
         eBOGUS
     };
-    Locale(ELocaleType);
+    explicit Locale(ELocaleType);
 
     /**
      * Initialize the locale cache for commonly used locales

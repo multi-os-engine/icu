@@ -291,7 +291,7 @@ private:
 
 class U_I18N_API PluralAvailableLocalesEnumeration: public StringEnumeration {
   public:
-    PluralAvailableLocalesEnumeration(UErrorCode &status);
+    explicit PluralAvailableLocalesEnumeration(UErrorCode &status);
     virtual ~PluralAvailableLocalesEnumeration();
     virtual const char* next(int32_t *resultLength, UErrorCode& status);
     virtual void reset(UErrorCode& status);
