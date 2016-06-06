@@ -90,7 +90,7 @@ private:
     UElementsAreEqual *comparer;
 
 public:
-    UVector(UErrorCode &status);
+    explicit UVector(UErrorCode &status);
 
     UVector(int32_t initialCapacity, UErrorCode &status);
 
@@ -294,7 +294,7 @@ private:
  */
 class U_COMMON_API UStack : public UVector {
 public:
-    UStack(UErrorCode &status);
+    explicit UStack(UErrorCode &status);
 
     UStack(int32_t initialCapacity, UErrorCode &status);
 

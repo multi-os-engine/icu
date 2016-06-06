@@ -82,7 +82,7 @@ public:
      * @param lon The ecliptic longitude, measured in radians.
      * @internal
      */
-    Ecliptic(double lat = 0, double lon = 0) {
+    explicit Ecliptic(double lat = 0, double lon = 0) {
       latitude = lat;
       longitude = lon;
     }
@@ -151,7 +151,7 @@ public:
      * @param dec The declination, measured in radians.
      * @internal
      */
-    Equatorial(double asc = 0, double dec = 0)
+    explicit Equatorial(double asc = 0, double dec = 0)
       : ascension(asc), declination(dec) { }
 
     /**
@@ -225,7 +225,7 @@ public:
      * @param azim The azimuth, measured in radians clockwise from north.
      * @internal
      */
-    Horizon(double alt=0, double azim=0)
+    explicit Horizon(double alt=0, double azim=0)
       : altitude(alt), azimuth(azim) { }
 
     /**
@@ -296,7 +296,7 @@ public:
    * the specified date and time.
    * @internal
    */
-  CalendarAstronomer(UDate d);
+  explicit CalendarAstronomer(UDate d);
 
   /**
    * Construct a new <code>CalendarAstronomer</code> object with the given
@@ -585,7 +585,7 @@ public:
 
   class U_I18N_API MoonAge : public UMemory {
   public:
-    MoonAge(double l)
+    explicit MoonAge(double l)
       :  value(l) { }
     void set(double l) { value = l; }
     double value;

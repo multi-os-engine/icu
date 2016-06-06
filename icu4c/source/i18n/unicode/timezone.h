@@ -818,7 +818,7 @@ protected:
      * @param id a system time zone ID
      * @stable ICU 2.0
      */
-    TimeZone(const UnicodeString &id);
+    explicit TimeZone(const UnicodeString &id);
 
     /**
      * Copy constructor.

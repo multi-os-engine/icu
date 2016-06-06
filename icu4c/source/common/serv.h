@@ -81,7 +81,7 @@ class U_COMMON_API ICUServiceKey : public UObject {
    *
    * @param id the ID from which to construct the key.
    */
-  ICUServiceKey(const UnicodeString& id);
+  explicit ICUServiceKey(const UnicodeString& id);
 
   /**
    * <p>Virtual destructor.</p>
@@ -569,7 +569,7 @@ class U_COMMON_API ICUService : public ICUNotifier {
      *
      * @param name a name to use in debugging.
      */
-    ICUService(const UnicodeString& name);
+    explicit ICUService(const UnicodeString& name);
 
     /**
      * <p>Destructor.</p>

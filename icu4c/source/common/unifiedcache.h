@@ -135,7 +135,7 @@ class LocaleCacheKey : public CacheKey<T> {
  protected:
    Locale   fLoc;
  public:
-   LocaleCacheKey(const Locale &loc) : fLoc(loc) {};
+   explicit LocaleCacheKey(const Locale &loc) : fLoc(loc) {};
    LocaleCacheKey(const LocaleCacheKey<T> &other)
            : CacheKey<T>(other), fLoc(other.fLoc) { }
    virtual ~LocaleCacheKey() { }
@@ -185,7 +185,7 @@ class U_COMMON_API UnifiedCache : public UnifiedCacheBase {
     * Do not call directly. Instead use UnifiedCache::getInstance() as
     * there should be only one UnifiedCache in an application.
     */
-   UnifiedCache(UErrorCode &status);
+   explicit UnifiedCache(UErrorCode &status);
 
    /**
     * Returns the cache instance.

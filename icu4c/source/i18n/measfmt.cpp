@@ -219,7 +219,7 @@ struct UnitDataSink : public ResourceTableSink {
      * unitsShort/duration/hour contains other{"{0} hrs"}.
      */
     struct UnitPatternSink : public ResourceTableSink {
-        UnitPatternSink(UnitDataSink &sink) : outer(sink) {}
+        explicit UnitPatternSink(UnitDataSink &sink) : outer(sink) {}
         ~UnitPatternSink();
 
         void setFormatterIfAbsent(int32_t index, const ResourceValue &value,
@@ -258,7 +258,7 @@ struct UnitDataSink : public ResourceTableSink {
      * unitsShort/duration contains tables for duration-unit subtypes day & hour.
      */
     struct UnitSubtypeSink : public ResourceTableSink {
-        UnitSubtypeSink(UnitDataSink &sink) : outer(sink) {}
+        explicit UnitSubtypeSink(UnitDataSink &sink) : outer(sink) {}
         ~UnitSubtypeSink();
         virtual ResourceTableSink *getOrCreateTableSink(
                 const char *key, int32_t /* initialSize */, UErrorCode &errorCode) {
@@ -277,7 +277,7 @@ struct UnitDataSink : public ResourceTableSink {
      * unitsShort/compound/per may be "{0}/{1}".
      */
     struct UnitCompoundSink : public ResourceTableSink {
-        UnitCompoundSink(UnitDataSink &sink) : outer(sink) {}
+        explicit UnitCompoundSink(UnitDataSink &sink) : outer(sink) {}
         ~UnitCompoundSink();
         virtual void put(const char *key, const ResourceValue &value, UErrorCode &errorCode) {
             if (U_SUCCESS(errorCode) && uprv_strcmp(key, "per") == 0) {
@@ -294,7 +294,7 @@ struct UnitDataSink : public ResourceTableSink {
      * It also contains a table for the compound/per pattern.
      */
     struct UnitTypeSink : public ResourceTableSink {
-        UnitTypeSink(UnitDataSink &sink) : outer(sink) {}
+        explicit UnitTypeSink(UnitDataSink &sink) : outer(sink) {}
         ~UnitTypeSink();
         virtual ResourceTableSink *getOrCreateTableSink(
                 const char *key, int32_t /* initialSize */, UErrorCode &errorCode) {
@@ -314,7 +314,7 @@ struct UnitDataSink : public ResourceTableSink {
         UnitDataSink &outer;
     } typeSink;
 
-    UnitDataSink(MeasureFormatCacheData &outputData)
+    explicit UnitDataSink(MeasureFormatCacheData &outputData)
             : patternSink(*this), subtypeSink(*this), compoundSink(*this), typeSink(*this),
               cacheData(outputData),
               width(UMEASFMT_WIDTH_COUNT), type(NULL), unitIndex(0) {}

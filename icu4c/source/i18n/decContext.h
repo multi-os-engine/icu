@@ -104,7 +104,7 @@
   #define DEC_MAX_EMAX   999999999
   #define DEC_MIN_EMAX           0
   #define DEC_MAX_EMIN           0
-  #define DEC_MIN_EMIN  -999999999
+  #define DEC_MIN_EMIN  (-999999999)
   #define DEC_MAX_MATH      999999 /* max emax, etc., for math funcs. */
 
   /* Classifications for decimal numbers, aligned with 754 (note that */

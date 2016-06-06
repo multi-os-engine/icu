@@ -84,8 +84,8 @@ private:
     uint32_t           variableTop;
 
 public:
-    UCollationPCE(UCollationElements *elems);
-    UCollationPCE(CollationElementIterator *iter);
+    explicit UCollationPCE(UCollationElements *elems);
+    explicit UCollationPCE(CollationElementIterator *iter);
     ~UCollationPCE();
 
     void init(UCollationElements *elems);

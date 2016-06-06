@@ -40,7 +40,7 @@ U_NAMESPACE_BEGIN
 
 class U_COMMON_API CStr : public UMemory {
   public:
-    CStr(const UnicodeString &in);
+    explicit CStr(const UnicodeString &in);
     ~CStr();
     const char * operator ()() const;
 

@@ -454,7 +454,7 @@ protected:
      * @see #handlePrev
      * @stable ICU 2.0
      */
-    SearchIterator(const UnicodeString &text, 
+    explicit SearchIterator(const UnicodeString &text, 
                          BreakIterator *breakiter = NULL);
 
     /**
@@ -476,7 +476,7 @@ protected:
      * @see #handlePrev
      * @stable ICU 2.0
      */
-    SearchIterator(CharacterIterator &text, BreakIterator *breakiter = NULL);
+    explicit SearchIterator(CharacterIterator &text, BreakIterator *breakiter = NULL);
 
     // protected methods --------------------------------------------------
 

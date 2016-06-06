@@ -67,7 +67,7 @@ public:
      * Construct a new empty rule set.
      * @param status    Output parameter filled in with success or failure status.
      */
-    TransliterationRuleSet(UErrorCode& status);
+    explicit TransliterationRuleSet(UErrorCode& status);
 
     /**
      * Copy constructor.

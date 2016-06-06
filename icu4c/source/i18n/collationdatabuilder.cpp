@@ -123,7 +123,7 @@ U_CDECL_END
  */
 class DataBuilderCollationIterator : public CollationIterator {
 public:
-    DataBuilderCollationIterator(CollationDataBuilder &b);
+    explicit DataBuilderCollationIterator(CollationDataBuilder &b);
 
     virtual ~DataBuilderCollationIterator();
 

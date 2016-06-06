@@ -18,7 +18,7 @@ class NumberFormat;
 
 class U_I18N_API SharedNumberFormat : public SharedObject {
 public:
-    SharedNumberFormat(NumberFormat *nfToAdopt) : ptr(nfToAdopt) { }
+    explicit SharedNumberFormat(NumberFormat *nfToAdopt) : ptr(nfToAdopt) { }
     virtual ~SharedNumberFormat();
     const NumberFormat *get() const { return ptr; }
     const NumberFormat *operator->() const { return ptr; }

@@ -365,7 +365,7 @@ public:
      *                  function chaining. (See User Guide for details.)
      * @stable ICU 4.8
      */
-    MessagePattern(UErrorCode &errorCode);
+    explicit MessagePattern(UErrorCode &errorCode);
 
     /**
      * Constructs an empty MessagePattern.

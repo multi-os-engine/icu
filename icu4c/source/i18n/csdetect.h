@@ -35,7 +35,7 @@ private:
                                 // corresponding to fCSRecognizers. See setDetectableCharset().
 
 public:
-    CharsetDetector(UErrorCode &status);
+    explicit CharsetDetector(UErrorCode &status);
 
     ~CharsetDetector();
 

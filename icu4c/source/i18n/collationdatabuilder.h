@@ -58,7 +58,7 @@ public:
         virtual int64_t modifyCE(int64_t ce) const = 0;
     };
 
-    CollationDataBuilder(UErrorCode &errorCode);
+    explicit CollationDataBuilder(UErrorCode &errorCode);
 
     virtual ~CollationDataBuilder();
 

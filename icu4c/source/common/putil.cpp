@@ -683,7 +683,7 @@ static char *gTimeZoneBufferPtr = NULL;
 #endif
 
 #if !U_PLATFORM_USES_ONLY_WIN32_API
-#define isNonDigit(ch) (ch < '0' || '9' < ch)
+#define isNonDigit(ch) ((ch) < '0' || '9' < (ch))
 static UBool isValidOlsonID(const char *id) {
     int32_t idx = 0;
 
@@ -727,7 +727,7 @@ static void skipZoneIDPrefix(const char** id) {
 
 #if defined(U_TZNAME) && !U_PLATFORM_USES_ONLY_WIN32_API
 
-#define CONVERT_HOURS_TO_SECONDS(offset) (int32_t)(offset*3600)
+#define CONVERT_HOURS_TO_SECONDS(offset) (int32_t)((offset)*3600)
 typedef struct OffsetZoneMapping {
     int32_t offsetSeconds;
     int32_t daylightType; /* 0=U_DAYLIGHT_NONE, 1=daylight in June-U_DAYLIGHT_JUNE, 2=daylight in December=U_DAYLIGHT_DECEMBER*/

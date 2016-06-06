@@ -129,7 +129,7 @@ public:
      * @see DateFormat#MONTH_FIELD
      * @stable ICU 2.0
      */
-    FieldPosition(int32_t field) 
+    explicit FieldPosition(int32_t field) 
         : UObject(), fField(field), fBeginIndex(0), fEndIndex(0) {}
 
     /**

@@ -42,7 +42,7 @@ public:
      * @param errorCode Standard ICU error code.
      * @stable ICU 4.8
      */
-    UCharsTrieBuilder(UErrorCode &errorCode);
+    explicit UCharsTrieBuilder(UErrorCode &errorCode);
 
     /**
      * Destructor.

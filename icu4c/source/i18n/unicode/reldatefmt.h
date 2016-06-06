@@ -303,7 +303,7 @@ public:
      * Create RelativeDateTimeFormatter with default locale.
      * @stable ICU 53
      */
-    RelativeDateTimeFormatter(UErrorCode& status);
+    explicit RelativeDateTimeFormatter(UErrorCode& status);
 
     /**
      * Create RelativeDateTimeFormatter with given locale.

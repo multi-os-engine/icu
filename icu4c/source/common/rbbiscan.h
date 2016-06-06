@@ -55,7 +55,7 @@ public:
         RBBIRuleChar() : fChar(0), fEscaped(FALSE) {};
     };
 
-    RBBIRuleScanner(RBBIRuleBuilder  *rb);
+    explicit RBBIRuleScanner(RBBIRuleBuilder  *rb);
 
 
     virtual    ~RBBIRuleScanner();

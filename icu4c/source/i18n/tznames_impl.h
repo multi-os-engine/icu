@@ -34,7 +34,7 @@ U_NAMESPACE_BEGIN
 struct ZNStringPoolChunk;
 class U_I18N_API ZNStringPool: public UMemory {
   public:
-    ZNStringPool(UErrorCode &status);
+    explicit ZNStringPool(UErrorCode &status);
     ~ZNStringPool();
 
     /* Get the pooled string that is equal to the supplied string s.
@@ -216,7 +216,7 @@ class TZDBNames;
 
 class TZDBTimeZoneNames : public TimeZoneNames {
 public:
-    TZDBTimeZoneNames(const Locale& locale);
+    explicit TZDBTimeZoneNames(const Locale& locale);
     virtual ~TZDBTimeZoneNames();
 
     virtual UBool operator==(const TimeZoneNames& other) const;

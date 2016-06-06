@@ -279,7 +279,7 @@ U_CDECL_END
  * instead of the native function.
  * @internal
  */
-#define UCNV_GET_NEXT_UCHAR_USE_TO_U -9
+#define UCNV_GET_NEXT_UCHAR_USE_TO_U (-9)
 
 U_CFUNC void
 ucnv_getCompleteUnicodeSet(const UConverter *cnv,

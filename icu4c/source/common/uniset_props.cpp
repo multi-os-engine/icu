@@ -943,7 +943,7 @@ static UBool mungeCharName(char* dst, const char* src, int32_t dstCapacity) {
 // Property set API
 //----------------------------------------------------------------
 
-#define FAIL(ec) {ec=U_ILLEGAL_ARGUMENT_ERROR; return *this;}
+#define FAIL(ec) {(ec)=U_ILLEGAL_ARGUMENT_ERROR; return *this;}
 
 UnicodeSet&
 UnicodeSet::applyIntPropertyValue(UProperty prop, int32_t value, UErrorCode& ec) {

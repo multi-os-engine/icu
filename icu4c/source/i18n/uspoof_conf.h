@@ -39,7 +39,7 @@ struct SPUString : public UMemory {
     int32_t         fStrTableIndex;   // Index into the final runtime data for this string.
                                       //  (or, for length 1, the single string char itself,
                                       //   there being no string table entry for it.)
-    SPUString(UnicodeString *s);
+    explicit SPUString(UnicodeString *s);
     ~SPUString();
 };
 
@@ -54,7 +54,7 @@ struct SPUString : public UMemory {
 
 class SPUStringPool : public UMemory {
   public:
-    SPUStringPool(UErrorCode &status);
+    explicit SPUStringPool(UErrorCode &status);
     ~SPUStringPool();
     
     // Add a string. Return the string from the table.

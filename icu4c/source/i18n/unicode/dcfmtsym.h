@@ -191,7 +191,7 @@ public:
      *                  failure code upon return.
      * @stable ICU 2.0
      */
-    DecimalFormatSymbols(UErrorCode& status);
+    explicit DecimalFormatSymbols(UErrorCode& status);
 
     /**
      * Creates a DecimalFormatSymbols object with last-resort data.

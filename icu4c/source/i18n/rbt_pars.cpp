@@ -140,7 +140,7 @@ public:
 
     const Hashtable* variableNames; // alias
 
-    ParseData(const TransliterationRuleData* data = 0,
+    explicit ParseData(const TransliterationRuleData* data = 0,
               const UVector* variablesVector = 0,
               const Hashtable* variableNames = 0);
 
@@ -297,7 +297,7 @@ public:
     //--------------------------------------------------
     // Methods
 
-    RuleHalf(TransliteratorParser& parser);
+    explicit RuleHalf(TransliteratorParser& parser);
     ~RuleHalf();
 
     int32_t parse(const UnicodeString& rule, int32_t pos, int32_t limit, UErrorCode& status);

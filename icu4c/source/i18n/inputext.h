@@ -28,7 +28,7 @@ class InputText : public UMemory
     // Prevent copying
     InputText(const InputText &);
 public:
-    InputText(UErrorCode &status);
+    explicit InputText(UErrorCode &status);
     ~InputText();
 
     void setText(const char *in, int32_t len);
