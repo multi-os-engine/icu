@@ -50,7 +50,7 @@ struct U_I18N_API CollationData : public UMemory {
         MAX_NUM_SCRIPT_RANGES = 256
     };
 
-    CollationData(const Normalizer2Impl &nfc)
+    explicit CollationData(const Normalizer2Impl &nfc)
             : trie(NULL),
               ce32s(NULL), ces(NULL), contexts(NULL), base(NULL),
               jamoCE32s(NULL),

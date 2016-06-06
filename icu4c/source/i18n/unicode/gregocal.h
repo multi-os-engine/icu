@@ -166,7 +166,7 @@ public:
      *                 Returns U_ZERO_ERROR if constructed successfully.
      * @stable ICU 2.0
      */
-    GregorianCalendar(UErrorCode& success);
+    explicit GregorianCalendar(UErrorCode& success);
 
     /**
      * Constructs a GregorianCalendar based on the current time in the given time zone

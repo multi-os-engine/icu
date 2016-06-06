@@ -361,7 +361,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
             ++(i); \
         } else { \
             /* function call for "complicated" and error cases */ \
-            (c)=utf8_nextCharSafeBody((const uint8_t *)s, &(i), (length), c, -1); \
+            (c)=utf8_nextCharSafeBody((const uint8_t *)(s), &(i), (length), c, -1); \
         } \
     } \
 }
@@ -412,7 +412,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
             ++(i); \
         } else { \
             /* function call for "complicated" and error cases */ \
-            (c)=utf8_nextCharSafeBody((const uint8_t *)s, &(i), (length), c, -3); \
+            (c)=utf8_nextCharSafeBody((const uint8_t *)(s), &(i), (length), c, -3); \
         } \
     } \
 }
@@ -668,7 +668,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
 #define U8_PREV(s, start, i, c) { \
     (c)=(uint8_t)(s)[--(i)]; \
     if((c)>=0x80) { \
-        (c)=utf8_prevCharSafeBody((const uint8_t *)s, start, &(i), c, -1); \
+        (c)=utf8_prevCharSafeBody((const uint8_t *)(s), start, &(i), c, -1); \
     } \
 }
 
@@ -699,7 +699,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
 #define U8_PREV_OR_FFFD(s, start, i, c) { \
     (c)=(uint8_t)(s)[--(i)]; \
     if((c)>=0x80) { \
-        (c)=utf8_prevCharSafeBody((const uint8_t *)s, start, &(i), c, -3); \
+        (c)=utf8_prevCharSafeBody((const uint8_t *)(s), start, &(i), c, -3); \
     } \
 }
 

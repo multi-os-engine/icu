@@ -32,7 +32,7 @@ public:
      * caller must not call uenum_close on 'uenum' after calling this
      * constructor.
      */
-    UStringEnumeration(UEnumeration* uenum);
+    explicit UStringEnumeration(UEnumeration* uenum);
 
     /**
      * Destructor.  This closes the UEnumeration passed in to the

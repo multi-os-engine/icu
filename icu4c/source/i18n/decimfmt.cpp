@@ -1863,7 +1863,7 @@ UBool DecimalFormat::equalWithSignCompatibility(UChar32 lhs, UChar32 rhs) const 
 }
 
 // check for LRM 0x200E, RLM 0x200F, ALM 0x061C
-#define IS_BIDI_MARK(c) (c==0x200E || c==0x200F || c==0x061C)
+#define IS_BIDI_MARK(c) ((c)==0x200E || (c)==0x200F || (c)==0x061C)
 
 #define TRIM_BUFLEN 32
 UnicodeString& DecimalFormat::trimMarksFromAffix(const UnicodeString& affix, UnicodeString& trimmedAffix) {

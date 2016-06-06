@@ -51,7 +51,7 @@ public:
      * Construct a hashtable
      * @param status Error code
     */
-    Hashtable(UErrorCode& status);
+    explicit Hashtable(UErrorCode& status);
 
     /**
      * Construct a hashtable, _disregarding any error_.  Use this constructor

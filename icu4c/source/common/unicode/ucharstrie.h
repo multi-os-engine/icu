@@ -61,7 +61,7 @@ public:
      * @param trieUChars The UChar array that contains the serialized trie.
      * @stable ICU 4.8
      */
-    UCharsTrie(const UChar *trieUChars)
+    explicit UCharsTrie(const UChar *trieUChars)
             : ownedArray_(NULL), uchars_(trieUChars),
               pos_(uchars_), remainingMatchLength_(-1) {}
 

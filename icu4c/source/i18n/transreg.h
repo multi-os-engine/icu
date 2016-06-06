@@ -145,7 +145,7 @@ class TransliteratorRegistry : public UMemory {
      * Contructor
      * @param status Output param set to success/failure code.
      */
-    TransliteratorRegistry(UErrorCode& status);
+    explicit TransliteratorRegistry(UErrorCode& status);
 
     /**
      * Nonvirtual destructor -- this class is not subclassable.
@@ -413,7 +413,7 @@ class TransliteratorRegistry : public UMemory {
      */
     class Enumeration : public StringEnumeration {
     public:
-        Enumeration(const TransliteratorRegistry& reg);
+        explicit Enumeration(const TransliteratorRegistry& reg);
         virtual ~Enumeration();
         virtual int32_t count(UErrorCode& status) const;
         virtual const UnicodeString* snext(UErrorCode& status);

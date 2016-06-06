@@ -28,7 +28,7 @@ class BreakIterator;
 // these shared break iterators must never be exposed outside of that class.
 class U_I18N_API SharedBreakIterator : public SharedObject {
 public:
-    SharedBreakIterator(BreakIterator *biToAdopt);
+    explicit SharedBreakIterator(BreakIterator *biToAdopt);
     virtual ~SharedBreakIterator();
 
     BreakIterator *get() const { return ptr; }

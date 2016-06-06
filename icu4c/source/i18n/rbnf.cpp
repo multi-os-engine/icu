@@ -194,7 +194,7 @@ class VArray {
 public:
     VArray() : buf(NULL), cap(0), size(0), deleter(NULL) {}
     
-    VArray(Fn_Deleter del) : buf(NULL), cap(0), size(0), deleter(del) {}
+    explicit VArray(Fn_Deleter del) : buf(NULL), cap(0), size(0), deleter(del) {}
     
     ~VArray() {
         if (deleter) {

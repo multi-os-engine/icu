@@ -85,7 +85,7 @@ struct DayPeriodRulesDataSink : public ResourceTableSink {
     // Data root -> rules.
     struct RulesSink : public ResourceTableSink {
         DayPeriodRulesDataSink &outer;
-        RulesSink(DayPeriodRulesDataSink &outer) : outer(outer) {}
+        explicit RulesSink(DayPeriodRulesDataSink &outer) : outer(outer) {}
         virtual ~RulesSink();
 
         virtual ResourceTableSink *getOrCreateTableSink(const char *key, int32_t, UErrorCode &errorCode) {
@@ -99,7 +99,7 @@ struct DayPeriodRulesDataSink : public ResourceTableSink {
     // Data root -> rules -> a rule set.
     struct RuleSetSink : public ResourceTableSink {
         DayPeriodRulesDataSink &outer;
-        RuleSetSink(DayPeriodRulesDataSink &outer) : outer(outer) {}
+        explicit RuleSetSink(DayPeriodRulesDataSink &outer) : outer(outer) {}
         virtual ~RuleSetSink();
 
         virtual ResourceTableSink *getOrCreateTableSink(const char *key, int32_t, UErrorCode &errorCode) {
@@ -128,7 +128,7 @@ struct DayPeriodRulesDataSink : public ResourceTableSink {
     // Arrays (e.g. before{6:00, 24:00}) will be redirected to the next sink.
     struct PeriodSink : public ResourceTableSink {
         DayPeriodRulesDataSink &outer;
-        PeriodSink(DayPeriodRulesDataSink &outer) : outer(outer) {}
+        explicit PeriodSink(DayPeriodRulesDataSink &outer) : outer(outer) {}
         virtual ~PeriodSink();
 
         virtual void put(const char *key, const ResourceValue &value, UErrorCode &errorCode) {
@@ -158,7 +158,7 @@ struct DayPeriodRulesDataSink : public ResourceTableSink {
     // Will enter this sink if 2+ times appear in a single cutoff type (e.g. before{6:00, 24:00}).
     struct CutoffSink : public ResourceArraySink {
         DayPeriodRulesDataSink &outer;
-        CutoffSink(DayPeriodRulesDataSink &outer) : outer(outer) {}
+        explicit CutoffSink(DayPeriodRulesDataSink &outer) : outer(outer) {}
         virtual ~CutoffSink();
 
         virtual void put(int32_t, const ResourceValue &value, UErrorCode &errorCode) {

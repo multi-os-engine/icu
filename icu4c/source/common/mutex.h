@@ -50,7 +50,7 @@ U_NAMESPACE_BEGIN
 
 class U_COMMON_API Mutex : public UMemory {
 public:
-  inline Mutex(UMutex *mutex = NULL);
+  inline explicit Mutex(UMutex *mutex = NULL);
   inline ~Mutex();
 
 private:

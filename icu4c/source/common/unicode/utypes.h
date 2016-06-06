@@ -219,7 +219,7 @@ typedef double UDate;
  * Minimum UDate value 
  * @stable ICU 4.8 
  */ 
-#define U_DATE_MIN -U_DATE_MAX
+#define U_DATE_MIN (-U_DATE_MAX)
 
 /*===========================================================================*/
 /* Shared library/DLL import-export API control                              */

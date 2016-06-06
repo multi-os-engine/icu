@@ -44,7 +44,7 @@ class UnicodeSet;
  * It is shared, reference-counted, and auto-deleted; see SharedObject.
  */
 struct U_I18N_API CollationTailoring : public SharedObject {
-    CollationTailoring(const CollationSettings *baseSettings);
+    explicit CollationTailoring(const CollationSettings *baseSettings);
     virtual ~CollationTailoring();
 
     /**

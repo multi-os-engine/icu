@@ -115,7 +115,7 @@ private:
      * Constructor
      * @internal (private)
      */
-    TimeUnit(UTimeUnitFields timeUnitField);
+    explicit TimeUnit(UTimeUnitFields timeUnitField);
 
 };
 

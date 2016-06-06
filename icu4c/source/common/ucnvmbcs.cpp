@@ -522,7 +522,7 @@ const UConverterSharedData _MBCSData={
 
 #define LINEAR_18030_BASE LINEAR_18030(0x81, 0x30, 0x81, 0x30)
 
-#define LINEAR(x) LINEAR_18030(x>>24, (x>>16)&0xff, (x>>8)&0xff, x&0xff)
+#define LINEAR(x) LINEAR_18030((x)>>24, ((x)>>16)&0xff, ((x)>>8)&0xff, (x)&0xff)
 
 /*
  * Some ranges of GB 18030 where both the Unicode code points and the

@@ -49,7 +49,7 @@ public:
      * @param status output param set to success/failure code on exit
      * @stable ICU 4.2
      */
-    CurrencyPluralInfo(UErrorCode& status);
+    explicit CurrencyPluralInfo(UErrorCode& status);
 
     /**
      * Create a CurrencyPluralInfo object for the given locale.

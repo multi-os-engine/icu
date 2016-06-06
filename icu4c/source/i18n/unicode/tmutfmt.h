@@ -88,7 +88,7 @@ public:
      * Use setLocale and/or setFormat to modify.
      * @deprecated ICU 53
      */
-    TimeUnitFormat(UErrorCode& status);
+    explicit TimeUnitFormat(UErrorCode& status);
 
     /**
      * Create TimeUnitFormat given locale, and full name style.

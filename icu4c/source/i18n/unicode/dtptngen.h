@@ -485,7 +485,7 @@ private:
      * Constructor.
      * @stable ICU 3.8
      */
-    DateTimePatternGenerator(UErrorCode & status);
+    explicit DateTimePatternGenerator(UErrorCode & status);
 
     /**
      * Constructor.

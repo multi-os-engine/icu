@@ -528,7 +528,7 @@ public:
     virtual const UChar* getName(UTimeZoneNameType type);
 
 protected:
-    ZNames(const UChar** names);
+    explicit ZNames(const UChar** names);
     static const UChar** loadData(UResourceBundle* rb, const char* key);
 
 private:
@@ -635,7 +635,7 @@ public:
     virtual const UChar* getName(UTimeZoneNameType type);
 
 private:
-    TZNames(const UChar** names);
+    explicit TZNames(const UChar** names);
     const UChar* fLocationName;
     UChar* fLocationNameOwned;
 };
@@ -714,8 +714,8 @@ TZNames::createInstance(UResourceBundle* rb, const char* key, const UnicodeStrin
 class MetaZoneIDsEnumeration : public StringEnumeration {
 public:
     MetaZoneIDsEnumeration();
-    MetaZoneIDsEnumeration(const UVector& mzIDs);
-    MetaZoneIDsEnumeration(UVector* mzIDs);
+    explicit MetaZoneIDsEnumeration(const UVector& mzIDs);
+    explicit MetaZoneIDsEnumeration(UVector* mzIDs);
     virtual ~MetaZoneIDsEnumeration();
     static UClassID U_EXPORT2 getStaticClassID(void);
     virtual UClassID getDynamicClassID(void) const;
@@ -797,7 +797,7 @@ U_CDECL_END
 // ---------------------------------------------------
 class ZNameSearchHandler : public TextTrieMapSearchResultHandler {
 public:
-    ZNameSearchHandler(uint32_t types);
+    explicit ZNameSearchHandler(uint32_t types);
     virtual ~ZNameSearchHandler();
 
     UBool handleMatch(int32_t matchLength, const CharacterNode *node, UErrorCode &status);

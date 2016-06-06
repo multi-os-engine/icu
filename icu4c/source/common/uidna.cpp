@@ -37,7 +37,7 @@ static const UChar ACE_PREFIX[] ={ 0x0078,0x006E,0x002d,0x002d } ;
 
 #define MAX_DOMAIN_NAME_LENGTH 255
 /* The Max length of the domain names should not be more than MAX_DOMAIN_NAME_LENGTH */
-#define MAX_IDN_BUFFER_SIZE   MAX_DOMAIN_NAME_LENGTH+1
+#define MAX_IDN_BUFFER_SIZE   (MAX_DOMAIN_NAME_LENGTH+1)
 
 #define LOWER_CASE_DELTA 0x0020
 #define HYPHEN           0x002D

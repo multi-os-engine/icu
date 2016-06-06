@@ -34,7 +34,7 @@ class FieldPositionOnlyHandler : public FieldPositionHandler {
   FieldPosition& pos;
 
  public:
-  FieldPositionOnlyHandler(FieldPosition& pos);
+  explicit FieldPositionOnlyHandler(FieldPosition& pos);
   virtual ~FieldPositionOnlyHandler();
 
   virtual void addAttribute(int32_t id, int32_t start, int32_t limit);

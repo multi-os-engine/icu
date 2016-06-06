@@ -712,7 +712,7 @@ public:
      *                  pattern is invalid this will be set to a failure code.
      * @stable ICU 2.0
      */
-    DecimalFormat(UErrorCode& status);
+    explicit DecimalFormat(UErrorCode& status);
 
     /**
      * Create a DecimalFormat from the given pattern and the symbols

@@ -135,7 +135,7 @@ public:
     /**
      * Constructor.
      */
-    TransliteratorParser(UErrorCode &statusReturn);
+    explicit TransliteratorParser(UErrorCode &statusReturn);
 
     /**
      * Destructor.

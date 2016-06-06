@@ -31,7 +31,7 @@ class UnicodeNameTransliterator : public Transliterator {
      * Constructs a transliterator.
      * @param adoptedFilter the filter to be adopted.
      */
-    UnicodeNameTransliterator(UnicodeFilter* adoptedFilter = 0);
+    explicit UnicodeNameTransliterator(UnicodeFilter* adoptedFilter = 0);
 
     /**
      * Destructor.

@@ -362,7 +362,7 @@ inline void Regex8BitSet::operator = (const Regex8BitSet &s) {
 
 class CaseFoldingUTextIterator: public UMemory {
       public:
-        CaseFoldingUTextIterator(UText &text);
+        explicit CaseFoldingUTextIterator(UText &text);
         ~CaseFoldingUTextIterator();
 
         UChar32 next();           // Next case folded character
