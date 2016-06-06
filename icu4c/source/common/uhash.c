@@ -118,11 +118,11 @@ static const float RESIZE_POLICY_RATIO_TABLE[6] = {
 /* This macro expects a UHashTok.pointer as its keypointer and
    valuepointer parameters */
 #define HASH_DELETE_KEY_VALUE(hash, keypointer, valuepointer) \
-            if (hash->keyDeleter != NULL && keypointer != NULL) { \
-                (*hash->keyDeleter)(keypointer); \
+            if ((hash)->keyDeleter != NULL && (keypointer) != NULL) { \
+                (*(hash)->keyDeleter)(keypointer); \
             } \
-            if (hash->valueDeleter != NULL && valuepointer != NULL) { \
-                (*hash->valueDeleter)(valuepointer); \
+            if ((hash)->valueDeleter != NULL && (valuepointer) != NULL) { \
+                (*(hash)->valueDeleter)(valuepointer); \
             }
 
 /*

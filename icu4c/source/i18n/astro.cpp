@@ -185,7 +185,7 @@ const double CalendarAstronomer::SYNODIC_MONTH  = 29.530588853;
  * @internal
  * @deprecated ICU 2.4. This class may be removed or modified.
  */
-#define JULIAN_EPOCH_MS  -210866760000000.0
+#define JULIAN_EPOCH_MS  (-210866760000000.0)
 
 
 /**

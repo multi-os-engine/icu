@@ -181,7 +181,7 @@ U_NAMESPACE_END
 
 // C wrapper --------------------------------------------------------------- ***
 
-#define THIS(en) ((icu::StringEnumeration*)(en->context))
+#define THIS(en) ((icu::StringEnumeration*)((en)->context))
 
 U_CDECL_BEGIN
 
