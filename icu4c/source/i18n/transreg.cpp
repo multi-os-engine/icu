@@ -207,7 +207,7 @@ void TransliteratorAlias::parse(TransliteratorParser& parser,
  */
 class TransliteratorSpec : public UMemory {
  public:
-    TransliteratorSpec(const UnicodeString& spec);
+    explicit TransliteratorSpec(const UnicodeString& spec);
     ~TransliteratorSpec();
 
     const UnicodeString& get() const;

@@ -725,7 +725,7 @@ public:
      * @param status    Output param set to success/failure code.
      * @stable ICU 2.0
      */
-    SimpleDateFormat(UErrorCode& status);
+    explicit SimpleDateFormat(UErrorCode& status);
 
     /**
      * Construct a SimpleDateFormat using the given pattern and the default locale.

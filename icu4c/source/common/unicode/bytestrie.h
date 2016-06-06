@@ -61,7 +61,7 @@ public:
      * @param trieBytes The byte array that contains the serialized trie.
      * @stable ICU 4.8
      */
-    BytesTrie(const void *trieBytes)
+    explicit BytesTrie(const void *trieBytes)
             : ownedArray_(NULL), bytes_(static_cast<const uint8_t *>(trieBytes)),
               pos_(bytes_), remainingMatchLength_(-1) {}
 

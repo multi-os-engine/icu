@@ -245,7 +245,7 @@ void ReorderingBuffer::insert(UChar32 c, uint8_t cc) {
 // Normalizer2Impl --------------------------------------------------------- ***
 
 struct CanonIterData : public UMemory {
-    CanonIterData(UErrorCode &errorCode);
+    explicit CanonIterData(UErrorCode &errorCode);
     ~CanonIterData();
     void addToStartSet(UChar32 origin, UChar32 decompLead, UErrorCode &errorCode);
     UTrie2 *trie;

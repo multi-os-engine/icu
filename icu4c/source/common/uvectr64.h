@@ -66,7 +66,7 @@ private:
     int64_t*  elements;
 
 public:
-    UVector64(UErrorCode &status);
+    explicit UVector64(UErrorCode &status);
 
     UVector64(int32_t initialCapacity, UErrorCode &status);
 

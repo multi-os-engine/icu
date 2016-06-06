@@ -188,7 +188,7 @@ protected:
     /** @internal */
     class Node : public UObject {
     public:
-        Node(int32_t initialHash) : hash(initialHash), offset(0) {}
+        explicit Node(int32_t initialHash) : hash(initialHash), offset(0) {}
         inline int32_t hashCode() const { return hash; }
         // Handles node==NULL.
         static inline int32_t hashCode(const Node *node) { return node==NULL ? 0 : node->hashCode(); }
@@ -252,7 +252,7 @@ protected:
     /** @internal */
     class FinalValueNode : public Node {
     public:
-        FinalValueNode(int32_t v) : Node(0x111111*37+v), value(v) {}
+        explicit FinalValueNode(int32_t v) : Node(0x111111*37+v), value(v) {}
         virtual UBool operator==(const Node &other) const;
         virtual void write(StringTrieBuilder &builder);
     protected:
@@ -264,7 +264,7 @@ protected:
      */
     class ValueNode : public Node {
     public:
-        ValueNode(int32_t initialHash) : Node(initialHash), hasValue(FALSE), value(0) {}
+        explicit ValueNode(int32_t initialHash) : Node(initialHash), hasValue(FALSE), value(0) {}
         virtual UBool operator==(const Node &other) const;
         void setValue(int32_t v) {
             hasValue=TRUE;
@@ -310,7 +310,7 @@ protected:
      */
     class BranchNode : public Node {
     public:
-        BranchNode(int32_t initialHash) : Node(initialHash) {}
+        explicit BranchNode(int32_t initialHash) : Node(initialHash) {}
     protected:
         int32_t firstEdgeNumber;
     };

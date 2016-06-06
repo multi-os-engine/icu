@@ -363,7 +363,7 @@ private:
 class U_I18N_API AffixPatternParser : public UMemory {
 public:
 AffixPatternParser();
-AffixPatternParser(const DecimalFormatSymbols &symbols);
+explicit AffixPatternParser(const DecimalFormatSymbols &symbols);
 void setDecimalFormatSymbols(const DecimalFormatSymbols &symbols);
 
 /**

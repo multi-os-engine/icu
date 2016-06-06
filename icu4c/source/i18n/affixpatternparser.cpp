@@ -25,7 +25,7 @@ static UChar gPerMill = 0x2030;
 static UChar gNegative = 0x2D;
 static UChar gPositive = 0x2B;
 
-#define PACK_TOKEN_AND_LENGTH(t, l) ((UChar) (((t) << 8) | (l & 0xFF)))
+#define PACK_TOKEN_AND_LENGTH(t, l) ((UChar) (((t) << 8) | ((l) & 0xFF)))
 
 #define UNPACK_TOKEN(c) ((AffixPattern::ETokenType) (((c) >> 8) & 0x7F))
 
@@ -391,7 +391,7 @@ AffixPattern::toUserString(UnicodeString &appendTo) const {
 
 class AffixPatternAppender : public UMemory {
 public:
-    AffixPatternAppender(AffixPattern &dest) : fDest(&dest), fIdx(0) { }
+    explicit AffixPatternAppender(AffixPattern &dest) : fDest(&dest), fIdx(0) { }
 
     inline void append(UChar x) {
         if (fIdx == UPRV_LENGTHOF(fBuffer)) {

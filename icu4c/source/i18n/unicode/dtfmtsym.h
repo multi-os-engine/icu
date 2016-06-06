@@ -91,7 +91,7 @@ public:
      *                  found or cannot be loaded
      * @stable ICU 2.0
      */
-    DateFormatSymbols(UErrorCode& status);
+    explicit DateFormatSymbols(UErrorCode& status);
 
     /**
      * Construct a DateFormatSymbols object by loading format data from

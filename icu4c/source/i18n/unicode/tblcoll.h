@@ -804,7 +804,7 @@ private:
     friend class CollationElementIterator;
     friend class Collator;
 
-    RuleBasedCollator(const CollationCacheEntry *entry);
+    explicit RuleBasedCollator(const CollationCacheEntry *entry);
 
     /**
      * Enumeration of attributes that are relevant for short definition strings

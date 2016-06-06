@@ -18,7 +18,7 @@ class Calendar;
 
 class U_I18N_API SharedCalendar : public SharedObject {
 public:
-    SharedCalendar(Calendar *calToAdopt) : ptr(calToAdopt) { }
+    explicit SharedCalendar(Calendar *calToAdopt) : ptr(calToAdopt) { }
     virtual ~SharedCalendar();
     const Calendar *get() const { return ptr; }
     const Calendar *operator->() const { return ptr; }

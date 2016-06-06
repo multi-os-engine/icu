@@ -27,7 +27,7 @@
 U_NAMESPACE_USE
 
 #define IS_EVEN(n) (((n)&1)==0)
-#define IS_POINTER_EVEN(p) IS_EVEN((size_t)p)
+#define IS_POINTER_EVEN(p) IS_EVEN((size_t)(p))
 
 U_CDECL_BEGIN
 

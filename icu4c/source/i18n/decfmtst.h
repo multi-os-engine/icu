@@ -30,7 +30,7 @@ class DecimalFormatStaticSets : public UMemory
 public:
     // Constructor and Destructor not for general use.
     //   Public to permit access from plain C implementation functions.
-    DecimalFormatStaticSets(UErrorCode &status);
+    explicit DecimalFormatStaticSets(UErrorCode &status);
     ~DecimalFormatStaticSets();
 
     /**

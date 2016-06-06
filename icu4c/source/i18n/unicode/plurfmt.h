@@ -152,7 +152,7 @@ public:
      *                must not indicate a failure before the function call.
      * @stable ICU 4.0
      */
-    PluralFormat(UErrorCode& status);
+    explicit PluralFormat(UErrorCode& status);
 
     /**
      * Creates a new cardinal-number <code>PluralFormat</code> for a given locale.

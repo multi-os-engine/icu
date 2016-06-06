@@ -185,7 +185,7 @@ static UnicodeString& itos(int32_t i, UnicodeString& appendTo) {
 // of the string and its length.
 class AppendableWrapper : public UMemory {
 public:
-    AppendableWrapper(Appendable& appendable) : app(appendable), len(0) {
+    explicit AppendableWrapper(Appendable& appendable) : app(appendable), len(0) {
     }
     void append(const UnicodeString& s) {
         app.appendString(s.getBuffer(), s.length());

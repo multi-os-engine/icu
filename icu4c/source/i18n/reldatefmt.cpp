@@ -300,7 +300,7 @@ struct RelDateTimeFmtDataSink : public ResourceTableSink {
      * Fill in values for the particular plural given, e.g., ONE, FEW, OTHER, etc.
      */
     struct RelDateTimeDetailSink : public ResourceTableSink {
-        RelDateTimeDetailSink(RelDateTimeFmtDataSink &sink) : outer(sink) {}
+        explicit RelDateTimeDetailSink(RelDateTimeFmtDataSink &sink) : outer(sink) {}
         ~RelDateTimeDetailSink();
 
         virtual void put(const char *key, const ResourceValue &value,
@@ -341,7 +341,7 @@ struct RelDateTimeFmtDataSink : public ResourceTableSink {
      * "minute-short", etc.
      */
     struct RelativeTimeSink : public ResourceTableSink {
-        RelativeTimeSink(RelDateTimeFmtDataSink &sink) : outer(sink) {}
+        explicit RelativeTimeSink(RelDateTimeFmtDataSink &sink) : outer(sink) {}
         ~RelativeTimeSink();
 
         virtual ResourceTableSink *getOrCreateTableSink(
@@ -371,7 +371,7 @@ struct RelDateTimeFmtDataSink : public ResourceTableSink {
       * "fri-narrow", "fri-short", etc.
     */
     struct RelativeSink : public ResourceTableSink {
-        RelativeSink(RelDateTimeFmtDataSink &sink) : outer(sink) {}
+        explicit RelativeSink(RelDateTimeFmtDataSink &sink) : outer(sink) {}
         ~RelativeSink();
 
         virtual void put(const char *key, const ResourceValue &value, UErrorCode &errorCode) {
@@ -409,7 +409,7 @@ struct RelDateTimeFmtDataSink : public ResourceTableSink {
      * Handles entries under "fields", recognizing "relative" and "relativeTime" entries.
      */
     struct UnitSink : public ResourceTableSink {
-        UnitSink(RelDateTimeFmtDataSink &sink) : outer(sink) {}
+        explicit UnitSink(RelDateTimeFmtDataSink &sink) : outer(sink) {}
         ~UnitSink();
 
         virtual void put(const char *key, const ResourceValue &value, UErrorCode &errorCode) {

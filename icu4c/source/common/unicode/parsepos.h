@@ -61,7 +61,7 @@ public:
      * @param newIndex the new text offset.
      * @stable ICU 2.0
      */
-    ParsePosition(int32_t newIndex)
+    explicit ParsePosition(int32_t newIndex)
         : UObject(),
         index(newIndex),
         errorIndex(-1)

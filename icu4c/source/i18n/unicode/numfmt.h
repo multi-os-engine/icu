@@ -1137,7 +1137,7 @@ public:
     /**
      * @stable ICU 2.6
      */
-    SimpleNumberFormatFactory(const Locale& locale, UBool visible = TRUE);
+    explicit SimpleNumberFormatFactory(const Locale& locale, UBool visible = TRUE);
 
     /**
      * @stable ICU 3.0

@@ -269,7 +269,7 @@ typedef int32_t UTextOffset;
  * Count the trail bytes for a UTF-8 lead byte.
  * @deprecated ICU 2.4. Renamed to U8_COUNT_TRAIL_BYTES, see utf_old.h.
  */
-#define UTF8_COUNT_TRAIL_BYTES(leadByte) (utf8_countTrailBytes[(uint8_t)leadByte])
+#define UTF8_COUNT_TRAIL_BYTES(leadByte) (utf8_countTrailBytes[(uint8_t)(leadByte)])
 
 /**
  * Mask a UTF-8 lead byte, leave only the lower bits that form part of the code point value.
