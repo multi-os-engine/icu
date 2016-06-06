@@ -93,9 +93,9 @@ enum {
 };
 
 #define UPROPS_NTV_GET_TYPE(ntv) \
-    ((ntv==UPROPS_NTV_NONE) ? U_NT_NONE : \
-    (ntv<UPROPS_NTV_DIGIT_START) ?  U_NT_DECIMAL : \
-    (ntv<UPROPS_NTV_NUMERIC_START) ? U_NT_DIGIT : \
+    (((ntv)==UPROPS_NTV_NONE) ? U_NT_NONE : \
+    ((ntv)<UPROPS_NTV_DIGIT_START) ?  U_NT_DECIMAL : \
+    ((ntv)<UPROPS_NTV_NUMERIC_START) ? U_NT_DIGIT : \
     U_NT_NUMERIC)
 
 /* number of properties vector words */

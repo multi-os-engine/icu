@@ -100,61 +100,61 @@ static const uint8_t escSeqCompoundText[NUM_OF_CONVERTERS][5] = {
 #define ESC_START 0x1B
 
 #define isASCIIRange(codepoint) \
-        ((codepoint == 0x0000) || (codepoint == 0x0009) || (codepoint == 0x000A) || \
-         (codepoint >= 0x0020 && codepoint <= 0x007f) || (codepoint >= 0x00A0 && codepoint <= 0x00FF))
+        (((codepoint) == 0x0000) || ((codepoint) == 0x0009) || ((codepoint) == 0x000A) || \
+         ((codepoint) >= 0x0020 && (codepoint) <= 0x007f) || ((codepoint) >= 0x00A0 && (codepoint) <= 0x00FF))
 
 #define isIBM915(codepoint) \
-        ((codepoint >= 0x0401 && codepoint <= 0x045F) || (codepoint == 0x2116))
+        (((codepoint) >= 0x0401 && (codepoint) <= 0x045F) || ((codepoint) == 0x2116))
 
 #define isIBM916(codepoint) \
-        ((codepoint >= 0x05D0 && codepoint <= 0x05EA) || (codepoint == 0x2017) || (codepoint == 0x203E))
+        (((codepoint) >= 0x05D0 && (codepoint) <= 0x05EA) || ((codepoint) == 0x2017) || ((codepoint) == 0x203E))
 
 #define isCompoundS3(codepoint) \
-        ((codepoint == 0x060C) || (codepoint == 0x061B) || (codepoint == 0x061F) || (codepoint >= 0x0621 && codepoint <= 0x063A) || \
-         (codepoint >= 0x0640 && codepoint <= 0x0652) || (codepoint >= 0x0660 && codepoint <= 0x066D) || (codepoint == 0x200B) || \
-         (codepoint >= 0x0FE70 && codepoint <= 0x0FE72) || (codepoint == 0x0FE74) || (codepoint >= 0x0FE76 && codepoint <= 0x0FEBE))
+        (((codepoint) == 0x060C) || ((codepoint) == 0x061B) || ((codepoint) == 0x061F) || ((codepoint) >= 0x0621 && (codepoint) <= 0x063A) || \
+         ((codepoint) >= 0x0640 && (codepoint) <= 0x0652) || ((codepoint) >= 0x0660 && (codepoint) <= 0x066D) || ((codepoint) == 0x200B) || \
+         ((codepoint) >= 0x0FE70 && (codepoint) <= 0x0FE72) || ((codepoint) == 0x0FE74) || ((codepoint) >= 0x0FE76 && (codepoint) <= 0x0FEBE))
 
 #define isCompoundS2(codepoint) \
-        ((codepoint == 0x02BC) || (codepoint == 0x02BD) || (codepoint >= 0x0384 && codepoint <= 0x03CE) || (codepoint == 0x2015))
+        (((codepoint) == 0x02BC) || ((codepoint) == 0x02BD) || ((codepoint) >= 0x0384 && (codepoint) <= 0x03CE) || ((codepoint) == 0x2015))
 
 #define isIBM914(codepoint) \
-        ((codepoint == 0x0100) || (codepoint == 0x0101) || (codepoint == 0x0112) || (codepoint == 0x0113) || (codepoint == 0x0116) || (codepoint == 0x0117) || \
-         (codepoint == 0x0122) || (codepoint == 0x0123) || (codepoint >= 0x0128 && codepoint <= 0x012B) || (codepoint == 0x012E) || (codepoint == 0x012F) || \
-         (codepoint >= 0x0136 && codepoint <= 0x0138) || (codepoint == 0x013B) || (codepoint == 0x013C) || (codepoint == 0x0145) || (codepoint ==  0x0146) || \
-         (codepoint >= 0x014A && codepoint <= 0x014D) || (codepoint == 0x0156) || (codepoint == 0x0157) || (codepoint >= 0x0166 && codepoint <= 0x016B) || \
-         (codepoint == 0x0172) || (codepoint == 0x0173))
+        (((codepoint) == 0x0100) || ((codepoint) == 0x0101) || ((codepoint) == 0x0112) || ((codepoint) == 0x0113) || ((codepoint) == 0x0116) || ((codepoint) == 0x0117) || \
+         ((codepoint) == 0x0122) || ((codepoint) == 0x0123) || ((codepoint) >= 0x0128 && (codepoint) <= 0x012B) || ((codepoint) == 0x012E) || ((codepoint) == 0x012F) || \
+         ((codepoint) >= 0x0136 && (codepoint) <= 0x0138) || ((codepoint) == 0x013B) || ((codepoint) == 0x013C) || ((codepoint) == 0x0145) || ((codepoint) ==  0x0146) || \
+         ((codepoint) >= 0x014A && (codepoint) <= 0x014D) || ((codepoint) == 0x0156) || ((codepoint) == 0x0157) || ((codepoint) >= 0x0166 && (codepoint) <= 0x016B) || \
+         ((codepoint) == 0x0172) || ((codepoint) == 0x0173))
 
 #define isIBM874(codepoint) \
-        ((codepoint >= 0x0E01 && codepoint <= 0x0E3A) || (codepoint >= 0x0E3F && codepoint <= 0x0E5B))
+        (((codepoint) >= 0x0E01 && (codepoint) <= 0x0E3A) || ((codepoint) >= 0x0E3F && (codepoint) <= 0x0E5B))
 
 #define isIBM912(codepoint) \
-        ((codepoint >= 0x0102 && codepoint <= 0x0107) || (codepoint >= 0x010C && codepoint <= 0x0111) || (codepoint >= 0x0118 && codepoint <= 0x011B) || \
-         (codepoint == 0x0139) || (codepoint == 0x013A) || (codepoint == 0x013D) || (codepoint == 0x013E) || (codepoint >= 0x0141 && codepoint <= 0x0144) || \
-         (codepoint == 0x0147) || (codepoint == 0x0147) || (codepoint == 0x0150) || (codepoint == 0x0151) || (codepoint == 0x0154) || (codepoint == 0x0155) || \
-         (codepoint >= 0x0158 && codepoint <= 0x015B) || (codepoint == 0x015E) || (codepoint == 0x015F) || (codepoint >= 0x0160 && codepoint <= 0x0165) || \
-         (codepoint == 0x016E) || (codepoint == 0x016F) || (codepoint == 0x0170) || (codepoint ==  0x0171) || (codepoint >= 0x0179 && codepoint <= 0x017E) || \
-         (codepoint == 0x02C7) || (codepoint == 0x02D8) || (codepoint == 0x02D9) || (codepoint == 0x02DB) || (codepoint == 0x02DD))
+        (((codepoint) >= 0x0102 && (codepoint) <= 0x0107) || ((codepoint) >= 0x010C && (codepoint) <= 0x0111) || ((codepoint) >= 0x0118 && (codepoint) <= 0x011B) || \
+         ((codepoint) == 0x0139) || ((codepoint) == 0x013A) || ((codepoint) == 0x013D) || ((codepoint) == 0x013E) || ((codepoint) >= 0x0141 && (codepoint) <= 0x0144) || \
+         ((codepoint) == 0x0147) || ((codepoint) == 0x0147) || ((codepoint) == 0x0150) || ((codepoint) == 0x0151) || ((codepoint) == 0x0154) || ((codepoint) == 0x0155) || \
+         ((codepoint) >= 0x0158 && (codepoint) <= 0x015B) || ((codepoint) == 0x015E) || ((codepoint) == 0x015F) || ((codepoint) >= 0x0160 && (codepoint) <= 0x0165) || \
+         ((codepoint) == 0x016E) || ((codepoint) == 0x016F) || ((codepoint) == 0x0170) || ((codepoint) ==  0x0171) || ((codepoint) >= 0x0179 && (codepoint) <= 0x017E) || \
+         ((codepoint) == 0x02C7) || ((codepoint) == 0x02D8) || ((codepoint) == 0x02D9) || ((codepoint) == 0x02DB) || ((codepoint) == 0x02DD))
 
 #define isIBM913(codepoint) \
-        ((codepoint >= 0x0108 && codepoint <= 0x010B) || (codepoint == 0x011C) || \
-         (codepoint == 0x011D) || (codepoint == 0x0120) || (codepoint == 0x0121) || \
-         (codepoint >= 0x0124 && codepoint <= 0x0127) || (codepoint == 0x0134) || (codepoint == 0x0135) || \
-         (codepoint == 0x015C) || (codepoint == 0x015D) || (codepoint == 0x016C) || (codepoint ==  0x016D))
+        (((codepoint) >= 0x0108 && (codepoint) <= 0x010B) || ((codepoint) == 0x011C) || \
+         ((codepoint) == 0x011D) || ((codepoint) == 0x0120) || ((codepoint) == 0x0121) || \
+         ((codepoint) >= 0x0124 && (codepoint) <= 0x0127) || ((codepoint) == 0x0134) || ((codepoint) == 0x0135) || \
+         ((codepoint) == 0x015C) || ((codepoint) == 0x015D) || ((codepoint) == 0x016C) || ((codepoint) ==  0x016D))
 
 #define isCompoundS1(codepoint) \
-        ((codepoint == 0x011E) || (codepoint == 0x011F) || (codepoint == 0x0130) || \
-         (codepoint == 0x0131) || (codepoint >= 0x0218 && codepoint <= 0x021B))
+        (((codepoint) == 0x011E) || ((codepoint) == 0x011F) || ((codepoint) == 0x0130) || \
+         ((codepoint) == 0x0131) || ((codepoint) >= 0x0218 && (codepoint) <= 0x021B))
 
 #define isISO8859_14(codepoint) \
-        ((codepoint >= 0x0174 && codepoint <= 0x0177) || (codepoint == 0x1E0A) || \
-         (codepoint == 0x1E0B) || (codepoint == 0x1E1E) || (codepoint == 0x1E1F) || \
-         (codepoint == 0x1E40) || (codepoint == 0x1E41) || (codepoint == 0x1E56) || \
-         (codepoint == 0x1E57) || (codepoint == 0x1E60) || (codepoint == 0x1E61) || \
-         (codepoint == 0x1E6A) || (codepoint == 0x1E6B) || (codepoint == 0x1EF2) || \
-         (codepoint == 0x1EF3) || (codepoint >= 0x1E80 && codepoint <= 0x1E85))
+        (((codepoint) >= 0x0174 && (codepoint) <= 0x0177) || ((codepoint) == 0x1E0A) || \
+         ((codepoint) == 0x1E0B) || ((codepoint) == 0x1E1E) || ((codepoint) == 0x1E1F) || \
+         ((codepoint) == 0x1E40) || ((codepoint) == 0x1E41) || ((codepoint) == 0x1E56) || \
+         ((codepoint) == 0x1E57) || ((codepoint) == 0x1E60) || ((codepoint) == 0x1E61) || \
+         ((codepoint) == 0x1E6A) || ((codepoint) == 0x1E6B) || ((codepoint) == 0x1EF2) || \
+         ((codepoint) == 0x1EF3) || ((codepoint) >= 0x1E80 && (codepoint) <= 0x1E85))
 
 #define isIBM923(codepoint) \
-        ((codepoint == 0x0152) || (codepoint == 0x0153) || (codepoint == 0x0178) || (codepoint == 0x20AC))
+        (((codepoint) == 0x0152) || ((codepoint) == 0x0153) || ((codepoint) == 0x0178) || ((codepoint) == 0x20AC))
 
 
 typedef struct{
