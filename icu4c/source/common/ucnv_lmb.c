@@ -1096,7 +1096,7 @@ GetUniFromLMBCSUni(char const ** ppLMBCSin)  /* Called with LMBCS-style Unicode 
 */
 
 #define CHECK_SOURCE_LIMIT(index) \
-     if (args->source+index > args->sourceLimit){\
+     if (args->source+(index) > args->sourceLimit){\
          *err = U_TRUNCATED_CHAR_FOUND;\
          args->source = args->sourceLimit;\
          return 0xffff;}

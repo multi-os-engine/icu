@@ -15,7 +15,7 @@
 
 #define N_GRAM_SIZE 3
 #define N_GRAM_MASK 0xFFFFFF
-#define ARRAY_SIZE(array) (sizeof array / sizeof array[0])
+#define ARRAY_SIZE(array) (sizeof (array) / sizeof (array)[0])
 
 U_NAMESPACE_BEGIN
 

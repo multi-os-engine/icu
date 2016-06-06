@@ -78,7 +78,7 @@ static const UChar gPatternChars[] = {
 };
 
 /* length of an array */
-#define ARRAY_LENGTH(array) (sizeof(array)/sizeof(array[0]))
+#define ARRAY_LENGTH(array) (sizeof(array)/sizeof((array)[0]))
 
 //------------------------------------------------------
 // Strings of last resort.  These are only used if we have no resource

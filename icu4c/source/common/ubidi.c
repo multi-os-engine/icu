@@ -1406,7 +1406,7 @@ checkExplicitLevels(UBiDi *pBiDi, UErrorCode *pErrorCode) {
 #define IMPTABPROPS_RES (IMPTABPROPS_COLUMNS - 1)
 #define GET_STATEPROPS(cell) ((cell)&0x1f)
 #define GET_ACTIONPROPS(cell) ((cell)>>5)
-#define s(action, newState) ((uint8_t)(newState+(action<<5)))
+#define s(action, newState) ((uint8_t)((newState)+((action)<<5)))
 
 static const uint8_t groupProp[] =          /* dirProp regrouped */
 {
@@ -1507,7 +1507,7 @@ static const uint8_t impTabProps[][IMPTABPROPS_COLUMNS] =
 #define IMPTABLEVELS_RES (IMPTABLEVELS_COLUMNS - 1)
 #define GET_STATE(cell) ((cell)&0x0f)
 #define GET_ACTION(cell) ((cell)>>4)
-#define s(action, newState) ((uint8_t)(newState+(action<<4)))
+#define s(action, newState) ((uint8_t)((newState)+((action)<<4)))
 
 typedef uint8_t ImpTab[][IMPTABLEVELS_COLUMNS];
 typedef uint8_t ImpAct[];

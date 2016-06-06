@@ -521,13 +521,13 @@ static const VariantMap VARIANT_MAP[] = {
 
 /* ### BCP47 Conversion *******************************************/
 /* Test if the locale id has BCP47 u extension and does not have '@' */
-#define _hasBCP47Extension(id) (id && uprv_strstr(id, "@") == NULL && getShortestSubtagLength(localeID) == 1)
+#define _hasBCP47Extension(id) ((id) && uprv_strstr(id, "@") == NULL && getShortestSubtagLength(localeID) == 1)
 /* Converts the BCP47 id to Unicode id. Does nothing to id if conversion fails */
 #define _ConvertBCP47(finalID, id, buffer, length,err) \
-        if (uloc_forLanguageTag(id, buffer, length, NULL, err) <= 0 || U_FAILURE(*err)) { \
-            finalID=id; \
+        if (uloc_forLanguageTag(id, buffer, length, NULL, err) <= 0 || U_FAILURE(*(err))) { \
+            (finalID)=id; \
         } else { \
-            finalID=buffer; \
+            (finalID)=buffer; \
         }
 /* Gets the size of the shortest subtag in the given localeID. */
 static int32_t getShortestSubtagLength(const char *localeID) {
@@ -1120,16 +1120,16 @@ uloc_setKeywordValue(const char* keywordName,
 
 /* ### ID parsing implementation **************************************************/
 
-#define _isPrefixLetter(a) ((a=='x')||(a=='X')||(a=='i')||(a=='I'))
+#define _isPrefixLetter(a) (((a)=='x')||((a)=='X')||((a)=='i')||((a)=='I'))
 
 /*returns TRUE if one of the special prefixes is here (s=string)
   'x-' or 'i-' */
-#define _isIDPrefix(s) (_isPrefixLetter(s[0])&&_isIDSeparator(s[1]))
+#define _isIDPrefix(s) (_isPrefixLetter((s)[0])&&_isIDSeparator((s)[1]))
 
 /* Dot terminates it because of POSIX form  where dot precedes the codepage
  * except for variant
  */
-#define _isTerminator(a)  ((a==0)||(a=='.')||(a=='@'))
+#define _isTerminator(a)  (((a)==0)||((a)=='.')||((a)=='@'))
 
 static char* _strnchr(const char* str, int32_t len, char c) {
     U_ASSERT(str != 0 && len >= 0);
@@ -1611,7 +1611,7 @@ uloc_openKeywords(const char* localeID,
 #define _ULOC_STRIP_KEYWORDS 0x2
 #define _ULOC_CANONICALIZE   0x1
 
-#define OPTION_SET(options, mask) ((options & mask) != 0)
+#define OPTION_SET(options, mask) (((options) & (mask)) != 0)
 
 static const char i_default[] = {'i', '-', 'd', 'e', 'f', 'a', 'u', 'l', 't'};
 #define I_DEFAULT_LENGTH (sizeof i_default / sizeof i_default[0])
