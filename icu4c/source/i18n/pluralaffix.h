@@ -80,7 +80,7 @@ public:
     /**
      * Create a PluralAffix where the 'other' variant is otherVariant.
      */
-    PluralAffix(const DigitAffix &otherVariant) : affixes(otherVariant) { }
+    explicit PluralAffix(const DigitAffix &otherVariant) : affixes(otherVariant) { }
 
     /**
      * Sets a particular variant for a plural category while overwriting

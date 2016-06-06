@@ -199,7 +199,7 @@ public:
      *
      * @stable ICU 4.0
      */
-    PluralRules(UErrorCode& status);
+    explicit PluralRules(UErrorCode& status);
 
     /**
      * Copy constructor.

@@ -196,7 +196,7 @@ struct SpoofStringLengthsElement {
 class SpoofData: public UMemory {
   public:
     static SpoofData *getDefault(UErrorCode &status);   // Load standard ICU spoof data.
-    SpoofData(UErrorCode &status);   // Create new spoof data wrapper.
+    explicit SpoofData(UErrorCode &status);   // Create new spoof data wrapper.
                                      // Only used when building new data from rules.
     
     // Constructor for use when creating from prebuilt default data.

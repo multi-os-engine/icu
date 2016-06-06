@@ -65,13 +65,13 @@ class U_COMMON_API StringPiece : public UMemory {
    * @param str a NUL-terminated const char * pointer
    * @stable ICU 4.2
    */
-  StringPiece(const char* str);
+  StringPiece(const char* str);  // NOLINT, implicit
 #if U_HAVE_STD_STRING
   /**
    * Constructs from a std::string.
    * @stable ICU 4.2
    */
-  StringPiece(const std::string& str)
+  StringPiece(const std::string& str)  // NOLINT, implicit
     : ptr_(str.data()), length_(static_cast<int32_t>(str.size())) { }
 #endif
   /**

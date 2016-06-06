@@ -235,7 +235,7 @@ class StringByteSink : public ByteSink {
    * @param dest pointer to string object to append to
    * @stable ICU 4.2
    */
-  StringByteSink(StringClass* dest) : dest_(dest) { }
+  explicit StringByteSink(StringClass* dest) : dest_(dest) { }
   /**
    * Append "bytes[0,n-1]" to this.
    * @param data the pointer to the bytes

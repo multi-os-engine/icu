@@ -185,7 +185,7 @@ protected:
      * @param id a system time zone ID
      * @stable ICU 3.8
      */
-    BasicTimeZone(const UnicodeString &id);
+    explicit BasicTimeZone(const UnicodeString &id);
 
     /**
      * Copy constructor.

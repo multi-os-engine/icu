@@ -79,7 +79,7 @@ public:
     /**
      * Other category is mapped to otherVariant.
      */
-    PluralMap(const T &otherVariant) : fOtherVariant(otherVariant) {
+    explicit PluralMap(const T &otherVariant) : fOtherVariant(otherVariant) {
         initializeNew();
     }
 

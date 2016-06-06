@@ -1437,7 +1437,7 @@ protected:
       *                 U_ZERO_ERROR if constructed successfully.
      * @stable ICU 2.0
       */
-    Calendar(UErrorCode& success);
+    explicit Calendar(UErrorCode& success);
 
     /**
      * Copy constructor

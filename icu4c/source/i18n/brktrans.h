@@ -36,7 +36,7 @@ public:
      * Constructs a transliterator.
      * @param adoptedFilter    the filter for this transliterator.
      */
-    BreakTransliterator(UnicodeFilter* adoptedFilter = 0);
+    explicit BreakTransliterator(UnicodeFilter* adoptedFilter = 0);
 
     /**
      * Destructor.

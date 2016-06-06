@@ -626,7 +626,7 @@ protected:
      * Constructor, just setting the length field in this base class.
      * @stable ICU 2.0
      */
-    CharacterIterator(int32_t length);
+    explicit CharacterIterator(int32_t length);
 
     /**
      * Constructor, just setting the length and position fields in this base class.

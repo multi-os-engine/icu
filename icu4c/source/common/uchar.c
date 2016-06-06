@@ -199,11 +199,11 @@ u_isISOControl(UChar32 c) {
 
 /* Some control characters that are used as space. */
 #define IS_THAT_CONTROL_SPACE(c) \
-    (c<=0x9f && ((c>=TAB && c<=CR) || (c>=0x1c && c <=0x1f) || c==NL))
+    ((c)<=0x9f && (((c)>=TAB && (c)<=CR) || ((c)>=0x1c && (c) <=0x1f) || (c)==NL))
 
 /* Java has decided that U+0085 New Line is not whitespace any more. */
 #define IS_THAT_ASCII_CONTROL_SPACE(c) \
-    (c<=0x1f && c>=TAB && (c<=CR || c>=0x1c))
+    ((c)<=0x1f && (c)>=TAB && ((c)<=CR || (c)>=0x1c))
 
 /* Checks if the Unicode character is a space character.*/
 U_CAPI UBool U_EXPORT2
@@ -649,7 +649,7 @@ _enumPropertyStartsRange(const void *context, UChar32 start, UChar32 end, uint32
     return TRUE;
 }
 
-#define USET_ADD_CP_AND_NEXT(sa, cp) sa->add(sa->set, cp); sa->add(sa->set, cp+1)
+#define USET_ADD_CP_AND_NEXT(sa, cp) sa->add((sa)->set, cp); (sa)->add((sa)->set, (cp)+1)
 
 U_CFUNC void U_EXPORT2
 uchar_addPropertyStarts(const USetAdder *sa, UErrorCode *pErrorCode) {

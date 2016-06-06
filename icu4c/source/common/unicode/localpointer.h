@@ -502,62 +502,63 @@ public:
  * @stable ICU 4.4
  */
 #if U_HAVE_RVALUE_REFERENCES
+/* NOILNT: clang-tidy adds parentheses around 'LocalPointerClassName' and 'Type'. */
 #define U_DEFINE_LOCAL_OPEN_POINTER(LocalPointerClassName, Type, closeFunction) \
-    class LocalPointerClassName : public LocalPointerBase<Type> { \
+    class LocalPointerClassName : public LocalPointerBase<Type> { /* NOLINT */ \
     public: \
-        using LocalPointerBase<Type>::operator*; \
-        using LocalPointerBase<Type>::operator->; \
-        explicit LocalPointerClassName(Type *p=NULL) : LocalPointerBase<Type>(p) {} \
-        LocalPointerClassName(LocalPointerClassName &&src) U_NOEXCEPT \
+        using LocalPointerBase<Type>::operator*; /* NOLINT */ \
+        using LocalPointerBase<Type>::operator->; /* NOLINT */ \
+        explicit LocalPointerClassName(Type *p=NULL) : LocalPointerBase<Type>(p) {} /* NOLINT */ \
+        LocalPointerClassName(LocalPointerClassName &&src) U_NOEXCEPT /* NOLINT */ \
                 : LocalPointerBase<Type>(src.ptr) { \
             src.ptr=NULL; \
         } \
         ~LocalPointerClassName() { closeFunction(ptr); } \
-        LocalPointerClassName &operator=(LocalPointerClassName &&src) U_NOEXCEPT { \
+        LocalPointerClassName &operator=(LocalPointerClassName &&src) U_NOEXCEPT { /* NOLINT */ \
             return moveFrom(src); \
         } \
-        LocalPointerClassName &moveFrom(LocalPointerClassName &src) U_NOEXCEPT { \
+        LocalPointerClassName &moveFrom(LocalPointerClassName &src) U_NOEXCEPT { /* NOLINT */ \
             closeFunction(ptr); \
             LocalPointerBase<Type>::ptr=src.ptr; \
             src.ptr=NULL; \
             return *this; \
         } \
-        void swap(LocalPointerClassName &other) U_NOEXCEPT { \
-            Type *temp=LocalPointerBase<Type>::ptr; \
+        void swap(LocalPointerClassName &other) U_NOEXCEPT { /* NOLINT */ \
+            Type *temp=LocalPointerBase<Type>::ptr; /* NOLINT */ \
             LocalPointerBase<Type>::ptr=other.ptr; \
             other.ptr=temp; \
         } \
-        friend inline void swap(LocalPointerClassName &p1, LocalPointerClassName &p2) U_NOEXCEPT { \
+        friend inline void swap(LocalPointerClassName &p1, LocalPointerClassName &p2) U_NOEXCEPT { /* NOLINT */ \
             p1.swap(p2); \
         } \
-        void adoptInstead(Type *p) { \
+        void adoptInstead(Type *p) { /* NOLINT */ \
             closeFunction(ptr); \
             ptr=p; \
         } \
     }
 #else
 #define U_DEFINE_LOCAL_OPEN_POINTER(LocalPointerClassName, Type, closeFunction) \
-    class LocalPointerClassName : public LocalPointerBase<Type> { \
+    class LocalPointerClassName : public LocalPointerBase<Type> {  /* NOLINT */ \
     public: \
-        using LocalPointerBase<Type>::operator*; \
-        using LocalPointerBase<Type>::operator->; \
-        explicit LocalPointerClassName(Type *p=NULL) : LocalPointerBase<Type>(p) {} \
+        using LocalPointerBase<Type>::operator*; /* NOLINT */ \
+        using LocalPointerBase<Type>::operator->; /* NOLINT */ \
+        explicit LocalPointerClassName(Type *p=NULL) : LocalPointerBase<Type>(p) {} /* NOLINT */ \
         ~LocalPointerClassName() { closeFunction(ptr); } \
-        LocalPointerClassName &moveFrom(LocalPointerClassName &src) U_NOEXCEPT { \
+        LocalPointerClassName &moveFrom(LocalPointerClassName (&src)) U_NOEXCEPT { /* NOLINT */ \
             closeFunction(ptr); \
             LocalPointerBase<Type>::ptr=src.ptr; \
             src.ptr=NULL; \
             return *this; \
         } \
-        void swap(LocalPointerClassName &other) U_NOEXCEPT { \
-            Type *temp=LocalPointerBase<Type>::ptr; \
+        void swap(LocalPointerClassName (&other)) U_NOEXCEPT { \
+            Type (*temp)=LocalPointerBase<Type>::ptr; \
             LocalPointerBase<Type>::ptr=other.ptr; \
             other.ptr=temp; \
         } \
-        friend inline void swap(LocalPointerClassName &p1, LocalPointerClassName &p2) U_NOEXCEPT { \
+        friend inline void swap(LocalPointerClassName (&p1), LocalPointerClassName (&p2)) U_NOEXCEPT { \
             p1.swap(p2); \
         } \
-        void adoptInstead(Type *p) { \
+        void adoptInstead(Type (*p)) { \
             closeFunction(ptr); \
             ptr=p; \
         } \

@@ -27,7 +27,7 @@ U_NAMESPACE_BEGIN
 // Has Normalizer2Impl and does boilerplate argument checking and setup.
 class Normalizer2WithImpl : public Normalizer2 {
 public:
-    Normalizer2WithImpl(const Normalizer2Impl &ni) : impl(ni) {}
+    explicit Normalizer2WithImpl(const Normalizer2Impl &ni) : impl(ni) {}
     virtual ~Normalizer2WithImpl();
 
     // normalize
@@ -184,7 +184,7 @@ public:
 
 class DecomposeNormalizer2 : public Normalizer2WithImpl {
 public:
-    DecomposeNormalizer2(const Normalizer2Impl &ni) : Normalizer2WithImpl(ni) {}
+    explicit DecomposeNormalizer2(const Normalizer2Impl &ni) : Normalizer2WithImpl(ni) {}
     virtual ~DecomposeNormalizer2();
 
 private:
@@ -287,7 +287,7 @@ private:
 
 class FCDNormalizer2 : public Normalizer2WithImpl {
 public:
-    FCDNormalizer2(const Normalizer2Impl &ni) : Normalizer2WithImpl(ni) {}
+    explicit FCDNormalizer2(const Normalizer2Impl &ni) : Normalizer2WithImpl(ni) {}
     virtual ~FCDNormalizer2();
 
 private:
@@ -314,7 +314,7 @@ private:
 };
 
 struct Norm2AllModes : public UMemory {
-    Norm2AllModes(Normalizer2Impl *i)
+    explicit Norm2AllModes(Normalizer2Impl *i)
             : impl(i), comp(*i, FALSE), decomp(*i), fcd(*i), fcc(*i, TRUE) {}
     ~Norm2AllModes();
 

@@ -223,7 +223,7 @@ protected:
     /**
      * Constructor used by subclasses.
      */
-    LocaleKeyFactory(int32_t coverage);
+    explicit LocaleKeyFactory(int32_t coverage);
 
     /**
      * Constructor used by subclasses.
@@ -381,7 +381,7 @@ class U_COMMON_API ICUResourceBundleFactory : public LocaleKeyFactory
      * ures_openAvailableLocales, such as U_ICUDATA or U_ICUDATA_COLL.
      * The empty string is equivalent to U_ICUDATA.
      */
-    ICUResourceBundleFactory(const UnicodeString& bundleName);
+    explicit ICUResourceBundleFactory(const UnicodeString& bundleName);
 
     /**
      * Destructor
@@ -435,7 +435,7 @@ class U_COMMON_API ICULocaleService : public ICUService
   /**
    * Construct an ICULocaleService with a name (useful for debugging).
    */
-  ICULocaleService(const UnicodeString& name);
+  explicit ICULocaleService(const UnicodeString& name);
 
   /**
    * Destructor.

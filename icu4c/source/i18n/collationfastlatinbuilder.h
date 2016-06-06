@@ -29,7 +29,7 @@ struct CollationData;
 
 class U_I18N_API CollationFastLatinBuilder : public UObject {
 public:
-    CollationFastLatinBuilder(UErrorCode &errorCode);
+    explicit CollationFastLatinBuilder(UErrorCode &errorCode);
     ~CollationFastLatinBuilder();
 
     UBool forData(const CollationData &data, UErrorCode &errorCode);

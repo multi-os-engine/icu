@@ -89,7 +89,7 @@ class RBBINode : public UMemory {
         UVector       *fFollowPos;
 
 
-        RBBINode(NodeType t);
+        explicit RBBINode(NodeType t);
         RBBINode(const RBBINode &other);
         ~RBBINode();
         

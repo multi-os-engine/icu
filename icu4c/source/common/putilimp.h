@@ -94,7 +94,7 @@ typedef size_t uintptr_t;
 #ifdef U_NL_LANGINFO_CODESET
     /* Use the predefined value. */
 #elif !U_HAVE_NL_LANGINFO_CODESET
-#   define U_NL_LANGINFO_CODESET -1
+#   define U_NL_LANGINFO_CODESET (-1)
 #elif U_PLATFORM == U_PF_OS400
    /* not defined */
 #else
