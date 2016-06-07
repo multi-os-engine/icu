@@ -19,6 +19,7 @@ import com.google.common.collect.Lists;
 import com.google.currysrc.api.input.InputFileGenerator;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -40,6 +41,12 @@ public final class DirectoryInputFileGenerator implements InputFileGenerator {
   }
 
   private void collectFiles(File baseDir, List<File> files) {
+    if (!baseDir.exists()) {
+      throw new IllegalArgumentException("Not found: " + baseDir.getAbsolutePath());
+    }
+    if (!baseDir.isDirectory()) {
+      throw new IllegalArgumentException("Not a directory: " + baseDir.getAbsolutePath());
+    }
     for (File file : baseDir.listFiles()) {
       if (file.isDirectory()) {
         collectFiles(file, files);
