@@ -35,6 +35,7 @@ include $(CLEAR_VARS)
 # Don't include this package in any target
 LOCAL_MODULE_TAGS := tests
 LOCAL_SRC_FILES := \
+<<<<<<< HEAD   (ff178d Allow overriding of the java binary)
     $(call all-java-files-under,src/main/tests) \
     $(call all-java-files-under,cts-coverage/src/main/tests) \
     $(call all-java-files-under,runner/src/main/java)
@@ -87,5 +88,50 @@ LOCAL_JAVA_RESOURCE_DIRS := src/main/tests
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-icu4j-host \
     junit
+=======
+    $(call all-java-files-under,src/main/tests)
+LOCAL_JAVA_RESOURCE_DIRS := src/main/tests
+LOCAL_STATIC_JAVA_LIBRARIES := \
+    android-support-test
+LOCAL_JAVA_LIBRARIES := \
+        core-oj \
+        core-libart
+LOCAL_NO_STANDARD_LIBRARIES := true
+LOCAL_MODULE := android-icu4j-tests
+include $(BUILD_STATIC_JAVA_LIBRARY)
+
+#==========================================================
+# build repackaged ICU for host for testing purposes
+#
+# Uses the repackaged versions of the data jars
+#==========================================================
+include $(CLEAR_VARS)
+
+# Don't include this package in any target
+LOCAL_MODULE_TAGS := optional
+LOCAL_SRC_FILES := $(call all-java-files-under,src/main/java)
+LOCAL_STATIC_JAVA_LIBRARIES := \
+    icu4j-icudata-host-jarjar \
+    icu4j-icutzdata-host-jarjar
+LOCAL_JAVA_RESOURCE_DIRS := resources
+LOCAL_MODULE := android-icu4j-host
+include $(BUILD_HOST_JAVA_LIBRARY)
+
+#==========================================================
+# build repackaged ICU tests for host for testing purposes
+#
+# Run the tests using the ICU4J test framework with the following command:
+#   java -cp ${ANDROID_BUILD_TOP}/out/host/linux-x86/framework/android-icu4j-tests-host.jar android.icu.dev.test.TestAll
+#==========================================================
+include $(CLEAR_VARS)
+
+# Don't include this package in any target
+LOCAL_MODULE_TAGS := tests
+LOCAL_SRC_FILES := \
+    $(call all-java-files-under,src/main/tests)
+LOCAL_JAVA_RESOURCE_DIRS := src/main/tests
+LOCAL_STATIC_JAVA_LIBRARIES := \
+    android-icu4j-host
+>>>>>>> BRANCH (569ada Android patch: Add a method to clear the cached default time)
 LOCAL_MODULE := android-icu4j-tests-host
 include $(BUILD_HOST_JAVA_LIBRARY)
