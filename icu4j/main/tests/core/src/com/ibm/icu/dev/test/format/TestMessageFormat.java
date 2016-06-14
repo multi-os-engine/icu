@@ -1,6 +1,6 @@
 /*
 **********************************************************************
-* Copyright (c) 2004-2015, International Business Machines
+* Copyright (c) 2004-2016, International Business Machines
 * Corporation and others.  All Rights Reserved.
 **********************************************************************
 * Author: Alan Liu
@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import com.ibm.icu.text.DateFormat;
 import com.ibm.icu.text.DecimalFormat;
@@ -1935,6 +1936,30 @@ public class TestMessageFormat extends com.ibm.icu.dev.test.TestFmwk {
                 m2.format(args, result, ignore).toString());
     }
 
+<<<<<<< HEAD   (ff178d Allow overriding of the java binary)
+=======
+    public void TestArgIsPrefixOfAnother() {
+        // Ticket #11952
+        MessageFormat mf1 = new MessageFormat(
+                "{0,select,a{A}ab{AB}abc{ABC}other{?}}", ULocale.ENGLISH);
+        assertEquals("a", "A", mf1.format(new Object[] { "a" }));
+        assertEquals("ab", "AB", mf1.format(new Object[] { "ab" }));
+        assertEquals("abc", "ABC", mf1.format(new Object[] { "abc" }));
+
+        // Ticket #12172
+        MessageFormat mf2 = new MessageFormat("{a} {aa} {aaa}", ULocale.ENGLISH);
+        Map<String, Object> args = new TreeMap<String, Object>();
+        args.put("a", "A");
+        args.put("aa", "AB");
+        args.put("aaa", "ABC");
+        assertEquals("a aa aaa", "A AB ABC", mf2.format(args, new StringBuffer(), null).toString());
+
+        // Ticket #12172
+        MessageFormat mf3 = new MessageFormat("{aa} {aaa}", ULocale.ENGLISH);
+        assertEquals("aa aaa", "AB ABC", mf3.format(args, new StringBuffer(), null).toString());
+    }
+
+>>>>>>> BRANCH (569ada Android patch: Add a method to clear the cached default time)
     public void TestMessagePatternAutoQuoteApostropheDeep() {
         // Example input & output taken from API docs.
         MessagePattern pattern = new MessagePattern(

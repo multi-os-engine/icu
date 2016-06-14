@@ -530,6 +530,7 @@ public class Icu4jTransform {
       "field:android.icu.text.DateTimePatternGenerator#TYPE_LIMIT",
       "field:android.icu.util.TimeZone#TIMEZONE_ICU",
       "field:android.icu.util.TimeZone#TIMEZONE_JDK",
+<<<<<<< HEAD   (ff178d Allow overriding of the java binary)
       "method:android.icu.text.BreakIterator#registerInstance(BreakIterator,Locale,int)",
       "method:android.icu.text.BreakIterator#registerInstance(BreakIterator,ULocale,int)",
       "method:android.icu.text.BreakIterator#unregister(Object)",
@@ -558,6 +559,10 @@ public class Icu4jTransform {
       "method:android.icu.util.IslamicCalendar#isCivil()",
       "method:android.icu.util.IslamicCalendar#setCivil(boolean)",
       "method:android.icu.util.TimeZone#clearCachedDefault()",
+=======
+      "method:android.icu.util.IslamicCalendar#isCivil()",
+      "method:android.icu.util.IslamicCalendar#setCivil(boolean)",
+>>>>>>> BRANCH (569ada Android patch: Add a method to clear the cached default time)
       "method:android.icu.util.TimeZone#getDefaultTimeZoneType()",
       "method:android.icu.util.TimeZone#setDefault(TimeZone)",
       "method:android.icu.util.TimeZone#setDefaultTimeZoneType(int)",
