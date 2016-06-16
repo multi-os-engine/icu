@@ -26,7 +26,7 @@ public class TestAll extends TestGroup {
             "ICUServiceTest",
             "ICUServiceThreadTest",
             "ICUBinaryTest",
-            "SimpleFormatterTest",
+            "SimplePatternFormatterTest",
             "TextTrieMapTest",
             "VersionInfoTest",
             "ICUResourceBundleTest",
