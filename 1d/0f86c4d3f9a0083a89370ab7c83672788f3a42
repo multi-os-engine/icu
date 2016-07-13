@@ -1,0 +1,9 @@
+Code-Review+2: Neil Fuller <nfuller@google.com>
+Code-Review+2: Joachim Sauer <jsauer@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Fredrik Roubert <roubert@google.com>
+Submitted-by: Fredrik Roubert <roubert@google.com>
+Submitted-at: Wed, 13 Jul 2016 17:56:17 +0000
+Reviewed-on: https://android-review.googlesource.com/246597
+Project: platform/external/icu
+Branch: refs/heads/master
