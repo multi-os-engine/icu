@@ -116,6 +116,8 @@ src_files += \
 	uniset_closure.cpp ucasemap_titlecase_brkiter.cpp \
 	ustr_titlecase_brkiter.cpp unistr_case_locale.cpp \
 	listformatter.cpp
+        uloc_keytype.cpp
+
 
 
 # This is the empty compiled-in icu data structure
