@@ -3,6 +3,7 @@
 *
 *   Copyright (C) 1997-2014, International Business Machines
 *   Corporation and others.  All Rights Reserved.
+*   Copyright (c) 2014-2016, Intel Corporation
 *
 ******************************************************************************
 *
@@ -34,6 +35,8 @@
 *   04/26/01    Barry N.    OS/400 support for uprv_getDefaultLocaleID
 *   08/15/01    Steven H.   OS/400 support for uprv_getDefaultCodepage
 *   01/03/08    Steven L.   Fake Time Support
+*   11/19/14    MOE         Added support for alternative
+*                           MOE specific icudt file path.
 ******************************************************************************
 */
 
@@ -1251,6 +1254,10 @@ static void U_CALLCONV dataDirectoryInitFn() {
 #   if !defined(ICU_NO_USER_DATA_OVERRIDE) && !UCONFIG_NO_FILE_IO
     /* First try to get the environment variable */
     path=getenv("ICU_DATA");
+#   endif
+
+#   if defined(MOE)
+    path=getenv("MOE_ICU_DATA");
 #   endif
 
     /* ICU_DATA_DIR may be set as a compile option.

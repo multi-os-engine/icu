@@ -64,6 +64,11 @@
 #define PNJ_HA              0x0A39
 #define PNJ_RRA             0x0A5C
 
+#ifdef MOE_WINDOWS
+// Workaround for existing CALLBACK macro in MinGW environment.
+#undef CALLBACK
+#endif
+
 typedef enum {
     DEVANAGARI =0,
     BENGALI,
