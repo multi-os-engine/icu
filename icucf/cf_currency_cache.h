@@ -81,9 +81,10 @@ private:
         }
         
     }
+
+    static std::map<std::string, CacheRecord > & countryToCurrencyMap;
     
     static std::map<std::string, CacheRecord > & getCountryToCurrencyCache() {
-        static std::map<std::string, CacheRecord > countryToCurrencyMap;
         return countryToCurrencyMap;
     }
 };
