@@ -85,7 +85,7 @@ namespace U_ICU_NAMESPACE {
          * @stable ICU 2.0
          */
         inline const char * getName() const {
-            return nullptr;
+            return _cfFullName.c_str();
         }
         
         /**
@@ -316,7 +316,7 @@ namespace U_ICU_NAMESPACE {
         
     private:
         static cf_Locale & getDefaultLocaleRef() {
-            static cf_Locale defaultLocale(CFLocaleCreateCopy(nullptr, CFLocaleGetSystem()));
+            static cf_Locale defaultLocale(CFLocaleCopyCurrent());
             return defaultLocale;
         }
         //translate this locale value to display locale language
